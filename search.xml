@@ -26,10 +26,16 @@
 ]]></content>
   </entry>
   <entry>
-    <title>multiple eiditor test</title>
+    <title>不同电脑同步操作方法</title>
     <url>/2022/07/11/multiple-eiditor-test/</url>
-    <content><![CDATA[<h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><hr>
-<p>多主机同步</p>
+    <content><![CDATA[<h2 id="每次弄完之后"><a href="#每次弄完之后" class="headerlink" title="每次弄完之后"></a>每次弄完之后</h2><hr>
+<p>先</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;xxx&quot;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">git push</span></span><br></pre></td></tr></table></figure>
+
+<p>再用 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p> 部署到GitHub上。</p>
 <hr>
 ]]></content>
   </entry>
