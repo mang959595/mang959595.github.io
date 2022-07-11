@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>first one</title>
-    <url>/2022/07/11/first-one/</url>
-    <content><![CDATA[<h2 id="第一篇啥也没有"><a href="#第一篇啥也没有" class="headerlink" title="第一篇啥也没有"></a>第一篇啥也没有</h2><p>123</p>
+    <title>不同电脑同步操作方法</title>
+    <url>/2022/07/11/multiple-eiditor-test/</url>
+    <content><![CDATA[<h2 id="每次弄完之后"><a href="#每次弄完之后" class="headerlink" title="每次弄完之后"></a>每次弄完之后</h2><hr>
+<p>先</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;xxx&quot;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">git push</span></span><br></pre></td></tr></table></figure>
+
+<p>再用 </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+
+<p> 部署到GitHub上。</p>
 <hr>
 ]]></content>
   </entry>
@@ -26,16 +33,9 @@
 ]]></content>
   </entry>
   <entry>
-    <title>不同电脑同步操作方法</title>
-    <url>/2022/07/11/multiple-eiditor-test/</url>
-    <content><![CDATA[<h2 id="每次弄完之后"><a href="#每次弄完之后" class="headerlink" title="每次弄完之后"></a>每次弄完之后</h2><hr>
-<p>先</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git add .</span><br><span class="line">git commit -m <span class="string">&quot;xxx&quot;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">git push</span></span><br></pre></td></tr></table></figure>
-
-<p>再用 </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
-
-<p> 部署到GitHub上。</p>
+    <title>first one</title>
+    <url>/2022/07/11/first-one/</url>
+    <content><![CDATA[<h2 id="第一篇啥也没有"><a href="#第一篇啥也没有" class="headerlink" title="第一篇啥也没有"></a>第一篇啥也没有</h2><p>123</p>
 <hr>
 ]]></content>
   </entry>
