@@ -18,7 +18,7 @@ subtitle:
   showCursor: true # 是否显示光标
 
 # 网站图标和侧边栏logo
-favicon: /favicon.ico
+favicon: /ticon.ico
 logo: /images/123.jpg
 
 # 封面配置
@@ -34,14 +34,14 @@ progressBar: true
 # 告示板模块
 broadcast:
   enable: true # true开启，false关闭
-  type: 2 # 1：自定义输入，2：一言api(https://hitokoto.cn/)
-  text: 一个安静优雅的hexo主题，快速且响应式。 # type为1时有效
+  type: 1 # 1：自定义输入，2：一言api(https://hitokoto.cn/)
+  text: 不学习就去死。 # type为1时有效
 
 # 文章配置
 # 文章太长，截断按钮文字(在需要截断的行增加此标记：<!--more-->)
 excerpt_link: 阅读更多...
 # 如果你嫌每篇文章手动加more标记比较麻烦，又不想在首页全文显示，可以把excerpt_all设置成true，这样首页只会显示文章归档
-excerpt_all: false
+excerpt_all: true
 
 # 是否开启代码复制按钮
 copy_btn: true
@@ -239,3 +239,4 @@ ads:
 lock:
   enable: false
   password: 123456
+
