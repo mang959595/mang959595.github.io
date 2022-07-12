@@ -1,7 +1,7 @@
 ---
 title: 用不同电脑写hexo博客
 date: 2022-07-11 23:37:43
-tags:
+categories: hexo
 ---
 
 
