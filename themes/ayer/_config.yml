@@ -2,15 +2,16 @@
 menu:
   主页: /
   归档: /archives
+  分类: /categories
 
 
 # 站点次标题和打字动效
 # https://github.com/mattboldt/typed.js
 subtitle:
   enable: true # 是否开启动效
-  text: 自救博客 # 显示的文字
-  text2: 一事无成 # 滚动播放，如果不需要可以留空
-  text3: 开始学习 # 最多支持三段文字
+  text: 不要摆烂 # 显示的文字
+  text2: 别摆烂 # 滚动播放，如果不需要可以留空
+  text3: 不能摆烂 # 最多支持三段文字
   startDelay: 0 # 延迟时间
   typeSpeed: 200 # 打字速度
   loop: true # 是否循环
@@ -18,14 +19,14 @@ subtitle:
   showCursor: true # 是否显示光标
 
 # 网站图标和侧边栏logo
-favicon: /ticon.ico
-logo: /images/123.jpg
+favicon:  /images/ccc.svg
+logo: /images/222.jpg
 
 # 封面配置
 # enable-是否启用封面；path-封面背景图；logo-封面logo
 cover:
   enable: true
-  path: /images/bk1.jpg # /source/images目录下附送多张美图，可更换
+  path: /images/321.jpg # /source/images目录下附送多张美图，可更换
   logo: false #/images/ayer.svg，如果不要直接设置成false
 
 # 页面顶部进度条
@@ -35,7 +36,7 @@ progressBar: true
 broadcast:
   enable: true # true开启，false关闭
   type: 1 # 1：自定义输入，2：一言api(https://hitokoto.cn/)
-  text: 不学习就去死。 # type为1时有效
+  text: 不要摆烂。 # type为1时有效
 
 # 文章配置
 # 文章太长，截断按钮文字(在需要截断的行增加此标记：<!--more-->)

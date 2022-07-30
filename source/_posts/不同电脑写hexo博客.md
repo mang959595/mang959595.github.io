@@ -1,7 +1,11 @@
 ---
 title: 用不同电脑写hexo博客
 date: 2022-07-11 23:37:43
+<<<<<<< HEAD
 tags: hexo
+=======
+categories: hexo
+>>>>>>> 135ea8596e25ecb55da50cc65fe372f69762b577
 ---
 # 基于GitHub双分支方法
 
