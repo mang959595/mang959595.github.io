@@ -19,14 +19,14 @@ subtitle:
   showCursor: true # 是否显示光标
 
 # 网站图标和侧边栏logo
-favicon:  /images/ccc.svg
-logo: /images/222.jpg
+favicon:  /images/hexo.png
+logo: /images/headphoto.jpg
 
 # 封面配置
 # enable-是否启用封面；path-封面背景图；logo-封面logo
 cover:
   enable: true
-  path: /images/321.jpg # /source/images目录下附送多张美图，可更换
+  path: /images/mountain2.jpg # /source/images目录下附送多张美图，可更换
   logo: false #/images/ayer.svg，如果不要直接设置成false
 
 # 页面顶部进度条
@@ -104,7 +104,7 @@ canvas_bg: 0
 
 # 自定义鼠标样式，直接替换/images/mouse.cur文件
 mouse:
-  enable: false
+  enable: true
   path: /images/mouse.cur
 
 # 鼠标点击效果：0-关闭，1-爱心，2-爆炸烟花，3-粒子烟花
