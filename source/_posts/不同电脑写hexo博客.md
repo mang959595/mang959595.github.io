@@ -9,7 +9,7 @@ categories: hexo
 ---
 # 基于GitHub双分支方法
 
-`<br><br>``<br><br>``<br><br>`
+
 
 ## 1. 在每次编辑之前
 
@@ -19,7 +19,7 @@ categories: hexo
 
 ---
 
-`<br><br>``<br><br>``<br><br>`
+<br><br><br><br><br><br>
 
 ## 2. 修改本地文件和编辑博客内容
 
@@ -39,7 +39,7 @@ Windows下用 git bash 打开本地文件夹
 
 ---
 
-`<br><br>``<br><br>``<br><br>`
+<br><br><br><br><br><br>
 
 ## 3. 编辑和修改完成之后
 
