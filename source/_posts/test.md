@@ -8,11 +8,10 @@ tags:
 
 Test
 
-![](./test/image-20230210000157021.png)
+![213](./test/image-20230210000157021.png)
 
 {% asset_img image-20230210000157021.png test %}
 
-{% asset_img image-20230210000157021 test2 %}
 
-![](image-20230210000157021.png)
 
+{% asset_img image-20230210000157021.png This is an example image %}
