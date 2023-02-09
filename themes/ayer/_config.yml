@@ -20,13 +20,13 @@ subtitle:
 
 # 网站图标和侧边栏logo
 favicon:  /images/hexo.png
-logo: /images/headphoto.jpg
+logo: /images/123.jpg
 
 # 封面配置
 # enable-是否启用封面；path-封面背景图；logo-封面logo
 cover:
   enable: true
-  path: /images/mountain2.jpg # /source/images目录下附送多张美图，可更换
+  path: /images/573656.jpg # /source/images目录下附送多张美图，可更换
   logo: false #/images/ayer.svg，如果不要直接设置成false
 
 # 页面顶部进度条
