@@ -1,7 +1,7 @@
 ---
 title: Linux多线程
 date: 2023-02-10 07:17:22
-tags:多线程
+tags: 多线程
 categories: 
 - C++开发
 - 多进程
