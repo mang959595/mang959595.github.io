@@ -1,3 +1,10 @@
+---
+title: Linux多进程
+date: 2023-02-9 00:00:00
+tags: 多进程
+categoreies: 牛客C++服务器项目
+---
+
 # 2.Linux多进程开发
 
 ---
@@ -64,7 +71,7 @@
 
 ![image-20230204223803946](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230204223803946.png)
 
- 
+ {% asset_img image-20230204223803946.jpg example %}
 
 **进程控制块 PCB**
 
