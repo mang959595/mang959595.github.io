@@ -1,3 +1,12 @@
+---
+title: Linux多进程开发
+date: 2023-02-09 00:00:00
+tags: 多进程
+categories: 
+- C++开发
+- 多进程
+---
+
 # 2.Linux多进程开发
 
 ---
