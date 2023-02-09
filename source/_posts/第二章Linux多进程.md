@@ -1,10 +1,3 @@
----
-title: Linux多进程
-date: 2023-02-9 00:00:00
-tags: 多进程
-categoreies: 牛客C++服务器项目
----
-
 # 2.Linux多进程开发
 
 ---
@@ -67,11 +60,11 @@ categoreies: 牛客C++服务器项目
 
 
 
-![image-20230204223514971](./第二章Linux多进程/image-20230204223514971.png)
+![image-20230204223514971](第二章Linux多进程/image-20230204223514971-16759624275181.png)
 
-![image-20230204223803946](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230204223803946.png)
+![image-20230204223803946](第二章Linux多进程/image-20230204223803946-16759624275193.png)
 
- {% asset_img image-20230204223514971.png example %}
+ 
 
 **进程控制块 PCB**
 
@@ -108,7 +101,7 @@ categoreies: 牛客C++服务器项目
 >
 > **阻塞态**：又称为 等待态(wait) 或 睡眠态(sleep)，指进程不具备运行条件，正在等待某个事件的完成。
 
-![image-20230204225943684](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230204225943684.png)
+![image-20230204225943684](第二章Linux多进程/image-20230204225943684-16759624275192.png)
 
 
 
@@ -118,7 +111,7 @@ categoreies: 牛客C++服务器项目
 >
 > **终止态**：进程完成任务达到正常结束点，或出现无法克服的错误而异常终止，或被操作系统及有终止权的进程所终止时所处的状态。进入终止态的进程不再执行，但依然保留再操作系统中等待善后。一旦其他进程完成了对终止态进程的信息抽取之后，操作系统将删除该进程。
 
-![image-20230204230502376](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230204230502376.png)
+![image-20230204230502376](第二章Linux多进程/image-20230204230502376-16759624275195.png)
 
 
 
@@ -140,7 +133,7 @@ j：列出与作业控制相关的进程
 
 > stat标识
 >
-> ![image-20230204232608821](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230204232608821.png)
+> ![image-20230204232608821](第二章Linux多进程/image-20230204232608821-16759624275196.png)
 
 
 
@@ -249,7 +242,7 @@ int main(){
 
 ### 父、子进程虚拟地址空间情况
 
-![image-20230205003125065](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230205003125065.png)
+![image-20230205003125065](第二章Linux多进程/image-20230205003125065-16759624275194.png)
 
 进程的实际pid在内核空间
 
@@ -265,9 +258,9 @@ int main(){
 >
 > 注意：fork后父子进程共享文件
 >
-> ![image-20230205011611597](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230205011611597.png)
+> ![image-20230205011611597](第二章Linux多进程/image-20230205011611597-16759624275197.png)
 >
-> ![image-20230205011543783](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230205011543783.png)
+> ![image-20230205011543783](第二章Linux多进程/image-20230205011543783-167596242752027.png)
 
 
 
@@ -354,7 +347,7 @@ c++有函数重载，c语言没有；
 - exec 函数族的作用是根据指定文件名找到可执行文件，并用它来取代调用进程的内容，换句话说，就是在调用进程内部执行一个可执行文件。（实际应用时一般在子进程中执行 exec函数族）
 - exec 函数族的函数执行成功后不会返回，因为调用进程的实体，包括代码段、数据段和堆栈等都已经被新的内容取代，只留下进程ID等一些表面上的信息仍保持原样。只有调用失败了，才会返回－１，从原程序的调用点接着往下执行。
 
-![image-20230205022237610](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230205022237610.png)
+![image-20230205022237610](第二章Linux多进程/image-20230205022237610-16759624275198.png)
 
 
 
@@ -454,7 +447,7 @@ void _exit(int status);
 
 ```
 
-![image-20230205024702546](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230205024702546.png)
+![image-20230205024702546](第二章Linux多进程/image-20230205024702546-16759624275209.png)
 
 
 
@@ -601,7 +594,7 @@ pid_t waitpid(pid_t pid, int *wstatus, int options);
 
 **Linux进程间通信的方式：**
 
-![image-20230205232903586](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230205232903586.png)
+![image-20230205232903586](第二章Linux多进程/image-20230205232903586-167596242752010.png)
 
 
 
@@ -623,7 +616,7 @@ pid_t waitpid(pid_t pid, int *wstatus, int options);
 
 为了执行该命令，shell 创建了两个进程分别执行 ls 和 wc
 
-![image-20230205233552602](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230205233552602.png)
+![image-20230205233552602](第二章Linux多进程/image-20230205233552602-167596242752011.png)
 
 ls进程的标准输出 stdout 指向管道写入端
 
@@ -641,7 +634,7 @@ wc进程的标准输入 stdin 指向管道读取端
 - 从管道读取数据是一次性操作，数据一旦被读走，就从管道中被抛弃，释放空间以便写更多的数据，在管道中无法使用lseek()来随机访问数据
 - 匿名管道只能在具有公共祖先的进程之间使用（父子进程共享文件描述符表，有相同的管道）
 
-![image-20230206013639551](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230206013639551.png)
+![image-20230206013639551](第二章Linux多进程/image-20230206013639551-167596242752012.png)
 
 
 
@@ -649,7 +642,7 @@ wc进程的标准输入 stdin 指向管道读取端
 
 环形队列（重复利用节点空间）
 
-![image-20230206014318131](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230206014318131.png)
+![image-20230206014318131](第二章Linux多进程/image-20230206014318131-167596242752013.png)
 
 
 
@@ -739,7 +732,7 @@ wc进程的标准输入 stdin 指向管道读取端
 > - 使用匿名管道实际开发时，父子进程不相互收发数据，而是规定好一个进程读一个进程写
 > - 读的进程关闭写端；写的进程关闭读端；
 >
-> ![image-20230206022417540](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230206022417540.png)
+> ![image-20230206022417540](第二章Linux多进程/image-20230206022417540-167596242752014.png)
 
 
 
@@ -1024,7 +1017,7 @@ int main1() {
 
 只能交替地接收和发送
 
-![image-20230206212504676](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230206212504676.png)
+![image-20230206212504676](第二章Linux多进程/image-20230206212504676-167596242752015.png)
 
 
 
@@ -1199,7 +1192,7 @@ int main() {
 
 映射的是进程的虚拟地址空间，映射位置是共享库的位置
 
-![image-20230207021339909](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230207021339909.png)
+![image-20230207021339909](第二章Linux多进程/image-20230207021339909-167596242752017.png)
 
 
 
@@ -1610,19 +1603,19 @@ int main() {
 
 查看信号的详细信息：`man 7 signal`
 
-![image-20230207074413475](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230207074413475.png)
+![image-20230207074413475](第二章Linux多进程/image-20230207074413475-167596242752016.png)
 
 
 
-![image-20230207074659817](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230207074659817.png)
+![image-20230207074659817](第二章Linux多进程/image-20230207074659817-167596242752019.png)
 
 
 
-![image-20230207074814071](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230207074814071.png)
+![image-20230207074814071](第二章Linux多进程/image-20230207074814071-167596242752018.png)
 
 
 
-![image-20230207074951533](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230207074951533.png)
+![image-20230207074951533](第二章Linux多进程/image-20230207074951533-167596242752020.png)
 
 
 
@@ -1866,7 +1859,7 @@ int main() {
 
 **默认**
 
-![image-20230207122515067](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230207122515067.png)
+![image-20230207122515067](第二章Linux多进程/image-20230207122515067-167596242752021.png)
 
 
 
@@ -2008,7 +2001,7 @@ int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact)
 
 **内核实现信号捕捉的过程**
 
-![image-20230207223806887](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230207223806887.png)
+![image-20230207223806887](第二章Linux多进程/image-20230207223806887-167596242752026.png)
 
 > 内核态的 do_signal() 和 sys_sigreturn()
 
@@ -2206,7 +2199,7 @@ int shmctl(int shmid, int cmd, struct shmid_ds *buf);
 
 > shmid_ds结构体
 >
-> ![image-20230208120249528](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230208120249528.png)
+> ![image-20230208120249528](第二章Linux多进程/image-20230208120249528-167596242752025.png)
 
 
 
@@ -2343,11 +2336,11 @@ key_t ftok(const char *pathname, int proj_id);
 
 `ipcs`
 
-![image-20230208122145744](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230208122145744.png)
+![image-20230208122145744](第二章Linux多进程/image-20230208122145744-167596242752022.png)
 
 `ipcrm`
 
-![image-20230208122153825](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230208122153825.png)
+![image-20230208122153825](第二章Linux多进程/image-20230208122153825-167596242752023.png)
 
 
 
@@ -2424,7 +2417,7 @@ key_t ftok(const char *pathname, int proj_id);
 
 `sort < longlist | uniq -c`
 
-![image-20230208194637948](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230208194637948.png)
+![image-20230208194637948](第二章Linux多进程/image-20230208194637948-167596242752024.png)
 
 > 来自评论区：
 >
