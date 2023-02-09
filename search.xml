@@ -241,7 +241,7 @@
       </tags>
   </entry>
   <entry>
-    <title></title>
+    <title>Linux多进程</title>
     <url>/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="2-Linux多进程开发"><a href="#2-Linux多进程开发" class="headerlink" title="2.Linux多进程开发"></a>2.Linux多进程开发</h1><hr>
 <h2 id="2-1-进程概述"><a href="#2-1-进程概述" class="headerlink" title="2.1 进程概述"></a>2.1 进程概述</h2><p><strong>程序和进程</strong></p>
@@ -289,6 +289,8 @@
 <p>并发（concurrency）：指在同一时刻只能有一条指令执行，但多个进程指令被快速的轮换执行，使得宏观上具有多个进程同时执行的效果，但在微观上并不是同时执行的，只是把时间分成若干段，使多个进程快速交替的执行。</p>
 <p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204223514971.png" alt="image-20230204223514971"></p>
 <p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204223803946.png" alt="image-20230204223803946"></p>
+ 
+
 <p><strong>进程控制块 PCB</strong></p>
 <p>内核为每个进程分配以一个 PCB 进程控制块，维护进程相关的信息，Linux内核的进程控制块是 task_struct 结构体。</p>
 <p>在 &#x2F;usr&#x2F;src&#x2F;linux-headers-xxx&#x2F;include&#x2F;linux&#x2F;sched.h 文件中可以查看 struct task_struct 结构体定义，其部分内部成员如下：</p>
@@ -1086,5 +1088,8 @@
 
 <p>第二章完结！</p>
 ]]></content>
+      <tags>
+        <tag>多进程</tag>
+      </tags>
   </entry>
 </search>
