@@ -10,8 +10,10 @@ Test
 
 ![213](./test/image-20230210000157021.png)
 
-{% asset_img image-20230210000157021.png test %}
+
+
+Test2
 
 
 
-{% asset_img image-20230210000157021.png This is an example image %}
+{% asset_img image-20230210000157021.png 222 %}
