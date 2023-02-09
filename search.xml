@@ -10,7 +10,7 @@
 <h2 id="2-修改本地文件和编辑博客内容"><a href="#2-修改本地文件和编辑博客内容" class="headerlink" title="2. 修改本地文件和编辑博客内容"></a>2. 修改本地文件和编辑博客内容</h2><hr>
 <p>Windows下用 git bash 打开本地文件夹</p>
 <p>然后就是 <code>hexo new [layout] &lt;title&gt;</code> 创建新文件</p>
-<img src="/2022/07/11/%E4%B8%8D%E5%90%8C%E7%94%B5%E8%84%91%E5%86%99hexo%E5%8D%9A%E5%AE%A2/1.png" class="">
+<img src="/?utm_source=gold_browser_extension/2022/07/11/%E4%B8%8D%E5%90%8C%E7%94%B5%E8%84%91%E5%86%99hexo%E5%8D%9A%E5%AE%A2/07/11/%E4%B8%8D%E5%90%8C%E7%94%B5%E8%84%91%E5%86%99hexo%E5%8D%9A%E5%AE%A2/1.png" class>
 
 <blockquote>
 <p><a href="https://zhuanlan.zhihu.com/p/156915260">相关hexo操作</a></p>
@@ -287,9 +287,9 @@
 <p><strong>并行和并发</strong></p>
 <p>并行（parallel）：指在同一时刻，有多条指令在多个处理器上同时执行。</p>
 <p>并发（concurrency）：指在同一时刻只能有一条指令执行，但多个进程指令被快速的轮换执行，使得宏观上具有多个进程同时执行的效果，但在微观上并不是同时执行的，只是把时间分成若干段，使多个进程快速交替的执行。</p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204223514971.png" alt="image-20230204223514971"></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204223803946.png" alt="image-20230204223803946"></p>
- <img src="/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/image-20230204223803946.png" class="" title="example">
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204223514971.png" alt="image-20230204223514971"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204223803946.png" alt="image-20230204223803946"></p>
+ <img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/image-20230204223803946.png" class title="example">
 
 <p><strong>进程控制块 PCB</strong></p>
 <p>内核为每个进程分配以一个 PCB 进程控制块，维护进程相关的信息，Linux内核的进程控制块是 task_struct 结构体。</p>
@@ -315,13 +315,13 @@
 <p><strong>就绪态</strong>：进程具备运行条件，等待系统分配处理器以便运行。当进程分配到除CPU外的所有必要资源后，只要再获得CPU，便可立即执行。多个就绪进程排成队列，称为就绪队列。</p>
 <p><strong>阻塞态</strong>：又称为 等待态(wait) 或 睡眠态(sleep)，指进程不具备运行条件，正在等待某个事件的完成。</p>
 </blockquote>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204225943684.png" alt="image-20230204225943684"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204225943684.png" alt="image-20230204225943684"></p>
 <p><code>五态模型</code>中，进程状态分为 ——  新建态、就绪态、运行态、阻塞态、终止态。</p>
 <blockquote>
 <p><strong>新建态</strong>：进程刚被创建时的状态，尚未进入就绪队列</p>
 <p><strong>终止态</strong>：进程完成任务达到正常结束点，或出现无法克服的错误而异常终止，或被操作系统及有终止权的进程所终止时所处的状态。进入终止态的进程不再执行，但依然保留再操作系统中等待善后。一旦其他进程完成了对终止态进程的信息抽取之后，操作系统将删除该进程。</p>
 </blockquote>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204230502376.png" alt="image-20230204230502376"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204230502376.png" alt="image-20230204230502376"></p>
 <h3 id="进程相关指令"><a href="#进程相关指令" class="headerlink" title="进程相关指令"></a>进程相关指令</h3><p><strong>查看进程</strong></p>
 <p><code>ps aux/ajx</code></p>
 <p>a：显示终端上的所有进程，包括其他用户的进程</p>
@@ -330,7 +330,7 @@
 <p>j：列出与作业控制相关的进程</p>
 <blockquote>
 <p>stat标识</p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204232608821.png" alt="image-20230204232608821"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230204232608821.png" alt="image-20230204232608821"></p>
 </blockquote>
 <p><strong>实时显示进程状态</strong></p>
 <p><code>top</code></p>
@@ -380,7 +380,7 @@
 
 
 
-<h3 id="父、子进程虚拟地址空间情况"><a href="#父、子进程虚拟地址空间情况" class="headerlink" title="父、子进程虚拟地址空间情况"></a>父、子进程虚拟地址空间情况</h3><p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205003125065.png" alt="image-20230205003125065"></p>
+<h3 id="父、子进程虚拟地址空间情况"><a href="#父、子进程虚拟地址空间情况" class="headerlink" title="父、子进程虚拟地址空间情况"></a>父、子进程虚拟地址空间情况</h3><p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205003125065.png" alt="image-20230205003125065"></p>
 <p>进程的实际pid在内核空间</p>
 <p>变量pid的值在栈空间</p>
 <blockquote>
@@ -388,8 +388,8 @@
 <p>写时拷贝时一钟可以推迟甚至避免拷贝数据的技术。内核此时并不复制整个进程的地址空间，而是让父子进程共享一个地址空间。</p>
 <p>只有在需要写入的时候才会复制地址空间，从而使得各个进程拥有各自的地址空间，在此之前只有以只读方式共享。</p>
 <p>注意：fork后父子进程共享文件</p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205011611597.png" alt="image-20230205011611597"></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205011543783.png" alt="image-20230205011543783"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205011611597.png" alt="image-20230205011611597"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205011543783.png" alt="image-20230205011543783"></p>
 </blockquote>
 <blockquote>
 <p>不同的进程访问同样的逻辑地址（虚拟地址）而对应的物理地址不同，是由于各自页表的不同。</p>
@@ -448,7 +448,7 @@
 <li>exec 函数族的作用是根据指定文件名找到可执行文件，并用它来取代调用进程的内容，换句话说，就是在调用进程内部执行一个可执行文件。（实际应用时一般在子进程中执行 exec函数族）</li>
 <li>exec 函数族的函数执行成功后不会返回，因为调用进程的实体，包括代码段、数据段和堆栈等都已经被新的内容取代，只留下进程ID等一些表面上的信息仍保持原样。只有调用失败了，才会返回－１，从原程序的调用点接着往下执行。</li>
 </ul>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205022237610.png" alt="image-20230205022237610"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205022237610.png" alt="image-20230205022237610"></p>
 <p><strong>exec函数族</strong></p>
 <blockquote>
 <p>exec后的字母表示传参方式和搜索规则</p>
@@ -472,7 +472,7 @@
 <h2 id="2-5-进程控制"><a href="#2-5-进程控制" class="headerlink" title="2.5 进程控制"></a>2.5 进程控制</h2><h3 id="进程退出"><a href="#进程退出" class="headerlink" title="进程退出"></a>进程退出</h3><p><strong>exit函数</strong></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#incldue <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> <span class="title function_">exit</span><span class="params">(<span class="type">int</span> status)</span>;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> _exit(<span class="type">int</span> status);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	参数：</span></span><br><span class="line"><span class="comment">		- status：进程退出时的一个状态信息。父进程回收子进程资源的时候可以获取到。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	exit是标准C库的函数，比_exit多做了</span></span><br><span class="line"><span class="comment">	1.调用退出处理函数</span></span><br><span class="line"><span class="comment">	2.刷新I/O缓存</span></span><br><span class="line"><span class="comment">	3.关闭文件描述符</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205024702546.png" alt="image-20230205024702546"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205024702546.png" alt="image-20230205024702546"></p>
 <h3 id="孤儿进程"><a href="#孤儿进程" class="headerlink" title="孤儿进程"></a>孤儿进程</h3><p>父进程运行结束，但子进程还在运行，这样的子进程就成为孤儿进程（Orphan Process）</p>
 <p>每当出现一个孤儿进程时，内核就把孤儿进程的父进程设置为init进程，而init进程会循环地 wait() 它的已经退出的子进程。（init进程会回收运行结束的孤儿进程）</p>
 <p>没什么危害</p>
@@ -530,12 +530,12 @@
 <li>进程控制：有些进程希望完全控制另一个进程的运行（如 Debug 进程gdb），此时控制进程希望能够拦截另一个进程的所有陷入和异常，并能够及时知道其状态改变</li>
 </ul>
 <p><strong>Linux进程间通信的方式：</strong></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205232903586.png" alt="image-20230205232903586"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205232903586.png" alt="image-20230205232903586"></p>
 <h3 id="2-6-2-匿名管道"><a href="#2-6-2-匿名管道" class="headerlink" title="2.6.2 匿名管道"></a>2.6.2 匿名管道</h3><h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>管道 也叫匿名管道。是 UNIX 系统 IPC 的最古老形式，所有的 UNIX 系统都支持这种通信机制。</p>
 <p><strong>案例解析：</strong></p>
 <p>​	统计一个目录中文件的数目命令：<code>ls | wc -l</code>	（管道符 | ）</p>
 <p>为了执行该命令，shell 创建了两个进程分别执行 ls 和 wc</p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205233552602.png" alt="image-20230205233552602"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230205233552602.png" alt="image-20230205233552602"></p>
 <p>ls进程的标准输出 stdout 指向管道写入端</p>
 <p>wc进程的标准输入 stdin 指向管道读取端</p>
 <p><strong>特点</strong></p>
@@ -548,10 +548,10 @@
 <li>从管道读取数据是一次性操作，数据一旦被读走，就从管道中被抛弃，释放空间以便写更多的数据，在管道中无法使用lseek()来随机访问数据</li>
 <li>匿名管道只能在具有公共祖先的进程之间使用（父子进程共享文件描述符表，有相同的管道）</li>
 </ul>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230206013639551.png" alt="image-20230206013639551"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230206013639551.png" alt="image-20230206013639551"></p>
 <p><strong>管道的数据结构</strong></p>
 <p>环形队列（重复利用节点空间）</p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230206014318131.png" alt="image-20230206014318131"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230206014318131.png" alt="image-20230206014318131"></p>
 <h4 id="管道的使用"><a href="#管道的使用" class="headerlink" title="管道的使用"></a>管道的使用</h4><ul>
 <li><p>创建匿名管道</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">pipe</span><span class="params">(<span class="type">int</span> pipefd[<span class="number">2</span>])</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	创建一个匿名管道，用于进程间通信</span></span><br><span class="line"><span class="comment">	参数： int pipefd[2]：传出参数</span></span><br><span class="line"><span class="comment">			pipefd[0] 管道的读端</span></span><br><span class="line"><span class="comment">			pipefd[1] 管道的写端</span></span><br><span class="line"><span class="comment">	返回值：</span></span><br><span class="line"><span class="comment">		成功 0</span></span><br><span class="line"><span class="comment">		失败 -1</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">	管道默认是阻塞的：</span></span><br><span class="line"><span class="comment">		如果管道中没有数据，read阻塞；</span></span><br><span class="line"><span class="comment">		如果管道满了，write阻塞；</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">	注意：匿名管道只能用于具有关系的进程之间的通信（父子进程，兄弟进程...）</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 实现：子进程发送数据给父进程，父进程读取到数据输出</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 在fork之前创建管道</span></span><br><span class="line">    <span class="type">int</span> pipefd[<span class="number">2</span>];</span><br><span class="line">    <span class="type">int</span> ret = pipe(pipefd);</span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="number">-1</span>)&#123;</span><br><span class="line">        perror(<span class="string">&quot;pipe&quot;</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 创建子进程</span></span><br><span class="line">    <span class="type">pid_t</span> pid = fork();</span><br><span class="line">    <span class="keyword">if</span>(pid &gt; <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 父进程</span></span><br><span class="line">        <span class="comment">// 从管道的读取端读取数据</span></span><br><span class="line">        close(pipefd[<span class="number">1</span>]);</span><br><span class="line">        </span><br><span class="line">    	<span class="type">char</span> buf[<span class="number">1024</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="type">int</span> len = read(pipefd[<span class="number">0</span>], buf, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;parent recv : %s, pid: %d\n&quot;</span>, buf, getpid());</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(pid == <span class="number">0</span>)&#123;</span><br><span class="line">        <span class="comment">// 子进程</span></span><br><span class="line">        close(pipefd[<span class="number">0</span>]);</span><br><span class="line">        </span><br><span class="line">        <span class="type">char</span> *str = <span class="string">&quot;hello, i am child&quot;</span>;</span><br><span class="line">        write(pipefd[<span class="number">1</span>], str, <span class="built_in">strlen</span>(str));</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -567,7 +567,7 @@
 <li>使用匿名管道实际开发时，父子进程不相互收发数据，而是规定好一个进程读一个进程写</li>
 <li>读的进程关闭写端；写的进程关闭读端；</li>
 </ul>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230206022417540.png" alt="image-20230206022417540"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230206022417540.png" alt="image-20230206022417540"></p>
 </blockquote>
 <h4 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h4><p>实现<code>ps aux | grep xxx</code></p>
 <p>父子进程间通信</p>
@@ -656,7 +656,7 @@
 </blockquote>
 <p><strong>有名管道实现简单聊天</strong></p>
 <p>只能交替地接收和发送</p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230206212504676.png" alt="image-20230206212504676"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230206212504676.png" alt="image-20230206212504676"></p>
 <p>进程A</p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/types.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/stat.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 1.判断有名管道文件是否存在</span></span><br><span class="line">    <span class="type">int</span> ret = access(<span class="string">&quot;fifo1&quot;</span>, F_OK);</span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="comment">// 文件不存在则创建</span></span><br><span class="line">        ret = mkfifo(<span class="string">&quot;fifo1&quot;</span>, <span class="number">0664</span>);</span><br><span class="line">    	<span class="keyword">if</span>(ret == <span class="number">-1</span>)&#123;</span><br><span class="line">			perror(<span class="string">&quot;mkfifo&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">	ret = access(<span class="string">&quot;fifo2&quot;</span>, F_OK);</span><br><span class="line">    <span class="keyword">if</span>(ret == <span class="number">-1</span>)&#123;</span><br><span class="line">        <span class="comment">// 文件不存在则创建</span></span><br><span class="line">        ret = mkfifo(<span class="string">&quot;fifo2&quot;</span>, <span class="number">0664</span>);</span><br><span class="line">    	<span class="keyword">if</span>(ret == <span class="number">-1</span>)&#123;</span><br><span class="line">			perror(<span class="string">&quot;mkfifo&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    	&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 以只写方式打开管道 fifo1</span></span><br><span class="line">    <span class="type">int</span> fdw = open(<span class="string">&quot;fifo1&quot;</span>, O_WRONLY);</span><br><span class="line">    <span class="keyword">if</span>(fdw == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;open&quot;</span>);</span><br><span class="line">    	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;打开管道fifo1成功，等待写入...\n&quot;</span>)；</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 以只读方式打开管道 fifo2</span></span><br><span class="line">    <span class="type">int</span> fdr = open(<span class="string">&quot;fifo2&quot;</span>, O_RDONLY);</span><br><span class="line">    <span class="keyword">if</span>(fdr == <span class="number">-1</span>) &#123;</span><br><span class="line">        perror(<span class="string">&quot;open&quot;</span>);</span><br><span class="line">    	<span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;打开管道fifo2成功，等待读取...\n&quot;</span>)；</span><br><span class="line">    </span><br><span class="line">	<span class="comment">// 循环写读数据</span></span><br><span class="line">    <span class="type">char</span> buf[<span class="number">128</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="built_in">memset</span>(buf, <span class="number">0</span>, <span class="number">128</span>);</span><br><span class="line">    	<span class="comment">// 获取标准输入的数据    </span></span><br><span class="line">        fgets(buf, <span class="number">128</span>, <span class="built_in">stdin</span>);</span><br><span class="line">        <span class="comment">// 发送信息，写入数据</span></span><br><span class="line">        ret = write(fdw, buf, <span class="built_in">strlen</span>(buf));</span><br><span class="line">        <span class="keyword">if</span>(ret == <span class="number">-1</span>)&#123;</span><br><span class="line">            perror(<span class="string">&quot;write&quot;</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 接收信息，读取数据</span></span><br><span class="line">        <span class="built_in">memset</span>(buf, <span class="number">0</span>, <span class="number">128</span>);</span><br><span class="line">        ret = read(fdr, buf, <span class="number">128</span>);</span><br><span class="line">        <span class="keyword">if</span>(ret &lt;= <span class="number">0</span>)&#123;</span><br><span class="line">            perror(<span class="string">&quot;read&quot;</span>);</span><br><span class="line">           	<span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;buf: %s\n&quot;</span>, buf);</span><br><span class="line">    &#125;</span><br><span class="line">        </span><br><span class="line">    close(fdr);</span><br><span class="line">    close(fdw);</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -669,7 +669,7 @@
 
 <h3 id="2-6-4-内存映射"><a href="#2-6-4-内存映射" class="headerlink" title="2.6.4 内存映射"></a>2.6.4 内存映射</h3><p>内存映射 Memory-mapped I&#x2F;O ,是将磁盘文件的数据映射到内存，用户通过修改内存就能修改磁盘文件。</p>
 <p>映射的是进程的虚拟地址空间，映射位置是共享库的位置</p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207021339909.png" alt="image-20230207021339909"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207021339909.png" alt="image-20230207021339909"></p>
 <p><strong>相关系统调用</strong></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;sys/mman.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> *<span class="title function_">mmap</span><span class="params">(<span class="type">void</span> *addr, <span class="type">size_t</span> length, <span class="type">int</span> prot, <span class="type">int</span> flags, <span class="type">int</span> fd, <span class="type">off_t</span> offset)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	将一个文件或设备的数据映射到内存当中</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">	参数：</span></span><br><span class="line"><span class="comment">		- addr：传入NULL，由内核决定后续处理</span></span><br><span class="line"><span class="comment">		- length：要映射的数据长度，不能为0.建议使用文件的长度	（使用 stat 或 lseek 可以获取文件长度）</span></span><br><span class="line"><span class="comment">		- prot：对申请的内存映射区的操作权限（不能与打开的文件有权限冲突）</span></span><br><span class="line"><span class="comment">			PROT_NONE 无权限</span></span><br><span class="line"><span class="comment">			PROT_EXEC 可执行</span></span><br><span class="line"><span class="comment">			PROT_READ 可读</span></span><br><span class="line"><span class="comment">			PROT_WRITE 可写</span></span><br><span class="line"><span class="comment">			（要操作映射内存，必须有读权限）</span></span><br><span class="line"><span class="comment">		- flags：</span></span><br><span class="line"><span class="comment">			MAP_SHARED	映射区的数据会自动和磁盘文件进行同步，进程间通信，必须设置该选项</span></span><br><span class="line"><span class="comment">			MAP_PRIVATE	不同步，内存映射区的数据改变不会修改源文件，而会创建一个新的文件 （copy on write）</span></span><br><span class="line"><span class="comment">		- fd：需要映射的文件的文件描述符，通过 open 得到的。 注意：文件大小要大于0，且 open 指定的权限不能和 prot 冲突。</span></span><br><span class="line"><span class="comment">		- offset：偏移量，文件数据的起始位置偏移，一般不使用（必须是4k的整数倍，0表示不偏移）</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">	返回值：</span></span><br><span class="line"><span class="comment">		成功，返回映射到的内存首地址（虚拟地址）</span></span><br><span class="line"><span class="comment">		失败，返回 MAP_FAILED 即（void *) -1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">munmap</span><span class="params">(<span class="type">void</span> *addr, <span class="type">size_t</span> length)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	释放内存映射</span></span><br><span class="line"><span class="comment">	</span></span><br><span class="line"><span class="comment">	参数：</span></span><br><span class="line"><span class="comment">		- addr：要释放的内存的首地址</span></span><br><span class="line"><span class="comment">		- length：要释放的内存大小，要和mmap函数中的length参数值一致</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -815,10 +815,10 @@
 <p>前31个信号为常规信号，其余为实时信号</p>
 </blockquote>
 <p>查看信号的详细信息：<code>man 7 signal</code></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207074413475.png" alt="image-20230207074413475"></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207074659817.png" alt="image-20230207074659817"></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207074814071.png" alt="image-20230207074814071"></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207074951533.png" alt="image-20230207074951533"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207074413475.png" alt="image-20230207074413475"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207074659817.png" alt="image-20230207074659817"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207074814071.png" alt="image-20230207074814071"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207074951533.png" alt="image-20230207074951533"></p>
 <p>进程的5个<strong>默认处理动作</strong></p>
 <ul>
 <li><p>Term 终止进程</p>
@@ -880,7 +880,7 @@
 <li>信号的阻塞就是让系统暂时保留信号，留待以后发送。由于另外有办法让系统忽略信号，所以一般情况下信号的阻塞只是暂时的，只是为了防止信号打断敏感的操作。</li>
 </ul>
 <p><strong>默认</strong></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207122515067.png" alt="image-20230207122515067"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207122515067.png" alt="image-20230207122515067"></p>
 <p><strong>操作信号集的函数</strong></p>
 <figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;signal.h&gt;</span></span></span><br><span class="line"><span class="comment">//以下信号集相关的函数都是对自定义的信号集（参数set）进行操作</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigemptyset</span><span class="params">(<span class="type">sigset_t</span> *<span class="built_in">set</span>)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	清空信号集中的数据，将所有标志位置 0</span></span><br><span class="line"><span class="comment">	参数：	set 要操作的信号集</span></span><br><span class="line"><span class="comment">	返回值：成功0，失败-1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigfillset</span><span class="params">(<span class="type">sigset_t</span> *<span class="built_in">set</span>)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	将信号集中的所有标志位置 1</span></span><br><span class="line"><span class="comment">	参数：	set 要操作的信号集</span></span><br><span class="line"><span class="comment">	返回值：成功0，失败-1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigaddset</span><span class="params">(<span class="type">sigset_t</span> *<span class="built_in">set</span>, <span class="type">int</span> signum)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	设置信号集中的某一个信号对应得标志位为 1 ，表示阻塞这个信号</span></span><br><span class="line"><span class="comment">	参数：	</span></span><br><span class="line"><span class="comment">		- set 要操作的信号集</span></span><br><span class="line"><span class="comment">		- signum 需要设置的信号</span></span><br><span class="line"><span class="comment">	返回值：成功0，失败-1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigdelset</span><span class="params">(<span class="type">sigset_t</span> *<span class="built_in">set</span>, <span class="type">int</span> signum)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	设置信号集中的某一个信号对应得标志位为 0 ，表示不阻塞这个信号</span></span><br><span class="line"><span class="comment">	参数：	</span></span><br><span class="line"><span class="comment">		- set 要操作的信号集</span></span><br><span class="line"><span class="comment">		- signum 需要设置的信号</span></span><br><span class="line"><span class="comment">	返回值：成功0，失败-1</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">sigismember</span><span class="params">(<span class="type">const</span> <span class="type">sigset_t</span> *<span class="built_in">set</span>, <span class="type">int</span> signum)</span>;</span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">	判断某个信号是否阻塞</span></span><br><span class="line"><span class="comment">	参数：	</span></span><br><span class="line"><span class="comment">		- set 要操作的信号集</span></span><br><span class="line"><span class="comment">		- signum 需要判断的信号</span></span><br><span class="line"><span class="comment">	返回值：</span></span><br><span class="line"><span class="comment">		- 1 ，signum被阻塞</span></span><br><span class="line"><span class="comment">		- 0 ，signum不阻塞</span></span><br><span class="line"><span class="comment">		- -1，调用失败</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -901,7 +901,7 @@
 </blockquote>
 <p>如果在回调函数执行过程中又收到信号，则会阻塞回调函数优先处理信号（解决方案：设置临时阻塞信号集）</p>
 <p><strong>内核实现信号捕捉的过程</strong></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207223806887.png" alt="image-20230207223806887"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230207223806887.png" alt="image-20230207223806887"></p>
 <blockquote>
 <p>内核态的 do_signal() 和 sys_sigreturn()</p>
 </blockquote>
@@ -942,7 +942,7 @@
 
 <blockquote>
 <p>shmid_ds结构体</p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230208120249528.png" alt="image-20230208120249528"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230208120249528.png" alt="image-20230208120249528"></p>
 </blockquote>
 <p><strong>案例</strong></p>
 <p>write.c</p>
@@ -996,9 +996,9 @@
 </ol>
 <p><strong>一些操作命令</strong>（System V）</p>
 <p><code>ipcs</code></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230208122145744.png" alt="image-20230208122145744"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230208122145744.png" alt="image-20230208122145744"></p>
 <p><code>ipcrm</code></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230208122153825.png" alt="image-20230208122153825"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230208122153825.png" alt="image-20230208122153825"></p>
 <h3 id="补充：2-6-7-消息队列"><a href="#补充：2-6-7-消息队列" class="headerlink" title="补充：2.6.7 消息队列"></a>补充：2.6.7 消息队列</h3><h2 id="2-7-守护进程"><a href="#2-7-守护进程" class="headerlink" title="2.7 守护进程"></a>2.7 守护进程</h2><h3 id="终端、进程组、会话"><a href="#终端、进程组、会话" class="headerlink" title="终端、进程组、会话"></a>终端、进程组、会话</h3><p><strong>终端</strong></p>
 <ul>
 <li>在 UNIX 系统中，用户通过 终端 登陆到系统后得到一个 shell 进程，这个终端进程为 shell 进程的 控制终端 （Controlling Termianl) ，进程中，控制终端是保存在 PCB 中的信息，而 fork() 会复制 PCB 中的信息，因此由 shell 进程启动的其他进程的控制终端也是这个终端。</li>
@@ -1027,7 +1027,7 @@
 <p>指令 </p>
 <p><code>fing / 2 &gt; /dev/null | wc -l &amp;</code>( &amp; 后台运行指令 )</p>
 <p><code>sort &lt; longlist | uniq -c</code></p>
-<p><img src="C:\Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230208194637948.png" alt="image-20230208194637948"></p>
+<p><img src="/?utm_source=gold_browser_extension/2023/02/09/%E7%AC%AC%E4%BA%8C%E7%AB%A0Linux%E5%A4%9A%E8%BF%9B%E7%A8%8B/Users\86191\Desktop\myblog\mang959595.github.io\source_posts\第二章Linux多进程\image-20230208194637948.png" alt="image-20230208194637948"></p>
 <blockquote>
 <p>来自评论区：</p>
 <p>为什么两条命令产生了两个新的进程组，并且不同于bach进程组:</p>
