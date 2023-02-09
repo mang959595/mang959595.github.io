@@ -67,7 +67,7 @@ categoreies: 牛客C++服务器项目
 
 
 
-![image-20230204223514971](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230204223514971.png)
+![image-20230204223514971](.\第二章Linux多进程\image-20230204223514971.png)
 
 ![image-20230204223803946](C:\Users\86191\Desktop\myblog\mang959595.github.io\source\_posts\第二章Linux多进程\image-20230204223803946.png)
 
