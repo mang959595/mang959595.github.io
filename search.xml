@@ -40,6 +40,442 @@
       </tags>
   </entry>
   <entry>
+    <title>珍惜时间</title>
+    <url>/2023/02/12/%E5%90%B8%E5%8F%96%E6%95%99%E8%AE%AD/</url>
+    <content><![CDATA[<p>现在是2023年2月12日，凌晨1：33…</p>
+<p>临近大三下学期开学，目前三线作战，一条线是考试复习，一条线是SRP项目，一条线是实习秋招。感觉时间非常紧张，精神压力也非常大。甚至考试上已经放弃了某一难啃的科目。</p>
+<p>那么时间为什么又会如此紧迫？</p>
+<br>
+
+<br>
+
+<br>
+
+<p>这里需要展开一场自我反思</p>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h2 id="拷打FW"><a href="#拷打FW" class="headerlink" title="拷打FW"></a>拷打FW</h2><h3 id="一事无成"><a href="#一事无成" class="headerlink" title="一事无成"></a>一事无成</h3><p>其实我是很早就了解到大学应该做什么的（可惜不知道具体该如何去做）。在<strong>大一上学期，差不多2020年10月份的时候</strong>，已经有学长指明了三条路：1.竞赛（CTF，ACM…） 2.工作（尽早去实习） 3.绩点科研（搞成绩以及进实验室）</p>
+<br>
+
+<p><strong>竞赛：</strong></p>
+<p>那时候又刚好听了CTF的讲座，于是心中默认自己以后要走安全路线。可惜我太高估自己了，选择了pwn路线来入门CTF。因为很多前置知识都没学过，也不知道要去学，去哪学，也就没有一个循序渐进的学习过程，所以就学不下去了。</p>
+<p>连一点语言基础、操作系统方面的知识都没有，所以看那些什么虚拟地址空间、段、函数引用表等词汇完全没有概念，即使是到网上查资料看视频，也很难消化进去。比起艰难地去理解一些新概念，打游戏实在爽快多了，所以我也就没有学下去了。（现在想想，当时也不太会检索信息）</p>
+<br>
+
+<p>到了大二自己还是有一点这方面的想法，也稍微付出了多一点的时间，浅浅地捡了一点东西，去应付招新的事。结果，花的时间和学的东西还是太少了，只能用特殊方式入队。</p>
+<p>入队后，又没有驱动力去学了，就一直搁置着，后面也没有参加过一次比赛。</p>
+<br>
+
+<p>现在回想，也许我应该选一个简单一点的方向，或者是，学的时候直接从解题入手，边做题边学新概念。在学习过程中，以解出题目作为激励，或许我就能学的下去，从而形成一个良性循环。</p>
+<p>不过还是得怪自己太懒了。</p>
+<p><br><br></p>
+<p><strong>工作：</strong></p>
+<p>当时，我默认自己不读研，本科毕业就工作。所以我应该是尽早往工作路线靠拢，但是，那会儿实在是不知道要学什么方向。</p>
+<p><strong>开始的开始</strong></p>
+<p>真正开始学习计算机之前，也就是中学时期，我因为喜欢玩各种单机游戏，就曾有过日后做一名游戏开发者的想法。在高考完的暑假，我也买了一本C语言的教材。可惜当时并不知道怎么学习这些东西，还按照高中的学习方式，学一点就记一点（比如C语言的关键字还要列出来然后去背…），导致效率很低。于是没学多少就没一点兴趣了（好像也没那么少，可惜没有进度没有推到内存管理和网络编程相的部分）。unity也不知道因为什么始终没有开始学。</p>
+<blockquote>
+<p>翻看了那时候的笔记，感觉那是高考结束到目前为止，自己最认真学习的一段时间了，泪目啊</p>
+<p>好恨啊，如果当时的学习方式对了，后面这几年应该会顺利很多</p>
+</blockquote>
+<p>又因为中学过得太憋屈了，加上自控力差，高考完的那个暑假就疯狂的玩。当时我对未来十分憧憬、充满动力，然而这些还是没能变成我的自制力。</p>
+<br>
+
+<p><strong>路线</strong></p>
+<p>到后来，每一年，每一学期，都会更新自己的方向。一会儿是游戏开发，一会儿是Linux C++，一会儿是信息安全，一会儿是区块链。看到网上的一些信息，就会影响自己的心态，忧虑这个那个。再加上我的学习方式不正确，就导致什么都没有学好。</p>
+<br>
+
+<p><strong>数据结构与算法</strong></p>
+<p>大一寒假（两年前），有学长告诉我们得趁早刷题，可惜我当时不了解这方面的重要性，以及该如何去学，答案稍微看不懂，就不想学了。也不知道原来平时C++上机的内容，就是一些数据结构和算法题。每次只能看着大神们30分钟解决战斗，潇洒离开机房，而自己只有羡慕的份。</p>
+<p>在数据结构和算法题这方面，后面又是因为学习方式不对，搁置了很长一段时间（还有自己懒惰）。</p>
+<p>直到最近换了方式，先分类，然后边做题边看别人的总结，才顺利起来。</p>
+<br>
+
+<p><strong>编程语言</strong></p>
+<p>这个应该是我大三之前就要掌握好的。</p>
+<p>大一的时候决定要学C++，可惜，学了基本语法和一点点面向对象、泛型编程之后就停了，也就是学完课本上的一点东西就停了。还记得两年前的寒假，我在艰难地翻看C++课本，因为太关注那些语法规则，那些细枝末节，导致因小失大，学得很难受而学不下去。</p>
+<p>又因为课本上没有STL的内容，STL的东西也没学到。</p>
+<p>也不知道有系统编程，网络编程这些东西，虽然那会儿还没学操作系统和计算机网络。我要是能够意识到这两点，就应该早点自学操作系统和计算机网络，不用等到大二下学期才去学。</p>
+<p>还有应该面向项目来学习编程语言，在学语言的同时，又能掌握工程技能。可惜自己太懒，浅学即止。</p>
+<p>到现在因为要找实习找工作，需要项目经验，才从网上找视频一步一步跟着构建。对了，在项目选择这方面，我又浪费了不少时间。</p>
+<p>除了做项目，C++其实还有好多需要学的，哎…</p>
+<br>
+
+<br>
+
+<p><strong>本科学习</strong></p>
+<p>这是我在选择摆烂的同时，又不愿放弃的东西。</p>
+<p>大一上学期玩得很嗨，把学分最高的两门数学可都丢了。</p>
+<p>大一下学期，稍微知耻而后勇了一点，但是还是把学分最高的数学丢了。并且该学好的专业课，也没好好学。</p>
+<p>大二上学期（大一虽然浪飞了，但是分流后的排名也不是说毫无保研希望），于是就想在这方面努力一点，最后这学期的成绩总体也还不错，但还是够高，某些科目拖了后腿。分析原因，主要还是因为自己贪玩，没有花足够的时间学习。</p>
+<p>大二下学期，明显后劲不足了，但是三门专业课都还行，就计算机网络稍微拖了一点后腿（这时候还没意识到计网的重要性），政治课成绩掉大分。</p>
+<p>大三上学期，现在正在复习的。其实一开始还是打算好好学，然而还是第n次虎头蛇尾。有一个原因是因为自己选的课太多，但也只是我的借口罢了。</p>
+<br>
+
+<p>为什么说不愿放弃：因为对于主要科目，我在学习的时候都会做好很多笔记，包括大一被我丢掉的数学分析、线性代数。</p>
+<p>为什么又说是摆烂：虽然做了笔记，但是，就仅限于笔记。该刷题的科目，我几乎都没有刷题；该深入实践的科目，我都是应付任务。</p>
+<p>最后成绩不上不下，不下是因为我确实学了，不上是因为我没有花更多时间去加强我学的东西。</p>
+<p>其实想要分数更高，只要再多刷一点题就行了，笔记甚至也可以不做。而我在笔记上面花费了大量时间，最后也没有好好利用笔记去提高分数（但保住了下限），只能说怪谁呢？怪自己SB，认命了。</p>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h3 id="时间都去哪了"><a href="#时间都去哪了" class="headerlink" title="时间都去哪了"></a>时间都去哪了</h3><p>上了大学后，我生活的各项内容占比，大概是：</p>
+<p>（计算方式： 实际时间*权值）</p>
+<ol>
+<li>打游戏</li>
+<li>踢球</li>
+<li>刷视频，刷知乎</li>
+<li>学习</li>
+</ol>
+<br>
+
+<p>这个权值，可以认为是实际做事时的优先级</p>
+<p>权值排行：</p>
+<p>top1 踢球</p>
+<p>top2 打游戏</p>
+<p>top3 刷视频，刷知乎</p>
+<p>top4 学习</p>
+<p>而我认为的，正确的优先级排行应该是：</p>
+<p>top1 学习</p>
+<p>top2 踢球</p>
+<p>top3 打游戏</p>
+<p>top4 刷视频，刷知乎</p>
+<br>
+
+<p>实际时间排行:</p>
+<ol>
+<li>学习（上课）</li>
+<li>打游戏</li>
+<li>踢球</li>
+<li>学习（课后）or 刷视频，刷知乎</li>
+</ol>
+<br>
+
+<br>
+
+<p><strong>关于游戏：</strong></p>
+<p>有很多个晚上，我在宿舍里快乐开黑打 LOL ，可以从六七点打到九点十点，或者是从九点十点，打倒十二点断网。如果是白天，可以打一整个下午。只要是开始了游戏，就会持续很久，没有说打一把两把就关了的。除了LOL，又有很多时间贡献给了 Planeside2，骑马与砍杀，饥荒……</p>
+<p>我知道自己深陷其中，也尝试过很多次物理戒断，但是一直不能解决这个问题。把这个游戏卸载了，过段时间就会去玩没有卸载地游戏。把所有游戏都卸载了，过段时间又会忍不住重新下回来一个。每次破戒，都会破得很彻底。</p>
+<p>也许根本原因在于自制力不足，我习惯了中学时期的种种约束，现在给予了我足够的自由，我却不能够合理地去发展。</p>
+<br>
+
+<p><strong>关于踢球：</strong></p>
+<p>虽然说运动强身健体，但是踢球确实占据了我不少时间和精力。每次踢球，一般是从四五点，踢到六七点，然后吃饭、洗澡、歇息，一晃就八点多九点多，也快半天时间。而且踢完球了，一般也提不起学习的念头，就又是游戏，短视频…</p>
+<p>一周多则踢个3次4次，少则1次2次，时间也就这么消失了。</p>
+<br>
+
+<p><strong>关于刷视频：</strong></p>
+<p>这个没什么好说的，手机打开，只要一点进去，时间就消失了。尤其是微信视频号，毫无营养的视频非常多，但却能让我在半夜刷上一两个小时。因为太容易点到这个玩意儿了，现在我已经把视频号给撤了。</p>
+<p>另外就是B站，知乎…很多没意义没营养的内容，都消耗了我不少时间。并且，知乎的很多负能量在不经意间击碎了我对未来的憧憬，陡增焦虑。</p>
+<br>
+
+<p><strong>剖析每一天的时间：</strong></p>
+<p>每学期都有一段时间课比较多，一段时间没什么课</p>
+<ul>
+<li>有课：获得逃课技能之前，上完课之后的时间，几乎都不想学习。习得逃课技能之后，该逃不该逃的课也都逃过了，逃了之后有去自学的，也有去游戏人生的，还有去踢球的…</li>
+<li>没课：没课一般是中午起床，吃个饭之后就一点多了。这个时候要么会犯困（奇了怪了），要么没忍住点开了游戏，通常来说一下午就又没了。如果衔接踢球的话，这一天就没了。衔接学习的话，多半是在完成作业什么的，完成任务罢了。到了比较晚的时候，就轮到短视频、新媒体什么的来抢占我的时间了。</li>
+</ul>
+<br>
+
+<p><strong>再仔细回想，发现我用来学习的时间几乎都在深夜。好像只有在这个时候我才能保持专注，才能进入状态。</strong></p>
+<p>浪费了一天的时间后，夜里常常感到愧疚。这个时候我就有动力学习了，而一旦进入状态，我就舍不得去睡觉。或许这就是我深夜学习的原因。</p>
+<br>
+
+<p><strong>放长假：</strong></p>
+<p>每个假期都会带几本书回家，然而一点也没看。</p>
+<p>在家里就是阴间作息+游戏人生。完全没有考虑学习什么的，有的话也是浅尝即止，觉得香不过游戏。</p>
+<p>直到这个寒假的前2&#x2F;3部分，也还是如此。虽然刚回家的那几天都有刷题。</p>
+<p>到现在因为面临春招实习的压力（很可能寄了，来不及），这段时间才开始猛学，才开始追悔莫及。</p>
+<br>
+
+<br>
+
+<p>就像我在一天中的深夜里学习一样，在某些时间段的尾段，我也是冲刺地学习。这并不是一个好的现象和方式，因为情况通常都是时间不够充裕，大脑不能稳定和冷静地运行。冲刺式的学习不能够深入知识和技术，通常只是以应付任务作为目的，达到应付任务的效果。</p>
+<br>
+
+<p>这样子的一天一天连在一起，就成了我不堪回首的大学时光。（虽然也就过了5&#x2F;8，还有一点抢救的机会）</p>
+<br>
+
+<br>
+
+<br>
+
+<h3 id="为什么会这样"><a href="#为什么会这样" class="headerlink" title="为什么会这样"></a>为什么会这样</h3><p>不妨回忆一下高中生涯，跟现在很相似。高一高二处于半摆烂状态，高三开始冲刺，就像我半摆烂到现在开始冲刺。高三冲刺到最后填平了前面摆烂挖的坑，结果也还不错。而现在，我实在不敢去奢求未来有多好的结果，只要不是烂果就行了。但是冲刺不能停，这点必须时刻提醒自己。</p>
+<br>
+
+<p>这种 半摆烂+冲刺 现象的成因如何解释。</p>
+<ul>
+<li><p>先说为什么会出现冲刺：时间临近终点，即将取得某种结果。此时，我会明确的希望自己能达到什么层次，确定自己的风格路线，并去了解应该如何去实现目标。</p>
+<ul>
+<li><p>概括下来就是：</p>
+<p>​	一定的野心 + 明确的目标 + 合适的方法</p>
+<p>分析高三冲刺：</p>
+<p>​	希望中学生涯有个好的结尾  + 92计算机专业 + 学习方法比较正确</p>
+<p>分析现在的冲刺：</p>
+<p>​	希望毕业有个匹配的工作 + C++服务器开发 + 我不好说</p>
+</li>
+</ul>
+</li>
+<li><p>再说为什么会半摆烂：无非就是，没有明确的目标，学习方式不对，迷茫，没有动力，自制力不足，玩心太重…</p>
+</li>
+</ul>
+<br>
+
+<p>补救措施：</p>
+<ul>
+<li>目标，现在有了</li>
+<li>路线，有了</li>
+<li>学习方式，这个感觉得参考别人了</li>
+<li>动力，压力都变成动力了</li>
+<li>自制力，只能改，从好习惯开始</li>
+<li>玩心重，不敢玩了</li>
+</ul>
+<p>还有一个，自我监督。</p>
+<br>
+
+<br>
+
+<h3 id="以后怎么办"><a href="#以后怎么办" class="headerlink" title="以后怎么办"></a>以后怎么办</h3><p>高三和现在又有些许不同：高三靠约束，现在靠自律；高三有贵人相伴，现在孤身奋战。约束养不成我的自控力，但代替了我的自控力；而贵人在我低落的时候给了我不少鼓励，在我松懈的时候给了我十足的动力。而目前形势严峻。</p>
+<p>我不好说未来会是什么结果，只能再次提醒自己，冲刺不能停。</p>
+<p>还有就是，吸取教训。不要过了这个坎，就觉得万事大吉，等到下一个坎到来，又像现在这样猴急。</p>
+<p>先从养成习惯开始吧，两个目标：<strong>规律作息，按时三餐</strong>。</p>
+<img src="/2023/02/12/%E5%90%B8%E5%8F%96%E6%95%99%E8%AE%AD/image-20230212062855952.png" alt="image-20230212062855952">
+
+<br>
+
+<p>今晚无论有什么事情没做，也要在12点前熄灯睡觉</p>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<p>而现在是2023年2月12日，早上6点27。本来是想反思一下自己的拖延症和网瘾，一不小心反思了一个晚上。</p>
+]]></content>
+      <categories>
+        <category>反思录</category>
+      </categories>
+      <tags>
+        <tag>时间</tag>
+        <tag>拷打</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>框架汇总</title>
+    <url>/2022/07/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="算法学习"><a href="#算法学习" class="headerlink" title="算法学习"></a>算法学习</h1><br>
+
+<h2 id="day1——核心框架汇总"><a href="#day1——核心框架汇总" class="headerlink" title="day1——核心框架汇总"></a>day1——核心框架汇总</h2><h3 id="1-框架思维"><a href="#1-框架思维" class="headerlink" title="1-框架思维"></a>1-框架思维</h3><h4 id="基本数据结构及其操作"><a href="#基本数据结构及其操作" class="headerlink" title="基本数据结构及其操作"></a>基本数据结构及其操作</h4><p>数据结构的存储方式只有两种：<strong>数组（顺序存储）和链表（链式存储）</strong></p>
+<p>在此之上可以构成：<strong>散列表、栈、队列、堆、树、图等等各种数据结构</strong></p>
+<p>基本操作：无非就是<strong>遍历 + 访问</strong>，再具体一点就是：<strong>增删查改</strong>。</p>
+<p>数据结构种类很多，但它们存在的目的都是在不同的应用场景，尽可能高效地增删查改。</p>
+<hr>
+<h4 id="算法的框架思维"><a href="#算法的框架思维" class="headerlink" title="算法的框架思维"></a>算法的框架思维</h4><p>数组遍历框架</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(<span class="type">int</span>[]arr)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt;arr.length; i++)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 迭代访问 arr[i]</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>链表遍历框架，兼具迭代和递归结构：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 基本的单链表节点 */</span></span><br><span class="line"></span><br><span class="line">classListNode&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line"></span><br><span class="line">    ListNode next;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(ListNode p = head; p != null; p =p.next)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 迭代访问 p.val</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 递归访问 head.val</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">traverse</span>(head.next);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>二叉树遍历框架，典型的非线性递归遍历结构：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 基本的二叉树节点 */</span></span><br><span class="line"></span><br><span class="line">classTreeNode&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line"></span><br><span class="line">    TreeNode left, right;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(TreeNoderoot)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">traverse</span>(root.left);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">traverse</span>(root.right);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p>N 叉树的遍历框架：</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 基本的 N 叉树节点 */</span></span><br><span class="line"></span><br><span class="line">classTreeNode&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line"></span><br><span class="line">    TreeNode[] children;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(TreeNoderoot)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(TreeNode child :root.children)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">traverse</span>(child);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>1、先学习像数组、链表这种基本数据结构的常用算法</strong></p>
+<p><strong>2、学会基础算法之后，不要急着上来就刷回溯算法、动态规划这类笔试常考题，而应该先刷二叉树</strong></p>
+<hr>
+<br>
+
+<h3 id="2-刷题心得"><a href="#2-刷题心得" class="headerlink" title="2-刷题心得"></a>2-刷题心得</h3><h4 id="数组-x2F-单链表系列算法"><a href="#数组-x2F-单链表系列算法" class="headerlink" title="数组&#x2F;单链表系列算法"></a>数组&#x2F;单链表系列算法</h4><blockquote>
+<p>-<strong>单链表常考的技巧就是双指针</strong></p>
+</blockquote>
+<blockquote>
+<p>-<strong>数组常用的技巧有很大一部分还是双指针相关的技巧，说白了是教你如何聪明地进行穷举</strong></p>
+</blockquote>
+<blockquote>
+<p>-<strong>滑动窗口算法技巧，典型的快慢双指针，快慢指针中间就是滑动的「窗口」，主要用于解决子串问题。</strong></p>
+</blockquote>
+<blockquote>
+<p>-**最后说说 <a href="https://labuladong.github.io/algo/2/20/24/">前缀和技巧</a> 和 <a href="https://labuladong.github.io/algo/2/20/25/">差分数组技巧</a>**。</p>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>如果频繁地让你计算子数组的和，每次用 for 循环去遍历肯定没问题，但前缀和技巧预计算一个 <code>preSum</code> 数组，就可以避免循环。</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>类似的，如果频繁地让你对子数组进行增减操作，也可以每次用 for 循环去操作，但差分数组技巧维护一个 <code>diff</code> 数组，也可以避免循环。</p>
+</blockquote>
+</blockquote>
+<br>
+
+<h4 id="二叉树系列算法"><a href="#二叉树系列算法" class="headerlink" title="二叉树系列算法"></a>二叉树系列算法</h4><p>二叉树题目的递归解法可以分两类思路，第一类是遍历一遍二叉树得出答案，第二类是通过分解问题计算出答案，这两类思路分别对应着 <a href="https://labuladong.github.io/algo/4/31/105/">回溯算法核心框架</a> 和 <a href="https://labuladong.github.io/algo/3/25/69/">动态规划核心框架</a>。</p>
+<p>更进一步，图论相关的算法也是二叉树算法的延续。</p>
+<p>比如 <a href="https://labuladong.github.io/algo/2/22/50/">图论基础</a>， <a href="https://labuladong.github.io/algo/2/22/51/">环判断和拓扑排序</a> 和 <a href="https://labuladong.github.io/algo/2/22/52/">二分图判定算法</a> 就用到了 DFS 算法；再比如 <a href="https://labuladong.github.io/algo/2/22/56/">Dijkstra 算法模板</a>，就是改造版 BFS 算法加上一个类似 dp table 的数组。</p>
+<p>这些算法的本质都是穷举二（多）叉树，有机会的话通过剪枝或者备忘录的方式减少冗余计算，提高效率，就这么点事儿。</p>
+<hr>
+<br>
+
+<h3 id="3-双指针（七道链表题）"><a href="#3-双指针（七道链表题）" class="headerlink" title="3-双指针（七道链表题）"></a>3-双指针（七道链表题）</h3><br>
+
+<h4 id="合并两个有序链表"><a href="#合并两个有序链表" class="headerlink" title="合并两个有序链表"></a>合并两个有序链表</h4><p>用到了3个指针：指向原链表的p1、p2，连接链表的p</p>
+<p>注意要新建一个空的链表头</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodemergeTwoLists</span>(ListNodel1,ListNodel2)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 虚拟头结点</span></span><br><span class="line"></span><br><span class="line">    ListNode dummy =<span class="built_in">newListNode</span>(<span class="number">-1</span>), p = dummy;</span><br><span class="line"></span><br><span class="line">    ListNode p1 = l1, p2 = l2;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p1 != null &amp;&amp; p2 != null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 比较 p1 和 p2 两个指针</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将值较小的的节点接到 p 指针</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(p1.val&gt;p2.val)&#123;</span><br><span class="line"></span><br><span class="line">            p.next= p2;</span><br><span class="line"></span><br><span class="line">            p2 =p2.next;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">            p.next= p1;</span><br><span class="line"></span><br><span class="line">            p1 =p1.next;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// p 指针不断前进</span></span><br><span class="line"></span><br><span class="line">        p =p.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(p1 != null)&#123;</span><br><span class="line"></span><br><span class="line">        p.next= p1;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(p2 != null)&#123;</span><br><span class="line"></span><br><span class="line">        p.next= p2;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    returndummy.next;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="链表的分解"><a href="#链表的分解" class="headerlink" title="链表的分解"></a>链表的分解</h4><p><img src="https://labuladong.github.io/algo/images/%e9%93%be%e8%a1%a8%e6%8a%80%e5%b7%a7/title4.jpg" alt="img"></p>
+<br>
+
+<h4 id="合并k个有序链表"><a href="#合并k个有序链表" class="headerlink" title="合并k个有序链表"></a>合并k个有序链表</h4><p>利用优先级队列（堆）</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodemergeKLists</span>(ListNode[]lists)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(lists.length==<span class="number">0</span>)<span class="keyword">return</span> null;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 虚拟头结点</span></span><br><span class="line"></span><br><span class="line">    ListNode dummy =<span class="built_in">newListNode</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    ListNode p = dummy;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 优先级队列，最小堆</span></span><br><span class="line"></span><br><span class="line">    PriorityQueue&lt;ListNode&gt; pq =newPriorityQueue&lt;&gt;(</span><br><span class="line"></span><br><span class="line">        lists.length,(a, b)-&gt;(a.val-b.val));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将 k 个链表的头结点加入最小堆</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(ListNode head : lists)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(head != null)</span><br><span class="line"></span><br><span class="line">            pq.<span class="built_in">add</span>(head);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!pq.<span class="built_in">isEmpty</span>())&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取最小节点，接到结果链表中</span></span><br><span class="line"></span><br><span class="line">        ListNode node =pq.<span class="built_in">poll</span>();</span><br><span class="line"></span><br><span class="line">        p.next= node;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node.next!= null)&#123;</span><br><span class="line"></span><br><span class="line">            pq.<span class="built_in">add</span>(node.next);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// p 指针不断前进</span></span><br><span class="line"></span><br><span class="line">        p =p.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    returndummy.next;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>优先队列 <code>pq</code> 中的元素个数最多是 <code>k</code>，所以一次 <code>poll</code> 或者 <code>add</code> 方法的时间复杂度是 <code>O(logk)</code>；所有的链表节点都会被加入和弹出 <code>pq</code>，<strong>所以算法整体的时间复杂度是 <code>O(Nlogk)</code>，其中 <code>k</code> 是链表的条数，<code>N</code> 是这些链表的节点总数</strong>。</p>
+<br>
+
+<h4 id="寻找单链表的倒数第k个节点"><a href="#寻找单链表的倒数第k个节点" class="headerlink" title="寻找单链表的倒数第k个节点"></a>寻找单链表的倒数第k个节点</h4><p>不告诉链表长度；</p>
+<p>只遍历一次链表的解法：用p1走k步后，p2再出发</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 返回链表的倒数第 k 个节点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ListNodefindFromEnd</span>(ListNodehead,intk)&#123;</span><br><span class="line"></span><br><span class="line">    ListNode p1 = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// p1 先走 k 步</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; k; i++)&#123;</span><br><span class="line"></span><br><span class="line">        p1 =p1.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ListNode p2 = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// p1 和 p2 同时走 n - k 步</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p1 != null)&#123;</span><br><span class="line"></span><br><span class="line">        p2 =p2.next;</span><br><span class="line"></span><br><span class="line">        p1 =p1.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// p2 现在指向第 n - k + 1 个节点，即倒数第 k 个节点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p2;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="寻找单链表的中点"><a href="#寻找单链表的中点" class="headerlink" title="寻找单链表的中点"></a>寻找单链表的中点</h4><p>利用快慢指针：快指针走两步，慢指针走一步</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodemiddleNode</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快慢指针初始化指向 head</span></span><br><span class="line"></span><br><span class="line">    ListNode slow = head, fast = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快指针走到末尾时停止</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast != null &amp;&amp;fast.next!= null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 慢指针走一步，快指针走两步</span></span><br><span class="line"></span><br><span class="line">        slow =slow.next;</span><br><span class="line"></span><br><span class="line">        fast =fast.next.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 慢指针指向中点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是，如果链表长度为偶数，也就是说中点有两个的时候，我们这个解法返回的节点是靠后的那个节点。</p>
+<br>
+
+<h4 id="判断单链表是否包含环并找出环起点"><a href="#判断单链表是否包含环并找出环起点" class="headerlink" title="判断单链表是否包含环并找出环起点"></a>判断单链表是否包含环并找出环起点</h4><p>判断是否含环：快慢指针，如果最终快指针赶上慢指针说明有环。否则快指针遍历直到空指针。</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">booleanhasCycle</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快慢指针初始化指向 head</span></span><br><span class="line"></span><br><span class="line">    ListNode slow = head, fast = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快指针走到末尾时停止</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast != null &amp;&amp;fast.next!= null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 慢指针走一步，快指针走两步</span></span><br><span class="line"></span><br><span class="line">        slow =slow.next;</span><br><span class="line"></span><br><span class="line">        fast =fast.next.next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 快慢指针相遇，说明含有环</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(slow == fast)&#123;</span><br><span class="line"></span><br><span class="line">            returntrue;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不包含环</span></span><br><span class="line"></span><br><span class="line">    returnfalse;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>若有环，如何判断环的起点</p>
+<blockquote>
+<p>当快慢指针相遇时，让其中任一个指针指向头节点，然后让它俩以相同速度前进，再次相遇时所在的节点位置就是环开始的位置。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodedetectCycle</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    ListNode fast, slow;</span><br><span class="line"></span><br><span class="line">    fast = slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast != null &amp;&amp;fast.next!= null)&#123;</span><br><span class="line"></span><br><span class="line">        fast =fast.next.next;</span><br><span class="line"></span><br><span class="line">        slow =slow.next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(fast == slow)<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 上面的代码类似 hasCycle 函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(fast == null ||fast.next== null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// fast 遇到空指针说明没有环</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> null;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新指向头结点</span></span><br><span class="line"></span><br><span class="line">    slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快慢指针同步前进，相交点就是环起点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(slow != fast)&#123;</span><br><span class="line"></span><br><span class="line">        fast =fast.next;</span><br><span class="line"></span><br><span class="line">        slow =slow.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h4 id="判断两个单链表是否相交并找出交点"><a href="#判断两个单链表是否相交并找出交点" class="headerlink" title="判断两个单链表是否相交并找出交点"></a>判断两个单链表是否相交并找出交点</h4><p>不使用Hashmap的实现，即仅使用两个指针</p>
+<blockquote>
+<p>我们可以让 <code>p1</code> 遍历完链表 <code>A</code> 之后开始遍历链表 <code>B</code>，让 <code>p2</code> 遍历完链表 <code>B</code> 之后开始遍历链表 <code>A</code>，这样相当于「逻辑上」两条链表接在了一起。</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodegetIntersectionNode</span>(ListNodeheadA,ListNodeheadB)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// p1 指向 A 链表头结点，p2 指向 B 链表头结点</span></span><br><span class="line"></span><br><span class="line">    ListNode p1 = headA, p2 = headB;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p1 != p2)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// p1 走一步，如果走到 A 链表末尾，转到 B 链表</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(p1 == null) p1 = headB;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>            p1 =p1.next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// p2 走一步，如果走到 B 链表末尾，转到 A 链表</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(p2 == null) p2 = headA;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>            p2 =p2.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>或者通过预先求出两个链表的长度，来使p1、p2同时到达相交节点</p>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> lenA =<span class="number">0</span>, lenB =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算两条链表的长度</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(ListNode p1 = headA; p1 != null; p1 =p1.next)&#123;</span><br><span class="line"></span><br><span class="line">        lenA++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(ListNode p2 = headB; p2 != null; p2 =p2.next)&#123;</span><br><span class="line"></span><br><span class="line">        lenB++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 让 p1 和 p2 到达尾部的距离相同</span></span><br><span class="line"></span><br><span class="line">    ListNode p1 = headA, p2 = headB;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(lenA &gt; lenB)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; lenA - lenB; i++)&#123;</span><br><span class="line"></span><br><span class="line">            p1 =p1.next;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; lenB - lenA; i++)&#123;</span><br><span class="line"></span><br><span class="line">            p2 =p2.next;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 看两个指针是否会相同，p1 == p2 时有两种情况：</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1、要么是两条链表不相交，他俩同时走到尾部空指针</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2、要么是两条链表相交，他俩走到两条链表的相交点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p1 != p2)&#123;</span><br><span class="line"></span><br><span class="line">        p1 =p1.next;</span><br><span class="line"></span><br><span class="line">        p2 =p2.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<hr>
+<br>
+
+<h3 id="4-双指针（七道数组题）"><a href="#4-双指针（七道数组题）" class="headerlink" title="4-双指针（七道数组题）"></a>4-双指针（七道数组题）</h3><blockquote>
+<p>链表和数组题中的双指针有两种</p>
+</blockquote>
+<blockquote>
+<p>-<strong>左右指针</strong>，就是两个指针相向而行或者相背而行；</p>
+</blockquote>
+<blockquote>
+<p>-<strong>快慢指针</strong>，就是两个指针同向而行，一快一慢。</p>
+</blockquote>
+<br>
+
+<h4 id="快慢指针技巧"><a href="#快慢指针技巧" class="headerlink" title="快慢指针技巧"></a>快慢指针技巧</h4><blockquote>
+<p>原地修改数组</p>
+</blockquote>
+<h5 id="删除有序数组中的重复项"><a href="#删除有序数组中的重复项" class="headerlink" title="删除有序数组中的重复项"></a>删除有序数组中的重复项</h5><p>在不新开数组的情况下的解法</p>
+<p><img src="https://labuladong.github.io/algo/images/%e6%95%b0%e7%bb%84%e5%8e%bb%e9%87%8d/1.gif" alt="img"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">intremoveDuplicates</span>(<span class="type">int</span>[]nums)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(nums.length==<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">        return0;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> slow =<span class="number">0</span>, fast =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast &lt;nums.length)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(nums[fast]!=nums[slow])&#123;</span><br><span class="line"></span><br><span class="line">            slow++;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 维护 nums[0..slow] 无重复</span></span><br><span class="line"></span><br><span class="line">            nums[slow]=nums[fast];</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fast++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组长度为索引 + 1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> slow +<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对于删除有序链表中的重复项呢？</p>
+<p><img src="https://labuladong.github.io/algo/images/%e6%95%b0%e7%bb%84%e5%8e%bb%e9%87%8d/2.gif" alt="img"></p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodedeleteDuplicates</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(head == null)<span class="keyword">return</span> null;</span><br><span class="line"></span><br><span class="line">    ListNode slow = head, fast = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast != null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(fast.val!=slow.val)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// nums[slow] = nums[fast];</span></span><br><span class="line"></span><br><span class="line">            slow.next= fast;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// slow++;</span></span><br><span class="line"></span><br><span class="line">            slow =slow.next;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// fast++</span></span><br><span class="line"></span><br><span class="line">        fast =fast.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 断开与后面重复元素的连接</span></span><br><span class="line"></span><br><span class="line">    slow.next= null;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h5 id="删除无序数组中的某个元素"><a href="#删除无序数组中的某个元素" class="headerlink" title="删除无序数组中的某个元素"></a>删除无序数组中的某个元素</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">intremoveElement</span>(<span class="type">int</span>[]nums,intval)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> fast =<span class="number">0</span>, slow =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast &lt;nums.length)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(nums[fast]!= val)&#123;</span><br><span class="line"></span><br><span class="line">            nums[slow]=nums[fast];</span><br><span class="line"></span><br><span class="line">            slow++;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fast++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这里是先给 <code>nums[slow]</code> 赋值然后再给 slow++</p>
+<br>
+
+<h5 id="移动0"><a href="#移动0" class="headerlink" title="移动0"></a>移动0</h5><blockquote>
+<p>比如说给你输入 <code>nums = [0,1,4,0,2]</code>，你的算法没有返回值，但是会把 <code>nums</code> 数组原地修改成 <code>[1,4,2,0,0]</code>。</p>
+</blockquote>
+<blockquote>
+<p>其实就相当于移除 <code>nums</code> 中的所有 0，然后再把后面的元素都赋值为 0 即可。</p>
+</blockquote>
+<p>可以复用上一题的 <code>removeElement</code> 函数</p>
+<br>
+
+<h4 id="滑动窗口类型（快慢指针）"><a href="#滑动窗口类型（快慢指针）" class="headerlink" title="滑动窗口类型（快慢指针）"></a>滑动窗口类型（快慢指针）</h4><p>代码框架</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 滑动窗口算法框架 */</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidslidingWindow</span>(strings,stringt)&#123;</span><br><span class="line"></span><br><span class="line">    unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt; need, window;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">char</span> c : t)need[c]++;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> valid =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(right &lt;s.<span class="built_in">size</span>())&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span> c =s[right];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 右移（增大）窗口</span></span><br><span class="line"></span><br><span class="line">        right++;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 进行窗口内数据的一系列更新</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(window needs shrink)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="type">char</span> d =s[left];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 左移（缩小）窗口</span></span><br><span class="line"></span><br><span class="line">            left++;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 进行窗口内数据的一系列更新</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><code>left</code> 指针在后，<code>right</code> 指针在前，两个指针中间的部分就是「窗口」，算法通过扩大和缩小「窗口」来解决某些问题。</p>
+<hr>
+<br>
+
+<h4 id="左右指针技巧"><a href="#左右指针技巧" class="headerlink" title="左右指针技巧"></a>左右指针技巧</h4><h5 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h5><p>简单框架</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">intbinarySearch</span>(<span class="type">int</span>[]nums,inttarget)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一左一右两个指针相向而行</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =nums.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> mid =(right + left)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(nums[mid]== target)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">elseif</span>(nums[mid]&lt; target)</span><br><span class="line"></span><br><span class="line">            left = mid +<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">elseif</span>(nums[mid]&gt; target)</span><br><span class="line"></span><br><span class="line">            right = mid <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span><span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h5 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h5><p>返回的下标是从1算起的</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span>[] <span class="built_in">twoSum</span>(<span class="type">int</span>[] nums,<span class="type">int</span> target)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一左一右两个指针相向而行</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =nums.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> sum =nums[left]+nums[right];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(sum == target)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 题目要求的索引是从 1 开始的</span></span><br><span class="line"></span><br><span class="line">            returnnewint[]&#123;left +<span class="number">1</span>, right +<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="built_in">elseif</span>(sum &lt; target)&#123;</span><br><span class="line"></span><br><span class="line">            left++; <span class="comment">// 让 sum 大一点 *</span></span><br><span class="line"></span><br><span class="line">        &#125;<span class="built_in">elseif</span>(sum &gt; target)&#123;</span><br><span class="line"></span><br><span class="line">            right--; <span class="comment">// 让 sum 小一点 *</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    returnnewint[]&#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h5 id="反转数组"><a href="#反转数组" class="headerlink" title="反转数组"></a>反转数组</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">voidreverseString</span>(<span class="type">char</span>[]s)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一左一右两个指针相向而行</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =s.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 交换 s[left] 和 s[right]</span></span><br><span class="line"></span><br><span class="line">        <span class="type">char</span> temp =s[left];</span><br><span class="line"></span><br><span class="line">        s[left]=s[right];</span><br><span class="line"></span><br><span class="line">        s[right]= temp;</span><br><span class="line"></span><br><span class="line">        left++;</span><br><span class="line"></span><br><span class="line">        right--;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<h5 id="回文串匹配"><a href="#回文串匹配" class="headerlink" title="回文串匹配"></a>回文串匹配</h5><p>简单匹配</p>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">booleanisPalindrome</span>(Strings)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一左一右两个指针相向而行</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =s.<span class="built_in">length</span>()<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(s.<span class="built_in">charAt</span>(left)!=s.<span class="built_in">charAt</span>(right))&#123;</span><br><span class="line"></span><br><span class="line">            returnfalse;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        left++;</span><br><span class="line"></span><br><span class="line">        right--;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    returntrue;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<p><strong>最长回文子串</strong></p>
+<blockquote>
+<p>左右指针从中间往两边延申</p>
+</blockquote>
+<blockquote>
+<p>如果回文串的长度为奇数，参数 r &#x3D; l</p>
+</blockquote>
+<blockquote>
+<p>如果回文串的长度为偶数，参数 r &#x3D; l+1</p>
+</blockquote>
+<blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在 s 中寻找以 s[l] 和 s[r] 为中心的最长回文串</span></span><br><span class="line"><span class="built_in">Stringpalindrome</span>(Strings,intl,intr)&#123;</span><br><span class="line"><span class="comment">// 防止索引越界</span></span><br><span class="line"><span class="keyword">while</span>(l &gt;=<span class="number">0</span>&amp;&amp; r &lt;s.<span class="built_in">length</span>()</span><br><span class="line">&amp;&amp;s.<span class="built_in">charAt</span>(l)==s.<span class="built_in">charAt</span>(r))&#123;</span><br><span class="line"><span class="comment">// 双指针，向两边展开</span></span><br><span class="line">l--; r++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 返回以 s[l] 和 s[r] 为中心的最长回文串</span></span><br><span class="line">returns.<span class="built_in">substring</span>(l +<span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</blockquote>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">StringlongestPalindrome</span>(Strings)&#123;</span><br><span class="line"></span><br><span class="line">    String res =<span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt;s.<span class="built_in">length</span>(); i++)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 以 s[i] 为中心的最长回文子串</span></span><br><span class="line"></span><br><span class="line">        String s1 =<span class="built_in">palindrome</span>(s, i, i);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 以 s[i] 和 s[i+1] 为中心的最长回文子串</span></span><br><span class="line"></span><br><span class="line">        String s2 =<span class="built_in">palindrome</span>(s, i, i +<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// res = longest(res, s1, s2)</span></span><br><span class="line"></span><br><span class="line">        res =res.<span class="built_in">length</span>()&gt;s1.<span class="built_in">length</span>()? res : s1;</span><br><span class="line"></span><br><span class="line">        res =res.<span class="built_in">length</span>()&gt;s2.<span class="built_in">length</span>()? res : s2;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+]]></content>
+      <tags>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Linux多线程</title>
     <url>/2023/02/10/%E7%AC%AC%E4%B8%89%E7%AB%A0Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<h1 id="第三章-Linux多线程开发"><a href="#第三章-Linux多线程开发" class="headerlink" title="第三章 Linux多线程开发"></a>第三章 Linux多线程开发</h1><hr>
@@ -346,441 +782,6 @@
       </categories>
       <tags>
         <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>框架汇总</title>
-    <url>/2022/07/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h1 id="算法学习"><a href="#算法学习" class="headerlink" title="算法学习"></a>算法学习</h1><br>
-
-<h2 id="day1——核心框架汇总"><a href="#day1——核心框架汇总" class="headerlink" title="day1——核心框架汇总"></a>day1——核心框架汇总</h2><h3 id="1-框架思维"><a href="#1-框架思维" class="headerlink" title="1-框架思维"></a>1-框架思维</h3><h4 id="基本数据结构及其操作"><a href="#基本数据结构及其操作" class="headerlink" title="基本数据结构及其操作"></a>基本数据结构及其操作</h4><p>数据结构的存储方式只有两种：<strong>数组（顺序存储）和链表（链式存储）</strong></p>
-<p>在此之上可以构成：<strong>散列表、栈、队列、堆、树、图等等各种数据结构</strong></p>
-<p>基本操作：无非就是<strong>遍历 + 访问</strong>，再具体一点就是：<strong>增删查改</strong>。</p>
-<p>数据结构种类很多，但它们存在的目的都是在不同的应用场景，尽可能高效地增删查改。</p>
-<hr>
-<h4 id="算法的框架思维"><a href="#算法的框架思维" class="headerlink" title="算法的框架思维"></a>算法的框架思维</h4><p>数组遍历框架</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(<span class="type">int</span>[]arr)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt;arr.length; i++)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 迭代访问 arr[i]</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>链表遍历框架，兼具迭代和递归结构：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 基本的单链表节点 */</span></span><br><span class="line"></span><br><span class="line">classListNode&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line"></span><br><span class="line">    ListNode next;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(ListNode p = head; p != null; p =p.next)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 迭代访问 p.val</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 递归访问 head.val</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">traverse</span>(head.next);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>二叉树遍历框架，典型的非线性递归遍历结构：</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 基本的二叉树节点 */</span></span><br><span class="line"></span><br><span class="line">classTreeNode&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line"></span><br><span class="line">    TreeNode left, right;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(TreeNoderoot)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">traverse</span>(root.left);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">traverse</span>(root.right);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p>N 叉树的遍历框架：</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 基本的 N 叉树节点 */</span></span><br><span class="line"></span><br><span class="line">classTreeNode&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> val;</span><br><span class="line"></span><br><span class="line">    TreeNode[] children;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidtraverse</span>(TreeNoderoot)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(TreeNode child :root.children)</span><br><span class="line"></span><br><span class="line">        <span class="built_in">traverse</span>(child);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><strong>1、先学习像数组、链表这种基本数据结构的常用算法</strong></p>
-<p><strong>2、学会基础算法之后，不要急着上来就刷回溯算法、动态规划这类笔试常考题，而应该先刷二叉树</strong></p>
-<hr>
-<br>
-
-<h3 id="2-刷题心得"><a href="#2-刷题心得" class="headerlink" title="2-刷题心得"></a>2-刷题心得</h3><h4 id="数组-x2F-单链表系列算法"><a href="#数组-x2F-单链表系列算法" class="headerlink" title="数组&#x2F;单链表系列算法"></a>数组&#x2F;单链表系列算法</h4><blockquote>
-<p>-<strong>单链表常考的技巧就是双指针</strong></p>
-</blockquote>
-<blockquote>
-<p>-<strong>数组常用的技巧有很大一部分还是双指针相关的技巧，说白了是教你如何聪明地进行穷举</strong></p>
-</blockquote>
-<blockquote>
-<p>-<strong>滑动窗口算法技巧，典型的快慢双指针，快慢指针中间就是滑动的「窗口」，主要用于解决子串问题。</strong></p>
-</blockquote>
-<blockquote>
-<p>-**最后说说 <a href="https://labuladong.github.io/algo/2/20/24/">前缀和技巧</a> 和 <a href="https://labuladong.github.io/algo/2/20/25/">差分数组技巧</a>**。</p>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>如果频繁地让你计算子数组的和，每次用 for 循环去遍历肯定没问题，但前缀和技巧预计算一个 <code>preSum</code> 数组，就可以避免循环。</p>
-</blockquote>
-</blockquote>
-<blockquote>
-<blockquote>
-<p>类似的，如果频繁地让你对子数组进行增减操作，也可以每次用 for 循环去操作，但差分数组技巧维护一个 <code>diff</code> 数组，也可以避免循环。</p>
-</blockquote>
-</blockquote>
-<br>
-
-<h4 id="二叉树系列算法"><a href="#二叉树系列算法" class="headerlink" title="二叉树系列算法"></a>二叉树系列算法</h4><p>二叉树题目的递归解法可以分两类思路，第一类是遍历一遍二叉树得出答案，第二类是通过分解问题计算出答案，这两类思路分别对应着 <a href="https://labuladong.github.io/algo/4/31/105/">回溯算法核心框架</a> 和 <a href="https://labuladong.github.io/algo/3/25/69/">动态规划核心框架</a>。</p>
-<p>更进一步，图论相关的算法也是二叉树算法的延续。</p>
-<p>比如 <a href="https://labuladong.github.io/algo/2/22/50/">图论基础</a>， <a href="https://labuladong.github.io/algo/2/22/51/">环判断和拓扑排序</a> 和 <a href="https://labuladong.github.io/algo/2/22/52/">二分图判定算法</a> 就用到了 DFS 算法；再比如 <a href="https://labuladong.github.io/algo/2/22/56/">Dijkstra 算法模板</a>，就是改造版 BFS 算法加上一个类似 dp table 的数组。</p>
-<p>这些算法的本质都是穷举二（多）叉树，有机会的话通过剪枝或者备忘录的方式减少冗余计算，提高效率，就这么点事儿。</p>
-<hr>
-<br>
-
-<h3 id="3-双指针（七道链表题）"><a href="#3-双指针（七道链表题）" class="headerlink" title="3-双指针（七道链表题）"></a>3-双指针（七道链表题）</h3><br>
-
-<h4 id="合并两个有序链表"><a href="#合并两个有序链表" class="headerlink" title="合并两个有序链表"></a>合并两个有序链表</h4><p>用到了3个指针：指向原链表的p1、p2，连接链表的p</p>
-<p>注意要新建一个空的链表头</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodemergeTwoLists</span>(ListNodel1,ListNodel2)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 虚拟头结点</span></span><br><span class="line"></span><br><span class="line">    ListNode dummy =<span class="built_in">newListNode</span>(<span class="number">-1</span>), p = dummy;</span><br><span class="line"></span><br><span class="line">    ListNode p1 = l1, p2 = l2;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p1 != null &amp;&amp; p2 != null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 比较 p1 和 p2 两个指针</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 将值较小的的节点接到 p 指针</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(p1.val&gt;p2.val)&#123;</span><br><span class="line"></span><br><span class="line">            p.next= p2;</span><br><span class="line"></span><br><span class="line">            p2 =p2.next;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">            p.next= p1;</span><br><span class="line"></span><br><span class="line">            p1 =p1.next;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// p 指针不断前进</span></span><br><span class="line"></span><br><span class="line">        p =p.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(p1 != null)&#123;</span><br><span class="line"></span><br><span class="line">        p.next= p1;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(p2 != null)&#123;</span><br><span class="line"></span><br><span class="line">        p.next= p2;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    returndummy.next;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h4 id="链表的分解"><a href="#链表的分解" class="headerlink" title="链表的分解"></a>链表的分解</h4><p><img src="https://labuladong.github.io/algo/images/%e9%93%be%e8%a1%a8%e6%8a%80%e5%b7%a7/title4.jpg" alt="img"></p>
-<br>
-
-<h4 id="合并k个有序链表"><a href="#合并k个有序链表" class="headerlink" title="合并k个有序链表"></a>合并k个有序链表</h4><p>利用优先级队列（堆）</p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodemergeKLists</span>(ListNode[]lists)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(lists.length==<span class="number">0</span>)<span class="keyword">return</span> null;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 虚拟头结点</span></span><br><span class="line"></span><br><span class="line">    ListNode dummy =<span class="built_in">newListNode</span>(<span class="number">-1</span>);</span><br><span class="line"></span><br><span class="line">    ListNode p = dummy;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 优先级队列，最小堆</span></span><br><span class="line"></span><br><span class="line">    PriorityQueue&lt;ListNode&gt; pq =newPriorityQueue&lt;&gt;(</span><br><span class="line"></span><br><span class="line">        lists.length,(a, b)-&gt;(a.val-b.val));</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 将 k 个链表的头结点加入最小堆</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(ListNode head : lists)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(head != null)</span><br><span class="line"></span><br><span class="line">            pq.<span class="built_in">add</span>(head);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(!pq.<span class="built_in">isEmpty</span>())&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 获取最小节点，接到结果链表中</span></span><br><span class="line"></span><br><span class="line">        ListNode node =pq.<span class="built_in">poll</span>();</span><br><span class="line"></span><br><span class="line">        p.next= node;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(node.next!= null)&#123;</span><br><span class="line"></span><br><span class="line">            pq.<span class="built_in">add</span>(node.next);</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// p 指针不断前进</span></span><br><span class="line"></span><br><span class="line">        p =p.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    returndummy.next;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>优先队列 <code>pq</code> 中的元素个数最多是 <code>k</code>，所以一次 <code>poll</code> 或者 <code>add</code> 方法的时间复杂度是 <code>O(logk)</code>；所有的链表节点都会被加入和弹出 <code>pq</code>，<strong>所以算法整体的时间复杂度是 <code>O(Nlogk)</code>，其中 <code>k</code> 是链表的条数，<code>N</code> 是这些链表的节点总数</strong>。</p>
-<br>
-
-<h4 id="寻找单链表的倒数第k个节点"><a href="#寻找单链表的倒数第k个节点" class="headerlink" title="寻找单链表的倒数第k个节点"></a>寻找单链表的倒数第k个节点</h4><p>不告诉链表长度；</p>
-<p>只遍历一次链表的解法：用p1走k步后，p2再出发</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">// 返回链表的倒数第 k 个节点</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">ListNodefindFromEnd</span>(ListNodehead,intk)&#123;</span><br><span class="line"></span><br><span class="line">    ListNode p1 = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// p1 先走 k 步</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; k; i++)&#123;</span><br><span class="line"></span><br><span class="line">        p1 =p1.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ListNode p2 = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// p1 和 p2 同时走 n - k 步</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p1 != null)&#123;</span><br><span class="line"></span><br><span class="line">        p2 =p2.next;</span><br><span class="line"></span><br><span class="line">        p1 =p1.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// p2 现在指向第 n - k + 1 个节点，即倒数第 k 个节点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p2;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h4 id="寻找单链表的中点"><a href="#寻找单链表的中点" class="headerlink" title="寻找单链表的中点"></a>寻找单链表的中点</h4><p>利用快慢指针：快指针走两步，慢指针走一步</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodemiddleNode</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快慢指针初始化指向 head</span></span><br><span class="line"></span><br><span class="line">    ListNode slow = head, fast = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快指针走到末尾时停止</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast != null &amp;&amp;fast.next!= null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 慢指针走一步，快指针走两步</span></span><br><span class="line"></span><br><span class="line">        slow =slow.next;</span><br><span class="line"></span><br><span class="line">        fast =fast.next.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 慢指针指向中点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>需要注意的是，如果链表长度为偶数，也就是说中点有两个的时候，我们这个解法返回的节点是靠后的那个节点。</p>
-<br>
-
-<h4 id="判断单链表是否包含环并找出环起点"><a href="#判断单链表是否包含环并找出环起点" class="headerlink" title="判断单链表是否包含环并找出环起点"></a>判断单链表是否包含环并找出环起点</h4><p>判断是否含环：快慢指针，如果最终快指针赶上慢指针说明有环。否则快指针遍历直到空指针。</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">booleanhasCycle</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快慢指针初始化指向 head</span></span><br><span class="line"></span><br><span class="line">    ListNode slow = head, fast = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快指针走到末尾时停止</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast != null &amp;&amp;fast.next!= null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 慢指针走一步，快指针走两步</span></span><br><span class="line"></span><br><span class="line">        slow =slow.next;</span><br><span class="line"></span><br><span class="line">        fast =fast.next.next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 快慢指针相遇，说明含有环</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(slow == fast)&#123;</span><br><span class="line"></span><br><span class="line">            returntrue;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 不包含环</span></span><br><span class="line"></span><br><span class="line">    returnfalse;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>若有环，如何判断环的起点</p>
-<blockquote>
-<p>当快慢指针相遇时，让其中任一个指针指向头节点，然后让它俩以相同速度前进，再次相遇时所在的节点位置就是环开始的位置。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodedetectCycle</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    ListNode fast, slow;</span><br><span class="line"></span><br><span class="line">    fast = slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast != null &amp;&amp;fast.next!= null)&#123;</span><br><span class="line"></span><br><span class="line">        fast =fast.next.next;</span><br><span class="line"></span><br><span class="line">        slow =slow.next;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(fast == slow)<span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 上面的代码类似 hasCycle 函数</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(fast == null ||fast.next== null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// fast 遇到空指针说明没有环</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> null;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 重新指向头结点</span></span><br><span class="line"></span><br><span class="line">    slow = head;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 快慢指针同步前进，相交点就是环起点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(slow != fast)&#123;</span><br><span class="line"></span><br><span class="line">        fast =fast.next;</span><br><span class="line"></span><br><span class="line">        slow =slow.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h4 id="判断两个单链表是否相交并找出交点"><a href="#判断两个单链表是否相交并找出交点" class="headerlink" title="判断两个单链表是否相交并找出交点"></a>判断两个单链表是否相交并找出交点</h4><p>不使用Hashmap的实现，即仅使用两个指针</p>
-<blockquote>
-<p>我们可以让 <code>p1</code> 遍历完链表 <code>A</code> 之后开始遍历链表 <code>B</code>，让 <code>p2</code> 遍历完链表 <code>B</code> 之后开始遍历链表 <code>A</code>，这样相当于「逻辑上」两条链表接在了一起。</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodegetIntersectionNode</span>(ListNodeheadA,ListNodeheadB)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// p1 指向 A 链表头结点，p2 指向 B 链表头结点</span></span><br><span class="line"></span><br><span class="line">    ListNode p1 = headA, p2 = headB;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p1 != p2)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// p1 走一步，如果走到 A 链表末尾，转到 B 链表</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(p1 == null) p1 = headB;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>            p1 =p1.next;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// p2 走一步，如果走到 B 链表末尾，转到 A 链表</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(p2 == null) p2 = headA;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">else</span>            p2 =p2.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>或者通过预先求出两个链表的长度，来使p1、p2同时到达相交节点</p>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> ListNode <span class="title">getIntersectionNode</span><span class="params">(ListNode headA, ListNode headB)</span></span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> lenA =<span class="number">0</span>, lenB =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 计算两条链表的长度</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(ListNode p1 = headA; p1 != null; p1 =p1.next)&#123;</span><br><span class="line"></span><br><span class="line">        lenA++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(ListNode p2 = headB; p2 != null; p2 =p2.next)&#123;</span><br><span class="line"></span><br><span class="line">        lenB++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 让 p1 和 p2 到达尾部的距离相同</span></span><br><span class="line"></span><br><span class="line">    ListNode p1 = headA, p2 = headB;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(lenA &gt; lenB)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; lenA - lenB; i++)&#123;</span><br><span class="line"></span><br><span class="line">            p1 =p1.next;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt; lenB - lenA; i++)&#123;</span><br><span class="line"></span><br><span class="line">            p2 =p2.next;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 看两个指针是否会相同，p1 == p2 时有两种情况：</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1、要么是两条链表不相交，他俩同时走到尾部空指针</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2、要么是两条链表相交，他俩走到两条链表的相交点</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(p1 != p2)&#123;</span><br><span class="line"></span><br><span class="line">        p1 =p1.next;</span><br><span class="line"></span><br><span class="line">        p2 =p2.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> p1;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<hr>
-<br>
-
-<h3 id="4-双指针（七道数组题）"><a href="#4-双指针（七道数组题）" class="headerlink" title="4-双指针（七道数组题）"></a>4-双指针（七道数组题）</h3><blockquote>
-<p>链表和数组题中的双指针有两种</p>
-</blockquote>
-<blockquote>
-<p>-<strong>左右指针</strong>，就是两个指针相向而行或者相背而行；</p>
-</blockquote>
-<blockquote>
-<p>-<strong>快慢指针</strong>，就是两个指针同向而行，一快一慢。</p>
-</blockquote>
-<br>
-
-<h4 id="快慢指针技巧"><a href="#快慢指针技巧" class="headerlink" title="快慢指针技巧"></a>快慢指针技巧</h4><blockquote>
-<p>原地修改数组</p>
-</blockquote>
-<h5 id="删除有序数组中的重复项"><a href="#删除有序数组中的重复项" class="headerlink" title="删除有序数组中的重复项"></a>删除有序数组中的重复项</h5><p>在不新开数组的情况下的解法</p>
-<p><img src="https://labuladong.github.io/algo/images/%e6%95%b0%e7%bb%84%e5%8e%bb%e9%87%8d/1.gif" alt="img"></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">intremoveDuplicates</span>(<span class="type">int</span>[]nums)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(nums.length==<span class="number">0</span>)&#123;</span><br><span class="line"></span><br><span class="line">        return0;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> slow =<span class="number">0</span>, fast =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast &lt;nums.length)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(nums[fast]!=nums[slow])&#123;</span><br><span class="line"></span><br><span class="line">            slow++;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 维护 nums[0..slow] 无重复</span></span><br><span class="line"></span><br><span class="line">            nums[slow]=nums[fast];</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fast++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 数组长度为索引 + 1</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> slow +<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>对于删除有序链表中的重复项呢？</p>
-<p><img src="https://labuladong.github.io/algo/images/%e6%95%b0%e7%bb%84%e5%8e%bb%e9%87%8d/2.gif" alt="img"></p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">ListNodedeleteDuplicates</span>(ListNodehead)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(head == null)<span class="keyword">return</span> null;</span><br><span class="line"></span><br><span class="line">    ListNode slow = head, fast = head;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast != null)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(fast.val!=slow.val)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// nums[slow] = nums[fast];</span></span><br><span class="line"></span><br><span class="line">            slow.next= fast;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// slow++;</span></span><br><span class="line"></span><br><span class="line">            slow =slow.next;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// fast++</span></span><br><span class="line"></span><br><span class="line">        fast =fast.next;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 断开与后面重复元素的连接</span></span><br><span class="line"></span><br><span class="line">    slow.next= null;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h5 id="删除无序数组中的某个元素"><a href="#删除无序数组中的某个元素" class="headerlink" title="删除无序数组中的某个元素"></a>删除无序数组中的某个元素</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">intremoveElement</span>(<span class="type">int</span>[]nums,intval)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> fast =<span class="number">0</span>, slow =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(fast &lt;nums.length)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(nums[fast]!= val)&#123;</span><br><span class="line"></span><br><span class="line">            nums[slow]=nums[fast];</span><br><span class="line"></span><br><span class="line">            slow++;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        fast++;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> slow;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p>这里是先给 <code>nums[slow]</code> 赋值然后再给 slow++</p>
-<br>
-
-<h5 id="移动0"><a href="#移动0" class="headerlink" title="移动0"></a>移动0</h5><blockquote>
-<p>比如说给你输入 <code>nums = [0,1,4,0,2]</code>，你的算法没有返回值，但是会把 <code>nums</code> 数组原地修改成 <code>[1,4,2,0,0]</code>。</p>
-</blockquote>
-<blockquote>
-<p>其实就相当于移除 <code>nums</code> 中的所有 0，然后再把后面的元素都赋值为 0 即可。</p>
-</blockquote>
-<p>可以复用上一题的 <code>removeElement</code> 函数</p>
-<br>
-
-<h4 id="滑动窗口类型（快慢指针）"><a href="#滑动窗口类型（快慢指针）" class="headerlink" title="滑动窗口类型（快慢指针）"></a>滑动窗口类型（快慢指针）</h4><p>代码框架</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">/* 滑动窗口算法框架 */</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">voidslidingWindow</span>(strings,stringt)&#123;</span><br><span class="line"></span><br><span class="line">    unordered_map&lt;<span class="type">char</span>,<span class="type">int</span>&gt; need, window;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">char</span> c : t)need[c]++;</span><br><span class="line"></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> valid =<span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(right &lt;s.<span class="built_in">size</span>())&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">char</span> c =s[right];</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 右移（增大）窗口</span></span><br><span class="line"></span><br><span class="line">        right++;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 进行窗口内数据的一系列更新</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(window needs shrink)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="type">char</span> d =s[left];</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 左移（缩小）窗口</span></span><br><span class="line"></span><br><span class="line">            left++;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 进行窗口内数据的一系列更新</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<p><code>left</code> 指针在后，<code>right</code> 指针在前，两个指针中间的部分就是「窗口」，算法通过扩大和缩小「窗口」来解决某些问题。</p>
-<hr>
-<br>
-
-<h4 id="左右指针技巧"><a href="#左右指针技巧" class="headerlink" title="左右指针技巧"></a>左右指针技巧</h4><h5 id="二分查找"><a href="#二分查找" class="headerlink" title="二分查找"></a>二分查找</h5><p>简单框架</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">intbinarySearch</span>(<span class="type">int</span>[]nums,inttarget)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一左一右两个指针相向而行</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =nums.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt;= right)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> mid =(right + left)/<span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(nums[mid]== target)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">return</span> mid;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">elseif</span>(nums[mid]&lt; target)</span><br><span class="line"></span><br><span class="line">            left = mid +<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">        <span class="built_in">elseif</span>(nums[mid]&gt; target)</span><br><span class="line"></span><br><span class="line">            right = mid <span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span><span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h5 id="两数之和"><a href="#两数之和" class="headerlink" title="两数之和"></a>两数之和</h5><p>返回的下标是从1算起的</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="type">int</span>[] <span class="built_in">twoSum</span>(<span class="type">int</span>[] nums,<span class="type">int</span> target)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一左一右两个指针相向而行</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =nums.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> sum =nums[left]+nums[right];</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(sum == target)&#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">// 题目要求的索引是从 1 开始的</span></span><br><span class="line"></span><br><span class="line">            returnnewint[]&#123;left +<span class="number">1</span>, right +<span class="number">1</span>&#125;;</span><br><span class="line"></span><br><span class="line">        &#125;<span class="built_in">elseif</span>(sum &lt; target)&#123;</span><br><span class="line"></span><br><span class="line">            left++; <span class="comment">// 让 sum 大一点 *</span></span><br><span class="line"></span><br><span class="line">        &#125;<span class="built_in">elseif</span>(sum &gt; target)&#123;</span><br><span class="line"></span><br><span class="line">            right--; <span class="comment">// 让 sum 小一点 *</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    returnnewint[]&#123;<span class="number">-1</span>,<span class="number">-1</span>&#125;;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h5 id="反转数组"><a href="#反转数组" class="headerlink" title="反转数组"></a>反转数组</h5><figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">voidreverseString</span>(<span class="type">char</span>[]s)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一左一右两个指针相向而行</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =s.length<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 交换 s[left] 和 s[right]</span></span><br><span class="line"></span><br><span class="line">        <span class="type">char</span> temp =s[left];</span><br><span class="line"></span><br><span class="line">        s[left]=s[right];</span><br><span class="line"></span><br><span class="line">        s[right]= temp;</span><br><span class="line"></span><br><span class="line">        left++;</span><br><span class="line"></span><br><span class="line">        right--;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<h5 id="回文串匹配"><a href="#回文串匹配" class="headerlink" title="回文串匹配"></a>回文串匹配</h5><p>简单匹配</p>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">booleanisPalindrome</span>(Strings)&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一左一右两个指针相向而行</span></span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> left =<span class="number">0</span>, right =s.<span class="built_in">length</span>()<span class="number">-1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(s.<span class="built_in">charAt</span>(left)!=s.<span class="built_in">charAt</span>(right))&#123;</span><br><span class="line"></span><br><span class="line">            returnfalse;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        left++;</span><br><span class="line"></span><br><span class="line">        right--;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    returntrue;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<p><strong>最长回文子串</strong></p>
-<blockquote>
-<p>左右指针从中间往两边延申</p>
-</blockquote>
-<blockquote>
-<p>如果回文串的长度为奇数，参数 r &#x3D; l</p>
-</blockquote>
-<blockquote>
-<p>如果回文串的长度为偶数，参数 r &#x3D; l+1</p>
-</blockquote>
-<blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 在 s 中寻找以 s[l] 和 s[r] 为中心的最长回文串</span></span><br><span class="line"><span class="built_in">Stringpalindrome</span>(Strings,intl,intr)&#123;</span><br><span class="line"><span class="comment">// 防止索引越界</span></span><br><span class="line"><span class="keyword">while</span>(l &gt;=<span class="number">0</span>&amp;&amp; r &lt;s.<span class="built_in">length</span>()</span><br><span class="line">&amp;&amp;s.<span class="built_in">charAt</span>(l)==s.<span class="built_in">charAt</span>(r))&#123;</span><br><span class="line"><span class="comment">// 双指针，向两边展开</span></span><br><span class="line">l--; r++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 返回以 s[l] 和 s[r] 为中心的最长回文串</span></span><br><span class="line">returns.<span class="built_in">substring</span>(l +<span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</blockquote>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="built_in">StringlongestPalindrome</span>(Strings)&#123;</span><br><span class="line"></span><br><span class="line">    String res =<span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i =<span class="number">0</span>; i &lt;s.<span class="built_in">length</span>(); i++)&#123;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 以 s[i] 为中心的最长回文子串</span></span><br><span class="line"></span><br><span class="line">        String s1 =<span class="built_in">palindrome</span>(s, i, i);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 以 s[i] 和 s[i+1] 为中心的最长回文子串</span></span><br><span class="line"></span><br><span class="line">        String s2 =<span class="built_in">palindrome</span>(s, i, i +<span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// res = longest(res, s1, s2)</span></span><br><span class="line"></span><br><span class="line">        res =res.<span class="built_in">length</span>()&gt;s1.<span class="built_in">length</span>()? res : s1;</span><br><span class="line"></span><br><span class="line">        res =res.<span class="built_in">length</span>()&gt;s2.<span class="built_in">length</span>()? res : s2;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> res;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-]]></content>
-      <tags>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>第四章Linux网络编程</title>
-    <url>/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</url>
-    <content><![CDATA[<br>
-
-<h1 id="第四章-Linux网络编程"><a href="#第四章-Linux网络编程" class="headerlink" title="第四章 Linux网络编程"></a>第四章 Linux网络编程</h1><hr>
-<br>
-
-<h2 id="4-1-计算机网络相关知识"><a href="#4-1-计算机网络相关知识" class="headerlink" title="4.1 计算机网络相关知识"></a>4.1 计算机网络相关知识</h2><br>
-
-<h3 id="4-1-1-网络结构模式"><a href="#4-1-1-网络结构模式" class="headerlink" title="4.1.1 网络结构模式"></a>4.1.1 网络结构模式</h3><h4 id="C-x2F-S结构"><a href="#C-x2F-S结构" class="headerlink" title="C&#x2F;S结构"></a>C&#x2F;S结构</h4><p><strong>简介</strong></p>
-<ul>
-<li>服务器 - 客户机，即 Client - Server（C&#x2F;S）结构。<strong>C&#x2F;S 结构通常采取两层结构。服务器负责数据的管理，客户机负责完成与用户的交互任务。</strong>客户机是因特网上访问别人信息的机器，服务器则是提供信息供人访问的计算机。</li>
-<li><strong>客户机通过局域网与服务器相连，接受用户的请求，并通过网络向服务器提出请求，对数据库进行操作。服务器接受客户机的请求，将数据提交给客户机，客户机将数据进行计算并将结果呈现给用户。</strong>服务器还要提供完善安全保护及对数据完整性的处理等操作，并允许多个客户机同时访问服务器，这就对服务器的硬件处理数据能力提出了很高的要求。</li>
-<li>在C&#x2F;S结构中，<strong>应用程序分为两部分：服务器部分和客户机部分。</strong>服务器部分是多个用户共享的信息与功能，执行后台服务，如控制共享数据库的操作等；客户机部分为用户所专有，负责执行前台功能，在出错提示、在线帮助等方面都有强大的功能，并且可以在子程序间自由切换。</li>
-</ul>
-<br>
-
-<p><strong>优点</strong></p>
-<ol>
-<li>能充分发挥客户端 PC 的处理能力，<strong>很多工作可以在客户端处理后再提交给服务器，</strong>所以 C&#x2F;S 结构<strong>客户端响应速度快</strong>；</li>
-<li>操作界面漂亮、形式多样，可以充分满足客户自身的<strong>个性化</strong>要求；</li>
-<li>C&#x2F;S 结构的<strong>管理信息系统具有较强的事务处理能力</strong>，能实现复杂的业务流程；</li>
-<li><strong>安全性较高</strong>，C&#x2F;S 一般面向相对固定的用户群，<strong>程序更加注重流程</strong>，它可以<strong>对权限进行多层次校验</strong>，提供了更安全的存取模式，对信息安全的控制能力很强，一般<strong>高度机密</strong>的信息系统采用 C&#x2F;S 结构适宜。</li>
-</ol>
-<br>
-
-<p><strong>缺点</strong></p>
-<ol>
-<li><strong>客户端需要安装专用的客户端软件</strong>。首先涉及到安装的工作量，其次任何一台电脑出问题，如病毒、硬件损坏，都需要进行安装或维护。系统软件升级时，每一台客户机需要重新安装，其维护和升级成本非常高；</li>
-<li><strong>对客户端的操作系统一般也会有限制，不能够跨平台</strong></li>
-</ol>
-<br>
-
-<br>
-
-<h4 id="B-x2F-S-结构"><a href="#B-x2F-S-结构" class="headerlink" title="B&#x2F;S 结构"></a>B&#x2F;S 结构</h4><p><strong>简介</strong></p>
-<ul>
-<li>B&#x2F;S 结构（Browser&#x2F;Server，浏览器&#x2F;服务器模式），<strong>是WEB兴起后的一种网络结构模式，WEB浏览器是客户端最主要的应用软件。</strong>这种模式<strong>统一了客户端</strong>，将系统功能实现的<strong>核心部分集中到服务器上</strong>，简化了系统的开发、维护和使用。客户机上只要安装一个浏览器，如 Firefox 或 InternetExplorer，服务器安装 SQL Server、Oracle、MySQL 等数据库。浏览器通过 Web Server 同数据库进行数据交互</li>
-</ul>
-<br>
-
-<p><strong>优点</strong></p>
-<ul>
-<li>B&#x2F;S 架构最大的优点是总体拥有<strong>成本低、维护方便、 分布性强、开发简单</strong>，可以不用安装任何专门的软件就能实现在任何地方进行操作，客户端零维护，系统的扩展非常容易，只要有一台能上网的电脑就能使用。</li>
-</ul>
-<br>
-
-<p><strong>缺点</strong></p>
-<ol>
-<li><strong>通信开销大、系统和数据的安全性较难保障;</strong></li>
-<li>个性特点明显降低，无法实现具有个性化的功能要求；</li>
-<li>协议一般是<strong>固定</strong>的：<strong>http&#x2F;https</strong>（无法输出大数据）</li>
-<li>客户端服务器端的交互是<strong>请求-响应模式</strong>，通常<strong>动态刷新</strong>页面，<strong>响应速度明显降低</strong>。</li>
-</ol>
-<br>
-
-<br>
-
-<br>
-
-<h3 id="4-1-2-MAC、IP、端口"><a href="#4-1-2-MAC、IP、端口" class="headerlink" title="4.1.2 MAC、IP、端口"></a>4.1.2 MAC、IP、端口</h3><h4 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h4><p>（网卡分为 以太网卡 和 无线网卡 ）</p>
-<ul>
-<li>网卡是一块被设计用来允许计算机在计算机网络上进行通讯的计算机硬件，又称为 <strong>网络适配器</strong> 或 <strong>网络接口卡NIC</strong> 。</li>
-<li>其<strong>拥有 MAC 地址</strong>，属于 OSI 模型的<strong>第 2 层</strong>，它使得用户可以通过电缆或无线相互连接。</li>
-<li>每一个网卡都有一个被称为 MAC 地址的独一无二的 <strong>48 位</strong>串行号。</li>
-<li>网卡的主要功能：<ul>
-<li>数据的封装与解封装</li>
-<li>链路管理</li>
-<li>数据编码与译码</li>
-</ul>
-</li>
-</ul>
-<br>
-
-<h4 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h4><ul>
-<li>Media Access Control Address</li>
-<li>直译为 <strong>媒体存取控制位址</strong> ，也称为 <strong>局域网地址</strong>、<strong>以太网地址</strong>、<strong>物理地址</strong> 或 <strong>硬件地址</strong> ，它是一个用来确认网络设备位置的位址，由网络设备制造商生产时烧录在网卡中</li>
-<li>在 OSI 模型中，<strong>第三层网络层负责IP地址，第二层数据链路层则负责MAC位址</strong> </li>
-<li>MAC 地址用于在网络中<strong>唯一标识一个网卡</strong>。一台设备若有一或多个网卡，则每个网卡都需要并会有一个唯一的 MAC 地址。</li>
-<li>MAC 地址的长度为 <strong>48 位（6个字节）</strong>，通常表示为 12 个 16 进制数，如：00-16-EA-AE-3C-40 就是一个MAC 地址。<ul>
-<li>其中前 3 个字节，16 进制数 00-16-EA 代表网络硬件制造商的编号，它由IEEE（电气与电子工程师协会）分配</li>
-<li>而后 3 个字节，16进制数 AE-3C-40 代表该制造商所制造的某个网络产品（如网卡）的系列号。</li>
-<li>只要不更改自己的 MAC 地址，MAC 地址在世界是唯一的。形象地说，MAC 地址就如同身份证上的身份证号码，具有唯性。</li>
-</ul>
-</li>
-</ul>
-<br>
-
-<h4 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h4><p><strong>简介</strong></p>
-<p>​	IP（Internet Protocol）协议是为计算机网络相互连接进行通信而设计的协议。在 <strong>因特网</strong> 中，它是能使连接到网上的所有计算机网络实现相互通信的一套规则，规定了计算机在因特网上进行通信时应当遵守的规则。任何厂家生产的计算机系统，只要遵守IP协议就可以与因特网互连互通。</p>
-<p>​	各个厂家生产的网络系统和设备，如以太网、分组交换网等，它们相互之间不能互通，不能互通的主要原因是因为它们所传送数据的基本单元（技术上称之为“帧”）的格式不同。IP 协议实际上是一套由软件程序组成的协议软件，它把各种不同“<strong>帧</strong>”统一转换成“<strong>IP 数据报</strong>”格式，这种转换是因特网的一个最重要的特点，使所有各种计算机都能在因特网上实现互通，即具有“开放性”的特点。正是因为有了 IP 协议，因特网才得以迅速发展成为世界上最大的、开放的计算机通信网络。因此，IP 协议也可以叫做“<strong>因特网协议</strong>”。</p>
-<br>
-
-<ul>
-<li><p><strong>IP地址</strong>（Internet Protocol Address）是指<strong>互联网协议地址</strong>，又译为<strong>网际协议地址</strong>。IP 地址是IP协议提供的一种统一的地址格式，<strong>它为互联网上的每一个网络和每一台主机分配一个逻辑地址，以此来屏蔽物理地址的差异</strong></p>
-</li>
-<li><p>IP 地址是一个 <strong>32 位的二进制数</strong>，通常被分割为 <strong>4 个“ 8 位二进制数”</strong>（也就是 4 个字节）。</p>
-</li>
-</ul>
-<br>
-
-<p><strong>IP地址类型</strong></p>
-<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210225815319.png" alt="image-20230210225815319"></p>
-<blockquote>
-<p>补充：</p>
-<ul>
-<li>D类IP地址：D 类 IP 地址在历史上被叫做多播地址（multicast address），即组播地址。在以太网中，多播地址命名了一组应该在这个网络中应用接收到一个分组的站点。多播地址的最高位必须是 “1110”，范围从224.0.0.0 - 239.255.255.255。</li>
-<li>特殊的网址：<ul>
-<li>每一个字节都为 0 的地址（ “0.0.0.0” ）对应于当前主机；</li>
-<li>IP 地址中的每一个字节都为 1 的 IP 地址（ “255.255.255.255” ）是当前子网的广播地址；</li>
-<li>IP 地址中凡是以 “11110” 开头的 E 类 IP 地址都保留用于将来和实验使用。</li>
-<li>IP地址中不能以十进制 “127” 作为开头，该类地址中数字 127.0.0.1 到 127.255.255.255 用于回路测试，如：127.0.0.1可以代表本机IP地址</li>
-</ul>
-</li>
-</ul>
-</blockquote>
-<br>
-
-<p><strong>子网掩码</strong></p>
-<ul>
-<li>子网掩码（subnet mask）又叫网络掩码、地址掩码、子网络遮罩，它是一种用来指明一个 IP 地址的哪些位标识的是主机所在的子网，以及哪些位标识的是主机的位掩码。子网掩码不能单独存在，它必须结合 IP 地址一起用。子网掩码只有一个作用，就是<strong>将某个 IP 地址划分成 网络地址 和 主机地址 两部分</strong>。</li>
-<li>子网掩码是一个 32 位地址，用于屏蔽 IP 地址的一部分以区别网络标识和主机标识，并说明该 IP地址是在局域网上，还是在广域网上。</li>
-<li>子网掩码是在 IPv4 地址资源紧缺的背景下为了解决 IP 地址分配而产生的虚拟 IP 技术，通过子网掩码将A、B、C 三类地址划分为若干子网，从而显著提高了 IP 地址的分配效率，有效解决了 IP 地址资源紧张的局面。另一方面，在企业内网中为了更好地管理网络，网管人员也利用子网掩码的作用，人为地将一个较大的企业内部网络划分为更多个小规模的子网，再利用三层交换机的路由功能实现子网互联，从而有效解决了网络广播风暴和网络病毒等诸多网络管理方面的问题。</li>
-</ul>
-<br>
-
-<br>
-
-<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><p>简介：</p>
-<ul>
-<li>端口 是英文 port 的意译，可以认为是设备与外界通讯交流的出口。端口可分为 <strong>虚拟端口</strong> 和 <strong>物理端口</strong> ，其中虚拟端口指计算机内部或交换机路由器内的端口，不可见，是特指TCP&#x2F;IP协议中的端口，是逻辑意义上的端口。例如计算机中的 80 端口、21 端口、23 端口等。物理端口又称为接口，是可见端口，计算机背板的 RJ45 网口，交换机路由器集线器等 RJ45 端口。电话使用 RJ11 插口也属于物理端口的范畴。</li>
-<li>如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP地址的端口可以有 65536（即：2^16）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从 0 到65535（2^16-1）。</li>
-</ul>
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<h3 id="4-1-3-网络模型"><a href="#4-1-3-网络模型" class="headerlink" title="4.1.3 网络模型"></a>4.1.3 网络模型</h3><br>
-
-<br>
-
-<br>
-
-<h3 id="4-1-4-协议"><a href="#4-1-4-协议" class="headerlink" title="4.1.4 协议"></a>4.1.4 协议</h3><br>
-
-<br>
-
-<p><br><br></p>
-<br>
-
-<br>
-
-<h2 id="4-2-Socket编程"><a href="#4-2-Socket编程" class="headerlink" title="4.2 Socket编程"></a>4.2 Socket编程</h2><br>
-
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<br>
-
-
-
-
-
-<h2 id="4-3-TCP-x2F-UDP协议"><a href="#4-3-TCP-x2F-UDP协议" class="headerlink" title="4.3 TCP&#x2F;UDP协议"></a>4.3 TCP&#x2F;UDP协议</h2><br>
-
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<br>
-
-
-
-<h2 id="4-4-并发服务器"><a href="#4-4-并发服务器" class="headerlink" title="4.4 并发服务器"></a>4.4 并发服务器</h2><br>
-
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<br>
-
-
-
-
-
-<h2 id="4-5-IO复用"><a href="#4-5-IO复用" class="headerlink" title="4.5 IO复用"></a>4.5 IO复用</h2><br>
-
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<br>
-]]></content>
-      <categories>
-        <category>C++开发</category>
-        <category>高性能服务器项目</category>
-      </categories>
-      <tags>
-        <tag>网络编程</tag>
       </tags>
   </entry>
   <entry>
@@ -1814,6 +1815,441 @@
       </categories>
       <tags>
         <tag>多进程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第四章Linux网络编程</title>
+    <url>/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/</url>
+    <content><![CDATA[<br>
+
+<h1 id="第四章-Linux网络编程"><a href="#第四章-Linux网络编程" class="headerlink" title="第四章 Linux网络编程"></a>第四章 Linux网络编程</h1><hr>
+<br>
+
+<h2 id="4-1-计算机网络相关知识"><a href="#4-1-计算机网络相关知识" class="headerlink" title="4.1 计算机网络相关知识"></a>4.1 计算机网络相关知识</h2><br>
+
+<h3 id="4-1-1-网络结构模式"><a href="#4-1-1-网络结构模式" class="headerlink" title="4.1.1 网络结构模式"></a>4.1.1 网络结构模式</h3><h4 id="C-x2F-S结构"><a href="#C-x2F-S结构" class="headerlink" title="C&#x2F;S结构"></a>C&#x2F;S结构</h4><p><strong>简介</strong></p>
+<ul>
+<li>服务器 - 客户机，即 Client - Server（C&#x2F;S）结构。<strong>C&#x2F;S 结构通常采取两层结构。服务器负责数据的管理，客户机负责完成与用户的交互任务。</strong>客户机是因特网上访问别人信息的机器，服务器则是提供信息供人访问的计算机。</li>
+<li><strong>客户机通过局域网与服务器相连，接受用户的请求，并通过网络向服务器提出请求，对数据库进行操作。服务器接受客户机的请求，将数据提交给客户机，客户机将数据进行计算并将结果呈现给用户。</strong>服务器还要提供完善安全保护及对数据完整性的处理等操作，并允许多个客户机同时访问服务器，这就对服务器的硬件处理数据能力提出了很高的要求。</li>
+<li>在C&#x2F;S结构中，<strong>应用程序分为两部分：服务器部分和客户机部分。</strong>服务器部分是多个用户共享的信息与功能，执行后台服务，如控制共享数据库的操作等；客户机部分为用户所专有，负责执行前台功能，在出错提示、在线帮助等方面都有强大的功能，并且可以在子程序间自由切换。</li>
+</ul>
+<br>
+
+<p><strong>优点</strong></p>
+<ol>
+<li>能充分发挥客户端 PC 的处理能力，<strong>很多工作可以在客户端处理后再提交给服务器，</strong>所以 C&#x2F;S 结构<strong>客户端响应速度快</strong>；</li>
+<li>操作界面漂亮、形式多样，可以充分满足客户自身的<strong>个性化</strong>要求；</li>
+<li>C&#x2F;S 结构的<strong>管理信息系统具有较强的事务处理能力</strong>，能实现复杂的业务流程；</li>
+<li><strong>安全性较高</strong>，C&#x2F;S 一般面向相对固定的用户群，<strong>程序更加注重流程</strong>，它可以<strong>对权限进行多层次校验</strong>，提供了更安全的存取模式，对信息安全的控制能力很强，一般<strong>高度机密</strong>的信息系统采用 C&#x2F;S 结构适宜。</li>
+</ol>
+<br>
+
+<p><strong>缺点</strong></p>
+<ol>
+<li><strong>客户端需要安装专用的客户端软件</strong>。首先涉及到安装的工作量，其次任何一台电脑出问题，如病毒、硬件损坏，都需要进行安装或维护。系统软件升级时，每一台客户机需要重新安装，其维护和升级成本非常高；</li>
+<li><strong>对客户端的操作系统一般也会有限制，不能够跨平台</strong></li>
+</ol>
+<br>
+
+<br>
+
+<h4 id="B-x2F-S-结构"><a href="#B-x2F-S-结构" class="headerlink" title="B&#x2F;S 结构"></a>B&#x2F;S 结构</h4><p><strong>简介</strong></p>
+<ul>
+<li>B&#x2F;S 结构（Browser&#x2F;Server，浏览器&#x2F;服务器模式），<strong>是WEB兴起后的一种网络结构模式，WEB浏览器是客户端最主要的应用软件。</strong>这种模式<strong>统一了客户端</strong>，将系统功能实现的<strong>核心部分集中到服务器上</strong>，简化了系统的开发、维护和使用。客户机上只要安装一个浏览器，如 Firefox 或 InternetExplorer，服务器安装 SQL Server、Oracle、MySQL 等数据库。浏览器通过 Web Server 同数据库进行数据交互</li>
+</ul>
+<br>
+
+<p><strong>优点</strong></p>
+<ul>
+<li>B&#x2F;S 架构最大的优点是总体拥有<strong>成本低、维护方便、 分布性强、开发简单</strong>，可以不用安装任何专门的软件就能实现在任何地方进行操作，客户端零维护，系统的扩展非常容易，只要有一台能上网的电脑就能使用。</li>
+</ul>
+<br>
+
+<p><strong>缺点</strong></p>
+<ol>
+<li><strong>通信开销大、系统和数据的安全性较难保障;</strong></li>
+<li>个性特点明显降低，无法实现具有个性化的功能要求；</li>
+<li>协议一般是<strong>固定</strong>的：<strong>http&#x2F;https</strong>（无法输出大数据）</li>
+<li>客户端服务器端的交互是<strong>请求-响应模式</strong>，通常<strong>动态刷新</strong>页面，<strong>响应速度明显降低</strong>。</li>
+</ol>
+<br>
+
+<br>
+
+<br>
+
+<h3 id="4-1-2-MAC、IP、端口"><a href="#4-1-2-MAC、IP、端口" class="headerlink" title="4.1.2 MAC、IP、端口"></a>4.1.2 MAC、IP、端口</h3><h4 id="网卡"><a href="#网卡" class="headerlink" title="网卡"></a>网卡</h4><p>（网卡分为 以太网卡 和 无线网卡 ）</p>
+<ul>
+<li>网卡是一块被设计用来允许计算机在计算机网络上进行通讯的计算机硬件，又称为 <strong>网络适配器</strong> 或 <strong>网络接口卡NIC</strong> 。</li>
+<li>其<strong>拥有 MAC 地址</strong>，属于 OSI 模型的<strong>第 2 层</strong>，它使得用户可以通过电缆或无线相互连接。</li>
+<li>每一个网卡都有一个被称为 MAC 地址的独一无二的 <strong>48 位</strong>串行号。</li>
+<li>网卡的主要功能：<ul>
+<li>数据的封装与解封装</li>
+<li>链路管理</li>
+<li>数据编码与译码</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h4 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h4><ul>
+<li>Media Access Control Address</li>
+<li>直译为 <strong>媒体存取控制位址</strong> ，也称为 <strong>局域网地址</strong>、<strong>以太网地址</strong>、<strong>物理地址</strong> 或 <strong>硬件地址</strong> ，它是一个用来确认网络设备位置的位址，由网络设备制造商生产时烧录在网卡中</li>
+<li>在 OSI 模型中，<strong>第三层网络层负责IP地址，第二层数据链路层则负责MAC位址</strong> </li>
+<li>MAC 地址用于在网络中<strong>唯一标识一个网卡</strong>。一台设备若有一或多个网卡，则每个网卡都需要并会有一个唯一的 MAC 地址。</li>
+<li>MAC 地址的长度为 <strong>48 位（6个字节）</strong>，通常表示为 12 个 16 进制数，如：00-16-EA-AE-3C-40 就是一个MAC 地址。<ul>
+<li>其中前 3 个字节，16 进制数 00-16-EA 代表网络硬件制造商的编号，它由IEEE（电气与电子工程师协会）分配</li>
+<li>而后 3 个字节，16进制数 AE-3C-40 代表该制造商所制造的某个网络产品（如网卡）的系列号。</li>
+<li>只要不更改自己的 MAC 地址，MAC 地址在世界是唯一的。形象地说，MAC 地址就如同身份证上的身份证号码，具有唯性。</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<h4 id="IP"><a href="#IP" class="headerlink" title="IP"></a>IP</h4><p><strong>简介</strong></p>
+<p>​	IP（Internet Protocol）协议是为计算机网络相互连接进行通信而设计的协议。在 <strong>因特网</strong> 中，它是能使连接到网上的所有计算机网络实现相互通信的一套规则，规定了计算机在因特网上进行通信时应当遵守的规则。任何厂家生产的计算机系统，只要遵守IP协议就可以与因特网互连互通。</p>
+<p>​	各个厂家生产的网络系统和设备，如以太网、分组交换网等，它们相互之间不能互通，不能互通的主要原因是因为它们所传送数据的基本单元（技术上称之为“帧”）的格式不同。IP 协议实际上是一套由软件程序组成的协议软件，它把各种不同“<strong>帧</strong>”统一转换成“<strong>IP 数据报</strong>”格式，这种转换是因特网的一个最重要的特点，使所有各种计算机都能在因特网上实现互通，即具有“开放性”的特点。正是因为有了 IP 协议，因特网才得以迅速发展成为世界上最大的、开放的计算机通信网络。因此，IP 协议也可以叫做“<strong>因特网协议</strong>”。</p>
+<br>
+
+<ul>
+<li><p><strong>IP地址</strong>（Internet Protocol Address）是指<strong>互联网协议地址</strong>，又译为<strong>网际协议地址</strong>。IP 地址是IP协议提供的一种统一的地址格式，<strong>它为互联网上的每一个网络和每一台主机分配一个逻辑地址，以此来屏蔽物理地址的差异</strong></p>
+</li>
+<li><p>IP 地址是一个 <strong>32 位的二进制数</strong>，通常被分割为 <strong>4 个“ 8 位二进制数”</strong>（也就是 4 个字节）。</p>
+</li>
+</ul>
+<br>
+
+<p><strong>IP地址类型</strong></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210225815319.png" alt="image-20230210225815319"></p>
+<p>补充：</p>
+<ul>
+<li>D类IP地址：D 类 IP 地址在历史上被叫做多播地址（multicast address），即组播地址。在以太网中，多播地址命名了一组应该在这个网络中应用接收到一个分组的站点。多播地址的最高位必须是 “1110”，范围从224.0.0.0 - 239.255.255.255。</li>
+<li><strong>特殊的网址</strong>（E类）：<ul>
+<li>每一个字节都为 0 的地址（ “0.0.0.0” ）对应于当前主机；</li>
+<li>IP 地址中的每一个字节都为 1 的 IP 地址（ “255.255.255.255” ）是当前子网的广播地址；</li>
+<li>IP 地址中凡是以 “11110” 开头的 E 类 IP 地址都保留用于将来和实验使用。</li>
+<li>IP地址中不能以十进制 “127” 作为开头，该类地址中数字 127.0.0.1 到 127.255.255.255 用于回路测试，如：127.0.0.1可以代表本机IP地址</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<p><strong>子网掩码</strong></p>
+<ul>
+<li>子网掩码（subnet mask）又叫网络掩码、地址掩码、子网络遮罩，它是一种用来指明一个 IP 地址的哪些位标识的是主机所在的子网，以及哪些位标识的是主机的位掩码。子网掩码不能单独存在，它必须结合 IP 地址一起用。子网掩码只有一个作用，就是<strong>将某个 IP 地址划分成 网络地址 和 主机地址 两部分</strong>。</li>
+<li>子网掩码是一个 32 位地址，用于屏蔽 IP 地址的一部分以区别网络标识和主机标识，并说明该 IP地址是在局域网上，还是在广域网上。</li>
+<li>子网掩码是在 IPv4 地址资源紧缺的背景下为了解决 IP 地址分配而产生的虚拟 IP 技术，通过子网掩码将A、B、C 三类地址划分为若干子网，从而显著提高了 IP 地址的分配效率，有效解决了 IP 地址资源紧张的局面。另一方面，在企业内网中为了更好地管理网络，网管人员也利用子网掩码的作用，人为地将一个较大的企业内部网络划分为更多个小规模的子网，再利用三层交换机的路由功能实现子网互联，从而有效解决了网络广播风暴和网络病毒等诸多网络管理方面的问题。</li>
+</ul>
+<br>
+
+<br>
+
+<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><blockquote>
+<p>端口 就是一块缓冲区，有 读缓冲 和 写缓冲 </p>
+</blockquote>
+<p><strong>简介</strong></p>
+<ul>
+<li>端口 是英文 port 的意译，可以认为是设备与外界通讯交流的出口。端口可分为 <strong>虚拟端口</strong> 和 <strong>物理端口</strong> ，<ul>
+<li><strong>虚拟端口</strong> 指<strong>计算机内部或交换机路由器内的端口</strong>，<strong>不可见</strong>，是特指<strong>TCP&#x2F;IP协议中的端口</strong>，是<strong>逻辑意义上</strong>的端口。例如计算机中的 80 端口、21 端口、23 端口等。</li>
+<li><strong>物理端口</strong> 又称为<strong>接口</strong>，<strong>是可见端口</strong>，计算机背板的 RJ45 网口，交换机路由器集线器等 RJ45 端口。电话使用 RJ11 插口也属于物理端口的范畴。</li>
+</ul>
+</li>
+<li>如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP地址的端口可以有 <strong>65536</strong>（即：2^16）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从 <strong>0 到 65535</strong>（2^16-1）。</li>
+</ul>
+<br>
+
+<p><strong>端口类型</strong></p>
+<ul>
+<li><p><strong>周知端口</strong> Well Known Ports ：</p>
+<ul>
+<li>也叫知名端口、公认端口或者常用端口，范围从 <strong>0 到 1023</strong>，它们紧密绑定于一些特定的服务。</li>
+<li>例如 <strong>80 端口分配给 WWW 服务，21 端口分配给 FTP 服务，23 端口分配给Telnet服务</strong>等等。</li>
+<li>网络服务是可以使用其他端口号的，比如使用“8080” 作为 WWW服务的端口；但是有些系统协议使用固定的端口号，比如 139 端口专门用于 NetBIOS 与 TCP&#x2F;IP 之间的通信</li>
+</ul>
+</li>
+<li><p><strong>注册端口</strong> Registered Ports ：</p>
+<ul>
+<li>端口号从 <strong>1024 到 49151</strong>，它们松散地绑定于一些服务，<strong>分配给用户进程或应用程序</strong>。</li>
+<li>这些端口在没有被服务器资源占用的时候，可以给用户端动态选用为源端口。</li>
+</ul>
+</li>
+<li><p><strong>动态端口</strong> &#x2F; <strong>私有端口</strong> Dynamic Ports&#x2F;Private Ports ：</p>
+<ul>
+<li>动态端口的范围是从 <strong>49152 到 65535</strong>。之所以称为动态端口，是因为它一般不固定分配某种服务，而是<strong>动态分配</strong>。</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h3 id="4-1-3-网络模型"><a href="#4-1-3-网络模型" class="headerlink" title="4.1.3 网络模型"></a>4.1.3 网络模型</h3><h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h4><p>Open System Interconnection</p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210233638076.png" alt="image-20230210233638076"></p>
+<p><strong>物理层</strong>：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输，到达目的地后再转化为1、0，也就是我们常说的数模转换与模数转换）。这一层的数据叫做比特。</p>
+<br>
+
+<p><strong>数据链路层</strong>：建立逻辑连接、进行硬件地址寻址、差错校验等功能。定义了如何让格式化数据以帧为单位进行传输，以及如何让控制对物理介质的访问。将比特组合成字节进而组合成帧，用MAC地址访问介质。</p>
+<br>
+
+<p><strong>网络层</strong>：进行逻辑地址寻址，在位于不同地理位置的网络中的两个主机系统之间提供连接和路径选择。Internet的发展使得从世界各站点访问信息的用户数大大增加，而网络层正是管理这种连接的层。</p>
+<br>
+
+<p><strong>传输层</strong>：定义了一些传输数据的协议和端口号（ WWW 端口 80 等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP 特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如 QQ 聊天数据就是通过这种方式传输的）。 主要是将从下层接收的数据进行分段和传输，到达目的地址后再进行重组。常常把这一层数据叫做段。</p>
+<br>
+
+<p><strong>会话层</strong>：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在你的系统之间发起会话或者接受会话请求。</p>
+<br>
+
+<p><strong>表示层</strong>：<strong>数据的表示、安全、压缩。</strong>主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等（也就是把计算机能够识别的东西转换成人能够能识别的东西（如图片、声音等）。</p>
+<br>
+
+<p><strong>应用层</strong>：网络服务与最终用户的一个接口。这一层为用户的应用程序（例如电子邮件、文件传输和终端仿真）提供网络服务</p>
+<br>
+
+<br>
+
+<h4 id="TCP-x2F-IP-四层模型"><a href="#TCP-x2F-IP-四层模型" class="headerlink" title="TCP&#x2F;IP 四层模型"></a>TCP&#x2F;IP 四层模型</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210233916419.png" alt="image-20230210233916419"></p>
+<p>现在 Internet（因特网）使用的<strong>主流协议族是 TCP&#x2F;IP 协议族</strong>，它是一个分层、多协议的通信体系。TCP&#x2F;IP协议族是一个四层协议系统，<strong>自底而上分别是数据链路层、网络层、传输层和应用层</strong>。</p>
+<br>
+
+<p><strong>简化OSI七层模型</strong></p>
+<ol>
+<li><strong>应用层、表示层、会话层</strong> 三个层次提供的服务相差不是很大，所以在 TCP&#x2F;IP 协议中，它们被合并为 <strong>应用层</strong> 一个层次。</li>
+<li>由于 <strong>传输层、网络层</strong> 在网络协议中的地位十分重要，所以在 TCP&#x2F;IP 协议中它们被作为<strong>独立</strong>的两个层次。</li>
+<li>因为 <strong>数据链路层、物理层</strong> 的内容相差不多，所以在 TCP&#x2F;IP 协议中它们被归并在 <strong>网络接口层</strong> 一个层次里。</li>
+</ol>
+<br>
+
+<p><strong>四层介绍</strong></p>
+<ul>
+<li><strong>应用层</strong>：应用层是 TCP&#x2F;IP 协议的第一层，是直接为应用进程提供服务的。<ul>
+<li>对不同种类的应用程序它们会根据自己的需要来使用应用层的不同协议，邮件传输应用使用了 SMTP 协议、万维网应用使用了 HTTP 协议、远程登录服务应用使用了有 TELNET 协议。</li>
+<li>应用层还能<strong>加密、解密、格式化数据</strong>。</li>
+<li>应用层可以<strong>建立或解除与其他节点的联系</strong>，这样可以充分节省网络资源。</li>
+</ul>
+</li>
+<li><strong>传输层</strong>：作为 TCP&#x2F;IP 协议的第二层，运输层在整个 TCP&#x2F;IP 协议中起到了中流砥柱的作用。且在运输层中， <strong>TCP 和 UDP</strong> 也同样起到了中流砥柱的作用。</li>
+<li><strong>网络层</strong>：网络层在 TCP&#x2F;IP 协议中的位于第三层。在 TCP&#x2F;IP 协议中网络层可以进行<strong>网络连接的建立和终止</strong>以及 <strong>IP 地址的寻找</strong>等功能。</li>
+<li><strong>网络接口层</strong>：在 TCP&#x2F;IP 协议中，网络接口层位于第四层。由于网络接口层兼并了物理层和数据链路层所以，网络接口层既是<strong>传输数据的物理媒介</strong>，也可以为网络层<strong>提供一条准确无误的线路</strong>。</li>
+</ul>
+<br>
+
+<br>
+
+<p><strong>比较</strong></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210235626139.png" alt="image-20230210235626139"></p>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h3 id="4-1-4-协议"><a href="#4-1-4-协议" class="headerlink" title="4.1.4 协议"></a>4.1.4 协议</h3><p><strong>简介</strong></p>
+<p>​	<strong>协议</strong>，网络协议的简称，网络协议是通信计算机双方必须共同遵从的一组约定。</p>
+<ul>
+<li>如怎么样建立连接、怎么样互相识别等。只有遵守这个约定，计算机之间才能相互通信交流。</li>
+<li>它的三要素是：<strong>语法、语义、时序</strong>。</li>
+<li>为了使数据在网络上从源到达目的，网络通信的参与方必须遵循相同的规则，这套规则称为协议（protocol），它最终体现为在网络上传输的<strong>数据包的格式</strong>。协议往往分成几个层次进行定义，<strong>分层定义</strong>是为了<u>使某一层协议的改变不影响其他层次的协议</u>。</li>
+</ul>
+<br>
+
+<p><strong>常见协议</strong></p>
+<ul>
+<li><p>应用层：</p>
+<ul>
+<li>FTP协议（File Transfer Protocol 文件传输协议）</li>
+<li>HTTP协议（Hyper Text Transfer Protocol 超文本传输协议）</li>
+<li>NFS（Network File System 网络文件系统）。（SSH协议端口号是22）</li>
+</ul>
+</li>
+<li><p>传输层：</p>
+<ul>
+<li>TCP协议（Transmission Control Protocol 传输控制协议）</li>
+<li>UDP协议（User Datagram Protocol 用户数据报协议）。</li>
+</ul>
+</li>
+<li><p>网络层：</p>
+<ul>
+<li>IP 协议（Internet Protocol 因特网互联协议）</li>
+<li>ICMP 协议（Internet Control Message Protocol 因特网控制报文协议）</li>
+<li>IGMP 协议（Internet Group Management Protocol 因特网组管理协议）。</li>
+</ul>
+</li>
+<li><p>网络接口层：</p>
+<ul>
+<li>ARP协议（Address Resolution Protocol 地址解析协议）</li>
+<li>RARP协议<br>（Reverse Address Resolution Protocol 反向地址解析协议）</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<br>
+
+<h4 id="UDP报"><a href="#UDP报" class="headerlink" title="UDP报"></a>UDP报</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211001006533.png" alt="image-20230211001006533"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003426471.png" alt="image-20230211003426471"></p>
+<br>
+
+<h4 id="TCP报"><a href="#TCP报" class="headerlink" title="TCP报"></a>TCP报</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211001202108.png" alt="image-20230211001202108"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003839373.png" alt="image-20230211003839373"></p>
+<p>flag：<br><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211004511396.png" alt="image-20230211004511396"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211004527855.png" alt="image-20230211004527855"></p>
+<br>
+
+<h4 id="IP报"><a href="#IP报" class="headerlink" title="IP报"></a>IP报</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003610812.png" alt="image-20230211003610812"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211005238765.png" alt="image-20230211005238765"></p>
+<br>
+
+<h4 id="以太网帧"><a href="#以太网帧" class="headerlink" title="以太网帧"></a>以太网帧</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003524443.png" alt="image-20230211003524443"></p>
+<p>类型：0x800 IP，0x806 ARP，0x835 RARP</p>
+<br>
+
+<h4 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003731026.png" alt="image-20230211003731026"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003742083.png" alt="image-20230211003742083"></p>
+<br>
+
+<br>
+
+<h4 id="通信过程"><a href="#通信过程" class="headerlink" title="通信过程"></a>通信过程</h4><p><strong>封装</strong></p>
+<p>​	应用程序数据在发送到物理网络上之前，将沿着协议栈从上往下依次传递。每层协议都将在上层数据的基础上加上自己的头部信息（有时还包括尾部信息），以实现该层的功能，这个过程就称为封装。</p>
+<blockquote>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211010042659.png" alt="封装"></p>
+</blockquote>
+<br>
+
+<p><strong>分用</strong></p>
+<p>​	当帧到达目的主机时，将沿着协议栈自底向上依次传递。各层协议依次处理帧中本层负责的头部数据，以获取所需的信息，并最终将处理后的帧交给目标应用程序。这个过程称为分用（demultiplexing）。分用是依靠头部信息中的类型字段实现的。</p>
+<blockquote>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211010337835.png" alt="分用"></p>
+</blockquote>
+<br>
+
+<p><strong>封装与解封装案例</strong></p>
+<p>（数据链路层还有 帧尾 的校验码）</p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211010845923.png" alt="封装与解封装"></p>
+<br>
+
+<br>
+
+<h4 id="ARP协议的分析"><a href="#ARP协议的分析" class="headerlink" title="ARP协议的分析"></a>ARP协议的分析</h4><p>封装过程中，从网络层到数据链路层，需要添加的以太网帧头含有 <strong>目的mac地址</strong> 字段</p>
+<p><strong>问题</strong>：目前知道 目的IP地址 ，要从何获取目的mac地址？ —— 利用ARP协议（通过 IP 获取 mac）</p>
+<p>先查找本地 地址解析表 ，如果没有就如下：</p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211011936900.png" alt="arp"></p>
+<ul>
+<li>广播发送</li>
+<li>单播应答</li>
+</ul>
+<br>
+
+<p><strong>帧结构</strong></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211020206256.png" alt="ARP报文"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211020650494.png" alt="加上帧头（请求包）"></p>
+<blockquote>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003731026.png" alt="image-20230211003731026"></p>
+</blockquote>
+<br>
+
+<br>
+
+<h3 id="4-1-5-Socket套接字"><a href="#4-1-5-Socket套接字" class="headerlink" title="4.1.5 Socket套接字"></a>4.1.5 Socket套接字</h3><p><strong>socket</strong>（套接字），就是对 <strong>网络中不同主机上的应用进程之间</strong> 进行<strong>双向通信</strong>的<strong>端点</strong>的抽象。一个套接字就是网络上进程通信的一端，提供了应用层进程利用网络协议交换数据的机制。从所处的地位来讲，套接字上联应用进程，下联网络协议栈，是应用程序通过网络协议进行通信和交互的接口。</p>
+<br>
+
+<p>socket 可以看成是两个网络<strong>应用程序</strong>进行通信时，各自<strong>通信连接中的端点</strong>，这是一个<strong>逻辑上的概念</strong>。它是网络环境中进程间通信的 API，也是可以 <strong>被命名</strong> 和 <strong>寻址</strong> 的通信端点，使用中的每一个套接字都有其类型和一个与之相连进程。通信时其中一个网络应用程序将要传输的一段信息写入它所在主机的 socket 中，该 socket 通过与网络接口卡（NIC）相连的传输介质将这段信息送到另外一台主机的 socket 中，使对方能够接收到这段信息。socket 是由 <strong>IP</strong> 和 <strong>端口</strong> 结合的，提供<strong>向应用层进程传送数据包</strong>的机制。</p>
+<br>
+
+<p>socket 本身有“<strong>插座</strong>”的意思，在 Linux 环境下，用于表示进程间网络通信的特殊文件类型。本质为内核借助 <strong>缓冲区</strong> 形成的 <strong>伪文件</strong> 。既然是文件，那么理所当然的，我们可以使用 <strong>文件描述符</strong> 引用套接字。与管道类似的，<u>Linux 系统将其封装成文件的目的是为了统一接口</u>，使得读写套接字和读写文件的操作一致。<u>区别是管道主要应用于本地进程间通信，而套接字多应用于网络进程间数据的传递。</u></p>
+<br>
+
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211023108406.png" alt="image-20230211023108406"></p>
+<br>
+
+<p>套接字通信分两部分：</p>
+<ul>
+<li><strong>服务器端</strong>：被动接受连接，一般不会主动发起连接</li>
+<li><strong>客户端</strong>：主动向服务器发起连接</li>
+</ul>
+<blockquote>
+<p>socket是一套通信的接口，Linux 和 Windows 都有，但是有一些细微的差别</p>
+</blockquote>
+<br>
+
+<br>
+
+<h3 id="4-1-6-字节序"><a href="#4-1-6-字节序" class="headerlink" title="4.1.6 字节序"></a>4.1.6 字节序</h3><br>
+
+<p><br><br></p>
+<br>
+
+<br>
+
+
+
+
+
+<h2 id="4-2-TCP-x2F-UDP协议分析"><a href="#4-2-TCP-x2F-UDP协议分析" class="headerlink" title="4.2 TCP&#x2F;UDP协议分析"></a>4.2 TCP&#x2F;UDP协议分析</h2><br>
+
+<br>
+
+<p><br><br></p>
+<br>
+
+<p><br><br></p>
+<br>
+
+<br>
+
+
+
+<h2 id="4-3-并发服务器"><a href="#4-3-并发服务器" class="headerlink" title="4.3 并发服务器"></a>4.3 并发服务器</h2><br>
+
+<br>
+
+<p><br><br></p>
+<br>
+
+<p><br><br></p>
+<br>
+
+<p><br><br></p>
+<br>
+
+<p><br><br></p>
+<br>
+
+<br>
+
+
+
+
+
+<h2 id="4-4-IO复用"><a href="#4-4-IO复用" class="headerlink" title="4.4 IO复用"></a>4.4 IO复用</h2><br>
+
+<br>
+
+<p><br><br></p>
+<br>
+
+<p><br><br></p>
+<br>
+
+<p><br><br></p>
+<br>
+
+<br>
+
+]]></content>
+      <categories>
+        <category>C++开发</category>
+        <category>高性能服务器项目</category>
+      </categories>
+      <tags>
+        <tag>网络编程</tag>
       </tags>
   </entry>
 </search>

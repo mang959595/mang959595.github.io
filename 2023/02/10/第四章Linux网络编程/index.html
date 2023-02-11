@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">2.8k</span>
+            <span class="post-count">5.4k</span>
         </span>
     </span>
 
@@ -93,7 +93,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">9 min</span>
+            <span class="post-count">19 min</span>
         </span>
     </span>
 </div>
@@ -209,11 +209,10 @@
 
 <p><strong>IP地址类型</strong></p>
 <p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210225815319.png" alt="image-20230210225815319"></p>
-<blockquote>
 <p>补充：</p>
 <ul>
 <li>D类IP地址：D 类 IP 地址在历史上被叫做多播地址（multicast address），即组播地址。在以太网中，多播地址命名了一组应该在这个网络中应用接收到一个分组的站点。多播地址的最高位必须是 “1110”，范围从224.0.0.0 - 239.255.255.255。</li>
-<li>特殊的网址：<ul>
+<li><strong>特殊的网址</strong>（E类）：<ul>
 <li>每一个字节都为 0 的地址（ “0.0.0.0” ）对应于当前主机；</li>
 <li>IP 地址中的每一个字节都为 1 的 IP 地址（ “255.255.255.255” ）是当前子网的广播地址；</li>
 <li>IP 地址中凡是以 “11110” 开头的 E 类 IP 地址都保留用于将来和实验使用。</li>
@@ -221,7 +220,6 @@
 </ul>
 </li>
 </ul>
-</blockquote>
 <br>
 
 <p><strong>子网掩码</strong></p>
@@ -234,10 +232,40 @@
 
 <br>
 
-<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><p>简介：</p>
+<h4 id="端口"><a href="#端口" class="headerlink" title="端口"></a>端口</h4><blockquote>
+<p>端口 就是一块缓冲区，有 读缓冲 和 写缓冲 </p>
+</blockquote>
+<p><strong>简介</strong></p>
 <ul>
-<li>端口 是英文 port 的意译，可以认为是设备与外界通讯交流的出口。端口可分为 <strong>虚拟端口</strong> 和 <strong>物理端口</strong> ，其中虚拟端口指计算机内部或交换机路由器内的端口，不可见，是特指TCP&#x2F;IP协议中的端口，是逻辑意义上的端口。例如计算机中的 80 端口、21 端口、23 端口等。物理端口又称为接口，是可见端口，计算机背板的 RJ45 网口，交换机路由器集线器等 RJ45 端口。电话使用 RJ11 插口也属于物理端口的范畴。</li>
-<li>如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP地址的端口可以有 65536（即：2^16）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从 0 到65535（2^16-1）。</li>
+<li>端口 是英文 port 的意译，可以认为是设备与外界通讯交流的出口。端口可分为 <strong>虚拟端口</strong> 和 <strong>物理端口</strong> ，<ul>
+<li><strong>虚拟端口</strong> 指<strong>计算机内部或交换机路由器内的端口</strong>，<strong>不可见</strong>，是特指<strong>TCP&#x2F;IP协议中的端口</strong>，是<strong>逻辑意义上</strong>的端口。例如计算机中的 80 端口、21 端口、23 端口等。</li>
+<li><strong>物理端口</strong> 又称为<strong>接口</strong>，<strong>是可见端口</strong>，计算机背板的 RJ45 网口，交换机路由器集线器等 RJ45 端口。电话使用 RJ11 插口也属于物理端口的范畴。</li>
+</ul>
+</li>
+<li>如果把 IP 地址比作一间房子，端口就是出入这间房子的门。真正的房子只有几个门，但是一个 IP地址的端口可以有 <strong>65536</strong>（即：2^16）个之多！端口是通过端口号来标记的，端口号只有整数，范围是从 <strong>0 到 65535</strong>（2^16-1）。</li>
+</ul>
+<br>
+
+<p><strong>端口类型</strong></p>
+<ul>
+<li><p><strong>周知端口</strong> Well Known Ports ：</p>
+<ul>
+<li>也叫知名端口、公认端口或者常用端口，范围从 <strong>0 到 1023</strong>，它们紧密绑定于一些特定的服务。</li>
+<li>例如 <strong>80 端口分配给 WWW 服务，21 端口分配给 FTP 服务，23 端口分配给Telnet服务</strong>等等。</li>
+<li>网络服务是可以使用其他端口号的，比如使用“8080” 作为 WWW服务的端口；但是有些系统协议使用固定的端口号，比如 139 端口专门用于 NetBIOS 与 TCP&#x2F;IP 之间的通信</li>
+</ul>
+</li>
+<li><p><strong>注册端口</strong> Registered Ports ：</p>
+<ul>
+<li>端口号从 <strong>1024 到 49151</strong>，它们松散地绑定于一些服务，<strong>分配给用户进程或应用程序</strong>。</li>
+<li>这些端口在没有被服务器资源占用的时候，可以给用户端动态选用为源端口。</li>
+</ul>
+</li>
+<li><p><strong>动态端口</strong> &#x2F; <strong>私有端口</strong> Dynamic Ports&#x2F;Private Ports ：</p>
+<ul>
+<li>动态端口的范围是从 <strong>49152 到 65535</strong>。之所以称为动态端口，是因为它一般不固定分配某种服务，而是<strong>动态分配</strong>。</li>
+</ul>
+</li>
 </ul>
 <br>
 
@@ -247,16 +275,216 @@
 
 <br>
 
+<h3 id="4-1-3-网络模型"><a href="#4-1-3-网络模型" class="headerlink" title="4.1.3 网络模型"></a>4.1.3 网络模型</h3><h4 id="OSI七层模型"><a href="#OSI七层模型" class="headerlink" title="OSI七层模型"></a>OSI七层模型</h4><p>Open System Interconnection</p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210233638076.png" alt="image-20230210233638076"></p>
+<p><strong>物理层</strong>：主要定义物理设备标准，如网线的接口类型、光纤的接口类型、各种传输介质的传输速率等。它的主要作用是传输比特流（就是由1、0转化为电流强弱来进行传输，到达目的地后再转化为1、0，也就是我们常说的数模转换与模数转换）。这一层的数据叫做比特。</p>
 <br>
 
-<h3 id="4-1-3-网络模型"><a href="#4-1-3-网络模型" class="headerlink" title="4.1.3 网络模型"></a>4.1.3 网络模型</h3><br>
+<p><strong>数据链路层</strong>：建立逻辑连接、进行硬件地址寻址、差错校验等功能。定义了如何让格式化数据以帧为单位进行传输，以及如何让控制对物理介质的访问。将比特组合成字节进而组合成帧，用MAC地址访问介质。</p>
+<br>
+
+<p><strong>网络层</strong>：进行逻辑地址寻址，在位于不同地理位置的网络中的两个主机系统之间提供连接和路径选择。Internet的发展使得从世界各站点访问信息的用户数大大增加，而网络层正是管理这种连接的层。</p>
+<br>
+
+<p><strong>传输层</strong>：定义了一些传输数据的协议和端口号（ WWW 端口 80 等），如：TCP（传输控制协议，传输效率低，可靠性强，用于传输可靠性要求高，数据量大的数据），UDP（用户数据报协议，与TCP 特性恰恰相反，用于传输可靠性要求不高，数据量小的数据，如 QQ 聊天数据就是通过这种方式传输的）。 主要是将从下层接收的数据进行分段和传输，到达目的地址后再进行重组。常常把这一层数据叫做段。</p>
+<br>
+
+<p><strong>会话层</strong>：通过传输层（端口号：传输端口与接收端口）建立数据传输的通路。主要在你的系统之间发起会话或者接受会话请求。</p>
+<br>
+
+<p><strong>表示层</strong>：<strong>数据的表示、安全、压缩。</strong>主要是进行对接收的数据进行解释、加密与解密、压缩与解压缩等（也就是把计算机能够识别的东西转换成人能够能识别的东西（如图片、声音等）。</p>
+<br>
+
+<p><strong>应用层</strong>：网络服务与最终用户的一个接口。这一层为用户的应用程序（例如电子邮件、文件传输和终端仿真）提供网络服务</p>
+<br>
+
+<br>
+
+<h4 id="TCP-x2F-IP-四层模型"><a href="#TCP-x2F-IP-四层模型" class="headerlink" title="TCP&#x2F;IP 四层模型"></a>TCP&#x2F;IP 四层模型</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210233916419.png" alt="image-20230210233916419"></p>
+<p>现在 Internet（因特网）使用的<strong>主流协议族是 TCP&#x2F;IP 协议族</strong>，它是一个分层、多协议的通信体系。TCP&#x2F;IP协议族是一个四层协议系统，<strong>自底而上分别是数据链路层、网络层、传输层和应用层</strong>。</p>
+<br>
+
+<p><strong>简化OSI七层模型</strong></p>
+<ol>
+<li><strong>应用层、表示层、会话层</strong> 三个层次提供的服务相差不是很大，所以在 TCP&#x2F;IP 协议中，它们被合并为 <strong>应用层</strong> 一个层次。</li>
+<li>由于 <strong>传输层、网络层</strong> 在网络协议中的地位十分重要，所以在 TCP&#x2F;IP 协议中它们被作为<strong>独立</strong>的两个层次。</li>
+<li>因为 <strong>数据链路层、物理层</strong> 的内容相差不多，所以在 TCP&#x2F;IP 协议中它们被归并在 <strong>网络接口层</strong> 一个层次里。</li>
+</ol>
+<br>
+
+<p><strong>四层介绍</strong></p>
+<ul>
+<li><strong>应用层</strong>：应用层是 TCP&#x2F;IP 协议的第一层，是直接为应用进程提供服务的。<ul>
+<li>对不同种类的应用程序它们会根据自己的需要来使用应用层的不同协议，邮件传输应用使用了 SMTP 协议、万维网应用使用了 HTTP 协议、远程登录服务应用使用了有 TELNET 协议。</li>
+<li>应用层还能<strong>加密、解密、格式化数据</strong>。</li>
+<li>应用层可以<strong>建立或解除与其他节点的联系</strong>，这样可以充分节省网络资源。</li>
+</ul>
+</li>
+<li><strong>传输层</strong>：作为 TCP&#x2F;IP 协议的第二层，运输层在整个 TCP&#x2F;IP 协议中起到了中流砥柱的作用。且在运输层中， <strong>TCP 和 UDP</strong> 也同样起到了中流砥柱的作用。</li>
+<li><strong>网络层</strong>：网络层在 TCP&#x2F;IP 协议中的位于第三层。在 TCP&#x2F;IP 协议中网络层可以进行<strong>网络连接的建立和终止</strong>以及 <strong>IP 地址的寻找</strong>等功能。</li>
+<li><strong>网络接口层</strong>：在 TCP&#x2F;IP 协议中，网络接口层位于第四层。由于网络接口层兼并了物理层和数据链路层所以，网络接口层既是<strong>传输数据的物理媒介</strong>，也可以为网络层<strong>提供一条准确无误的线路</strong>。</li>
+</ul>
+<br>
+
+<br>
+
+<p><strong>比较</strong></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230210235626139.png" alt="image-20230210235626139"></p>
+<br>
+
+<br>
 
 <br>
 
 <br>
 
-<h3 id="4-1-4-协议"><a href="#4-1-4-协议" class="headerlink" title="4.1.4 协议"></a>4.1.4 协议</h3><br>
+<h3 id="4-1-4-协议"><a href="#4-1-4-协议" class="headerlink" title="4.1.4 协议"></a>4.1.4 协议</h3><p><strong>简介</strong></p>
+<p>​	<strong>协议</strong>，网络协议的简称，网络协议是通信计算机双方必须共同遵从的一组约定。</p>
+<ul>
+<li>如怎么样建立连接、怎么样互相识别等。只有遵守这个约定，计算机之间才能相互通信交流。</li>
+<li>它的三要素是：<strong>语法、语义、时序</strong>。</li>
+<li>为了使数据在网络上从源到达目的，网络通信的参与方必须遵循相同的规则，这套规则称为协议（protocol），它最终体现为在网络上传输的<strong>数据包的格式</strong>。协议往往分成几个层次进行定义，<strong>分层定义</strong>是为了<u>使某一层协议的改变不影响其他层次的协议</u>。</li>
+</ul>
+<br>
 
+<p><strong>常见协议</strong></p>
+<ul>
+<li><p>应用层：</p>
+<ul>
+<li>FTP协议（File Transfer Protocol 文件传输协议）</li>
+<li>HTTP协议（Hyper Text Transfer Protocol 超文本传输协议）</li>
+<li>NFS（Network File System 网络文件系统）。（SSH协议端口号是22）</li>
+</ul>
+</li>
+<li><p>传输层：</p>
+<ul>
+<li>TCP协议（Transmission Control Protocol 传输控制协议）</li>
+<li>UDP协议（User Datagram Protocol 用户数据报协议）。</li>
+</ul>
+</li>
+<li><p>网络层：</p>
+<ul>
+<li>IP 协议（Internet Protocol 因特网互联协议）</li>
+<li>ICMP 协议（Internet Control Message Protocol 因特网控制报文协议）</li>
+<li>IGMP 协议（Internet Group Management Protocol 因特网组管理协议）。</li>
+</ul>
+</li>
+<li><p>网络接口层：</p>
+<ul>
+<li>ARP协议（Address Resolution Protocol 地址解析协议）</li>
+<li>RARP协议<br>（Reverse Address Resolution Protocol 反向地址解析协议）</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<br>
+
+<h4 id="UDP报"><a href="#UDP报" class="headerlink" title="UDP报"></a>UDP报</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211001006533.png" alt="image-20230211001006533"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003426471.png" alt="image-20230211003426471"></p>
+<br>
+
+<h4 id="TCP报"><a href="#TCP报" class="headerlink" title="TCP报"></a>TCP报</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211001202108.png" alt="image-20230211001202108"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003839373.png" alt="image-20230211003839373"></p>
+<p>flag：<br><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211004511396.png" alt="image-20230211004511396"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211004527855.png" alt="image-20230211004527855"></p>
+<br>
+
+<h4 id="IP报"><a href="#IP报" class="headerlink" title="IP报"></a>IP报</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003610812.png" alt="image-20230211003610812"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211005238765.png" alt="image-20230211005238765"></p>
+<br>
+
+<h4 id="以太网帧"><a href="#以太网帧" class="headerlink" title="以太网帧"></a>以太网帧</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003524443.png" alt="image-20230211003524443"></p>
+<p>类型：0x800 IP，0x806 ARP，0x835 RARP</p>
+<br>
+
+<h4 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h4><p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003731026.png" alt="image-20230211003731026"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003742083.png" alt="image-20230211003742083"></p>
+<br>
+
+<br>
+
+<h4 id="通信过程"><a href="#通信过程" class="headerlink" title="通信过程"></a>通信过程</h4><p><strong>封装</strong></p>
+<p>​	应用程序数据在发送到物理网络上之前，将沿着协议栈从上往下依次传递。每层协议都将在上层数据的基础上加上自己的头部信息（有时还包括尾部信息），以实现该层的功能，这个过程就称为封装。</p>
+<blockquote>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211010042659.png" alt="封装"></p>
+</blockquote>
+<br>
+
+<p><strong>分用</strong></p>
+<p>​	当帧到达目的主机时，将沿着协议栈自底向上依次传递。各层协议依次处理帧中本层负责的头部数据，以获取所需的信息，并最终将处理后的帧交给目标应用程序。这个过程称为分用（demultiplexing）。分用是依靠头部信息中的类型字段实现的。</p>
+<blockquote>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211010337835.png" alt="分用"></p>
+</blockquote>
+<br>
+
+<p><strong>封装与解封装案例</strong></p>
+<p>（数据链路层还有 帧尾 的校验码）</p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211010845923.png" alt="封装与解封装"></p>
+<br>
+
+<br>
+
+<h4 id="ARP协议的分析"><a href="#ARP协议的分析" class="headerlink" title="ARP协议的分析"></a>ARP协议的分析</h4><p>封装过程中，从网络层到数据链路层，需要添加的以太网帧头含有 <strong>目的mac地址</strong> 字段</p>
+<p><strong>问题</strong>：目前知道 目的IP地址 ，要从何获取目的mac地址？ —— 利用ARP协议（通过 IP 获取 mac）</p>
+<p>先查找本地 地址解析表 ，如果没有就如下：</p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211011936900.png" alt="arp"></p>
+<ul>
+<li>广播发送</li>
+<li>单播应答</li>
+</ul>
+<br>
+
+<p><strong>帧结构</strong></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211020206256.png" alt="ARP报文"></p>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211020650494.png" alt="加上帧头（请求包）"></p>
+<blockquote>
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211003731026.png" alt="image-20230211003731026"></p>
+</blockquote>
+<br>
+
+<br>
+
+<h3 id="4-1-5-Socket套接字"><a href="#4-1-5-Socket套接字" class="headerlink" title="4.1.5 Socket套接字"></a>4.1.5 Socket套接字</h3><p><strong>socket</strong>（套接字），就是对 <strong>网络中不同主机上的应用进程之间</strong> 进行<strong>双向通信</strong>的<strong>端点</strong>的抽象。一个套接字就是网络上进程通信的一端，提供了应用层进程利用网络协议交换数据的机制。从所处的地位来讲，套接字上联应用进程，下联网络协议栈，是应用程序通过网络协议进行通信和交互的接口。</p>
+<br>
+
+<p>socket 可以看成是两个网络<strong>应用程序</strong>进行通信时，各自<strong>通信连接中的端点</strong>，这是一个<strong>逻辑上的概念</strong>。它是网络环境中进程间通信的 API，也是可以 <strong>被命名</strong> 和 <strong>寻址</strong> 的通信端点，使用中的每一个套接字都有其类型和一个与之相连进程。通信时其中一个网络应用程序将要传输的一段信息写入它所在主机的 socket 中，该 socket 通过与网络接口卡（NIC）相连的传输介质将这段信息送到另外一台主机的 socket 中，使对方能够接收到这段信息。socket 是由 <strong>IP</strong> 和 <strong>端口</strong> 结合的，提供<strong>向应用层进程传送数据包</strong>的机制。</p>
+<br>
+
+<p>socket 本身有“<strong>插座</strong>”的意思，在 Linux 环境下，用于表示进程间网络通信的特殊文件类型。本质为内核借助 <strong>缓冲区</strong> 形成的 <strong>伪文件</strong> 。既然是文件，那么理所当然的，我们可以使用 <strong>文件描述符</strong> 引用套接字。与管道类似的，<u>Linux 系统将其封装成文件的目的是为了统一接口</u>，使得读写套接字和读写文件的操作一致。<u>区别是管道主要应用于本地进程间通信，而套接字多应用于网络进程间数据的传递。</u></p>
+<br>
+
+<p><img src="/2023/02/10/%E7%AC%AC%E5%9B%9B%E7%AB%A0Linux%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/image-20230211023108406.png" alt="image-20230211023108406"></p>
+<br>
+
+<p>套接字通信分两部分：</p>
+<ul>
+<li><strong>服务器端</strong>：被动接受连接，一般不会主动发起连接</li>
+<li><strong>客户端</strong>：主动向服务器发起连接</li>
+</ul>
+<blockquote>
+<p>socket是一套通信的接口，Linux 和 Windows 都有，但是有一些细微的差别</p>
+</blockquote>
+<br>
+
+<br>
+
+<h3 id="4-1-6-字节序"><a href="#4-1-6-字节序" class="headerlink" title="4.1.6 字节序"></a>4.1.6 字节序</h3><br>
+
+<p><br><br></p>
+<br>
+
+<br>
+
+
+
+
+
+<h2 id="4-2-TCP-x2F-UDP协议分析"><a href="#4-2-TCP-x2F-UDP协议分析" class="headerlink" title="4.2 TCP&#x2F;UDP协议分析"></a>4.2 TCP&#x2F;UDP协议分析</h2><br>
+
+<br>
+
+<p><br><br></p>
 <br>
 
 <p><br><br></p>
@@ -264,37 +492,9 @@
 
 <br>
 
-<h2 id="4-2-Socket编程"><a href="#4-2-Socket编程" class="headerlink" title="4.2 Socket编程"></a>4.2 Socket编程</h2><br>
-
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<br>
 
 
-
-
-
-<h2 id="4-3-TCP-x2F-UDP协议"><a href="#4-3-TCP-x2F-UDP协议" class="headerlink" title="4.3 TCP&#x2F;UDP协议"></a>4.3 TCP&#x2F;UDP协议</h2><br>
-
-<br>
-
-<p><br><br></p>
-<br>
-
-<p><br><br></p>
-<br>
-
-<br>
-
-
-
-<h2 id="4-4-并发服务器"><a href="#4-4-并发服务器" class="headerlink" title="4.4 并发服务器"></a>4.4 并发服务器</h2><br>
+<h2 id="4-3-并发服务器"><a href="#4-3-并发服务器" class="headerlink" title="4.3 并发服务器"></a>4.3 并发服务器</h2><br>
 
 <br>
 
@@ -316,7 +516,7 @@
 
 
 
-<h2 id="4-5-IO复用"><a href="#4-5-IO复用" class="headerlink" title="4.5 IO复用"></a>4.5 IO复用</h2><br>
+<h2 id="4-4-IO复用"><a href="#4-4-IO复用" class="headerlink" title="4.4 IO复用"></a>4.4 IO复用</h2><br>
 
 <br>
 
@@ -330,6 +530,7 @@
 <br>
 
 <br>
+
  
       <!-- reward -->
       
@@ -394,6 +595,15 @@
 
    
   <nav class="article-nav">
+    
+      <a href="/2023/02/12/%E5%90%B8%E5%8F%96%E6%95%99%E8%AE%AD/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            珍惜时间
+          
+        </div>
+      </a>
     
     
       <a href="/2023/02/10/%E7%AC%AC%E4%B8%89%E7%AB%A0Linux%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="article-nav-link">
