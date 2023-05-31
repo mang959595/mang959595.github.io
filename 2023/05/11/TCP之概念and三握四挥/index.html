@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>TCP之概念and三握四挥 |  b4mang95</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/hexo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-TCP之概念and三握四挥"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  TCP之概念and三握四挥
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/" class="article-date">
+  <time datetime="2023-05-11T14:09:47.000Z" itemprop="datePublished">2023-05-11</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C/">网络</a> / <a class="article-category-link" href="/categories/%E7%BD%91%E7%BB%9C/TCP/">TCP</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">4.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">14 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="TCP之概念、三握四挥"><a href="#TCP之概念、三握四挥" class="headerlink" title="TCP之概念、三握四挥"></a>TCP之概念、三握四挥</h1><p>图片和部分文字来源<a target="_blank" rel="noopener" href="https://xiaolincoding.com/network/3_tcp/tcp_interview.html">小林coding (xiaolincoding.com)</a></p>
+<hr>
+<p>TCP是传输层的协议，全称”<strong>传输控制协议</strong>“，用于在IP网络上实现数据和消息的<strong>可靠</strong>传输，并以建立<strong>连接</strong>的方式进行面向<strong>字节流</strong>的数据的传输。</p>
+<br>
+
+<br>
+
+<p>在可靠性方面，TCP实现了：</p>
+<ul>
+<li><strong>连接的建立和断开</strong>，<strong>重传机制</strong>（定时器），<strong>流量控制</strong>（滑动窗口），<strong>拥塞控制</strong>等机制功能。</li>
+<li>达到的可靠效果：网络包的收发是<strong>无损坏、无间隔、按序（seq，ack）、非冗余</strong></li>
+</ul>
+<hr>
+<br>
+
+<p><br><br></p>
+<br>
+
+<h2 id="TCP格式"><a href="#TCP格式" class="headerlink" title="TCP格式"></a>TCP格式</h2><h3 id="TCP头部"><a href="#TCP头部" class="headerlink" title="TCP头部"></a>TCP头部</h3><img src="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/image-20230510150751458.png" alt="image-20230510150751458" style="zoom:80%;">
+
+<ul>
+<li><strong>源端口号、目的端口号</strong></li>
+<li><strong>序列号</strong>seq</li>
+<li><strong>确认应答号</strong>ack</li>
+<li><strong>首部长度</strong> 因为有长度不固定的选项字段，所以首部长度需要明确表示</li>
+<li><strong>标志位</strong>（URG、ACK、PSH、RST、SYN、FIN）<ul>
+<li>RST 是强制对方断开连接，说明出现异常</li>
+<li>SYN 在建立连接时用到，同步</li>
+<li>ACK 为确认应答标识</li>
+<li>FIN 在断开连接时用到</li>
+<li>URG 表示有紧急数据，并通过紧急指针定位</li>
+<li>PSH 告诉接收方立即将数据交给应用层，不用等到缓冲区满了</li>
+</ul>
+</li>
+<li><strong>窗口大小</strong></li>
+<li>校验和、紧急指针</li>
+<li><strong>选项</strong>（可变长度）</li>
+</ul>
+<br>
+
+<br>
+
+<h3 id="TCP连接"><a href="#TCP连接" class="headerlink" title="TCP连接"></a>TCP连接</h3><p>一个连接包括连接双方的：</p>
+<ul>
+<li>socket（IP + port）</li>
+<li>滑窗大小（接收窗口、发送窗口）</li>
+<li>序列号（seq）</li>
+<li>…</li>
+</ul>
+<br>
+
+<p>理论上可以一个服务端socket可以与 <strong>IP数量*端口数量</strong> 个socket建立连接，但实际上受系统<strong>fd数量</strong>、<strong>内存</strong>的限制。</p>
+<br>
+
+<br>
+
+<h2 id="TCP与UDP的区别"><a href="#TCP与UDP的区别" class="headerlink" title="TCP与UDP的区别"></a>TCP与UDP的区别</h2><h3 id="UDP格式"><a href="#UDP格式" class="headerlink" title="UDP格式"></a>UDP格式</h3><p><strong>头部</strong></p>
+<img src="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/image-20230510161730776.png" alt="image-20230510161730776" style="zoom:80%;">
+
+<ul>
+<li><strong>源端口号、目标端口号</strong></li>
+<li><strong>包长度</strong>（数据报）</li>
+<li><strong>校验和</strong>（可以校验首部和数据是否正确）</li>
+</ul>
+<br>
+
+<br>
+
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><ol>
+<li>连接：TCP有连接，UDP无连接</li>
+<li>传输对象：TCP一对一，<strong>UDP一对一、一对多、多对多</strong></li>
+<li><strong>可靠性</strong>：TCP传输<strong>按序</strong>、<strong>无差错</strong>、<strong>不丢失</strong>、<strong>无重复</strong>，UDP不保证</li>
+<li><strong>流量控制、拥塞控制</strong>：TCP的机制</li>
+<li><strong>传输方式</strong>：TCP流式传输，面向<strong>字节流</strong>，保证数据<strong>顺序</strong>和<strong>可靠</strong>，但是<strong>数据没有边界</strong>（粘包问题）；UDP传输数据包，面向<strong>数据报</strong>，但可能会<strong>乱序和丢包</strong>。</li>
+</ol>
+<br>
+
+<p><strong>应用场景</strong></p>
+<p><strong>TCP</strong>：倾向可靠性要求的</p>
+<ul>
+<li>文件传输</li>
+<li>HTTP&#x2F;HTTPS</li>
+</ul>
+<br>
+
+<p><strong>UDP</strong>：倾向传输速率的、即时性的</p>
+<ul>
+<li>DNS，SNMP，数据量较少的</li>
+<li>视频、音频、游戏</li>
+<li>广播通信</li>
+</ul>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h2 id="TCP连接建立-三次握手"><a href="#TCP连接建立-三次握手" class="headerlink" title="TCP连接建立-三次握手"></a>TCP连接建立-三次握手</h2><h3 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h3><img src="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/image-20230510163728483.png" alt="image-20230510163728483" style="zoom:80%;">
+
+<ul>
+<li>客户端(SYN_SENT) &gt; 服务端(LISTEN-&gt;SYN_RCVD)： SYN（seq&#x3D;c_x）</li>
+<li>客户端(SYN_SENT-&gt;EST) &lt; 服务端(SYN_RCVD)：    SYN+ACK（seq&#x3D;s_x,ack&#x3D;c_x+1）</li>
+<li>客户端(EST) &gt; 服务端(SYN_RCVD-&gt;EST)：         ACK（ack&#x3D;s_x+1）</li>
+</ul>
+<blockquote>
+<p><strong>第三次</strong>握手可以<strong>携带数据</strong>，因为经过前两次握手已经确认同步了客户端这边的序列号</p>
+</blockquote>
+<br>
+
+<br>
+
+<h3 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题:"></a>常见问题:</h3><h4 id="为什么是三次握手？"><a href="#为什么是三次握手？" class="headerlink" title="为什么是三次握手？"></a>为什么是三次握手？</h4><p>为什么不是两次：</p>
+<p><strong>三次握手让服务端多了一个过渡状态即SYN_RECV，在此期间可以先确认连接的正确性，排除重复的历史连接</strong></p>
+<p>客户端的第一次握手发送的SYN包（A）收到网络阻塞超时了，于是客户端重发新的SYN包（B）（并采用另一个seq号）;</p>
+<p>但是服务端最终先收到了旧的SYN包（A），于是进行了第二次握手（回送ack&#x3D;A+1）:</p>
+<ul>
+<li><p>如果不进行第三次握手，此时就建立连接，会导致双方对客户端seq序列号的不同步：客户端用的是 B，服务端用的是 A</p>
+</li>
+<li><p>而进行第三次握手，客户端会检查第二次握手的ack&#x3D;A+1，发现并非期待的ack&#x3D;B+1，则会回送RST报文告诉服务端这个错误终止连接。并等待服务端回送正确的ack&#x3D;B+1。</p>
+</li>
+</ul>
+<p>之后服务端收到最新的SYN（B）并回送正确的ack&#x3D;B+1，客户端收到后进行第三次握手，同步服务端这边的序列号。</p>
+<blockquote>
+<p>如果服务端<u>连续收到两个SYN报文（先A后B）</u>，即<u>没有在中间收到RST报文</u>，那么服务端第二次收到之后会回送 <strong>Challenge Ack</strong> 报文（其序列号仍是旧SYN报文的响应即ack&#x3D;A+1）</p>
+</blockquote>
+<p>阻止重复历史连接的目的是：<strong>为了避免资源浪费</strong></p>
+<ul>
+<li>三次握手中服务端会有一个 SYN_RCVD 状态，作为中间状态来确认连接的正确建立。</li>
+<li>如果是两次握手，没有中间状态过渡，服务端收到SYN就立即建立连接，但服务端最终还是会收到客户端发来的RST报文断开连接，在此期间连接占用了系统资源（连接队列、socket_fd、内核内存），并且可能会发送数据（无效）</li>
+</ul>
+<br>
+
+<p>为什么不是四次：</p>
+<p><strong>三次握手的目的是建立连接并且同步双方初始序列号，同步序列号需要一来一回，理论上需要两个来回，但是中间的两步可以合并</strong></p>
+<p>第一次握手和第二次握手同步了客户端的序列号：seq&#x3D;A，ack&#x3D;A+1</p>
+<p>第二次握手和第三次握手同步了服务端的序列号：seq&#x3D;B，ack&#x3D;B+1</p>
+<ul>
+<li>第二次握手把 seq&#x3D;B, ack&#x3D;A+1 一起发了，所以相当于减少了一次握手，所以不是四次</li>
+</ul>
+<br>
+
+<br>
+
+<h4 id="为什么每次TCP连接建立时的序列号不同？"><a href="#为什么每次TCP连接建立时的序列号不同？" class="headerlink" title="为什么每次TCP连接建立时的序列号不同？"></a>为什么每次TCP连接建立时的序列号不同？</h4><ul>
+<li>分辨不同的连接同步情况，主要是跟历史连接区分（前后两次连接建立时的seq都相同的话，后续发送的数据包的序列号也可能相同，如果历史连接的数据包延迟到新连接时才被接收，若序列号相同则会导致不应该的数据接收）</li>
+</ul>
+<blockquote>
+<p>此外，还是有可能会发生历史数据包的seq冲突，还需要利用 <strong>时间戳</strong> 来分辨</p>
+</blockquote>
+<ul>
+<li>防止黑客伪造相同序列号的报文让接收方接收</li>
+</ul>
+<p>初始序列号 ISN 的生成利用到了时钟和哈希算法，重复率很低。</p>
+<br>
+
+<br>
+
+<h4 id="IP-层会分片（MTU），为什么TCP层还需要分片（MSS）"><a href="#IP-层会分片（MTU），为什么TCP层还需要分片（MSS）" class="headerlink" title="IP 层会分片（MTU），为什么TCP层还需要分片（MSS）"></a>IP 层会分片（MTU），为什么TCP层还需要分片（MSS）</h4><img src="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/image-20230510220202657.png" alt="image-20230510220202657" style="zoom:80%;">
+
+<ul>
+<li><strong>MTU</strong>：<strong>IP网络包的最大长度</strong>，以太网的一般为1500字节；</li>
+<li><strong>MSS</strong>：IP网络包除去IP头、TCP头，剩下的<strong>TCP数据的最大长度</strong>；</li>
+</ul>
+<p>MTU是针对数据在IP层的分片大小，MSS是针对数据在TCP层的分片大小。</p>
+<p>假设TCP层要发送的数据长度为3个MTU左右：（注意 <strong>重传</strong> 是TCP而不是IP的机制）</p>
+<ul>
+<li><strong>无MSS</strong>的情况下，数据通过3个IP包来发送，但只有第一个包中包含TCP头。如果<strong>其中一个IP包</strong>丢失了，因为<strong>唯一的TCP头</strong>中说明的数据长度应该是大概3个MTU的大小，无法确认丢失部分的长度，那么就得重新发送<strong>所有的IP包</strong>。</li>
+<li><strong>有MSS</strong>的情况下（一般MSS长度略小于MTU，使得MSS分片不需要在MTU中再分），如果其中一个IP包丢失了，则可以根据缺失的TCP头（重传情况之一：收到重复的ack）来确定要重发哪一部分的数据，即只需重新发送少量IP包。</li>
+</ul>
+<blockquote>
+<p><strong>建立连接的时候</strong>，通信双方会协商各自的MSS值</p>
+</blockquote>
+<br>
+
+<br>
+
+<h4 id="握手丢失的情况"><a href="#握手丢失的情况" class="headerlink" title="握手丢失的情况"></a>握手丢失的情况</h4><ol>
+<li><strong>第一次握手丢失</strong></li>
+</ol>
+<ul>
+<li>服务端没有收到SYN，则不会回送SYN-ACK；客户端长时间没收到ACK，触发超时重传，重新发送SYN。</li>
+<li>重传次数：由内核文件中的参数<code>tcp_syn_retries</code>设置；超时时间：每次是上一次的2倍</li>
+<li>当超时次数达到上限之后，若还是没有收到ACK，那么客户端就会断开</li>
+</ul>
+<ol start="2">
+<li><strong>第二次握手丢失</strong></li>
+</ol>
+<ul>
+<li>客户端长时间没有收到SYN-ACK，触发超时重传</li>
+<li>服务端长时间没有收到第三次握手的ACK，触发超时重传</li>
+<li>在达到重传次数上限后，若还没有收到回应，则会断开，CLOSE</li>
+</ul>
+<ol start="3">
+<li><strong>第三次握手丢失</strong></li>
+</ol>
+<ul>
+<li>服务端长时间没有收到第三次握手的ACK，触发超时重传</li>
+<li>客户端已经建立起了连接，若收到服务端的重传，则会发送ACK</li>
+<li>服务端达到重传次数上限，若还没有收到回应，则会断开，CLOSE</li>
+<li><strong>客户端处于ESTABLISHED状态</strong>：<ul>
+<li>若客户端不主动发数据，则长时间无数据交互，客户端最终会断开。</li>
+<li>若客户端主动发数据，则会一直触发重传并到达上限断开。</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<br>
+
+<h3 id="其他知识：SYN攻击、半连接队列、全连接队列"><a href="#其他知识：SYN攻击、半连接队列、全连接队列" class="headerlink" title="其他知识：SYN攻击、半连接队列、全连接队列"></a>其他知识：SYN攻击、半连接队列、全连接队列</h3><p>针对服务端的攻击，攻击者发送大量SYN包给服务端，但不进行第三次握手，使得服务端的TCP<strong>半连接队列</strong>爆满，无法正常接收后续的SYN连接请求。</p>
+<blockquote>
+<img src="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/image-20230511162030421.png" alt="image-20230511162030421" style="zoom: 67%;">
+
+<p>半连接队列（SYN队列）：存放已进行第一次握手的客户端</p>
+<p>全连接队列（accept队列）：存放已进行第三次握手的客户端</p>
+<ul>
+<li>收到第一次握手后把客户端放入SYN队列，并进行第二次握手；</li>
+<li>收到第三次握手后把客户端移出SYN队列，并放入Accept队列；</li>
+<li>应用程序执行accept()从Accept队列中取出客户端，建立起连接。</li>
+</ul>
+</blockquote>
+<p><strong>应对方式</strong>：</p>
+<ol>
+<li>调大 netdev_max_backlog ：内核处理速度<u>小于</u>网卡接收数据速度时的额外数据缓存队列大小。</li>
+<li>增大 TCP半连接队列 ：<ul>
+<li>增大 net.ipv4.tcp_max_syn_backlog</li>
+<li>增大 listen() 函数中的 backlog</li>
+<li>增大 net.core.somaxconn</li>
+</ul>
+</li>
+<li>开启 net.ipv4.tcp_syncookies ：SYN队列满了以后，服务端对于收到的新的SYN连接请求，根据算法算出cookie并直接进行第二次握手，且将cookie作为seq。服务端收到第三次握手时，检查ack&#x3D;cookie+1，并将客户端连接放入全连接Accept队列。</li>
+<li>减少 SYN+ACK 重传次数（修改内核参数）：减少了无效连接的占用队列的时间。</li>
+</ol>
+<br>
+
+<br>
+
+<h2 id="TCP连接断开-四次挥手"><a href="#TCP连接断开-四次挥手" class="headerlink" title="TCP连接断开-四次挥手"></a>TCP连接断开-四次挥手</h2><h3 id="过程-1"><a href="#过程-1" class="headerlink" title="过程"></a>过程</h3><p>以客户端主动关闭连接为例。</p>
+<img src="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/image-20230511163506620.png" alt="image-20230511163506620" style="zoom: 67%;">
+
+<ol>
+<li>客户端发送FIN，并进入<strong>FIN_WAIT_1</strong>状态；</li>
+<li>服务端收到FIN，回送ACK，并进入<strong>CLOSED_WAIT</strong>状态；在服务端发送FIN之前，服务端还可以发送数据；</li>
+<li>客户端收到ACK，进入<strong>FIN_WAIT_2</strong>状态，等待服务端的FIN，在此期间可以接收数据；</li>
+<li>服务端处理完数据后，发送FIN，并进入<strong>LAST_ACK</strong>状态；</li>
+<li>客户端收到FIN，回送ACK，并进入<strong>TIME_WAIT</strong>状态等待一段时间（留机会给服务端重发FIN），确保对方收到了ACK。之后连接正常关闭。</li>
+<li>服务端收到ACK，连接关闭。</li>
+</ol>
+<br>
+
+<br>
+
+<h3 id="常见问题："><a href="#常见问题：" class="headerlink" title="常见问题："></a>常见问题：</h3><p>以客户端主动断开为例</p>
+<h4 id="为什么是4次"><a href="#为什么是4次" class="headerlink" title="为什么是4次"></a>为什么是4次</h4><ul>
+<li>关闭连接时，客户端先发送FIN包仅表示客户端不再发送数据，但能继续接收数据</li>
+<li>服务端收到FIN后回送ACK，但在发送FIN之前还可以处理剩余数据并发送，等到不再需要发送数据之后才发送FIN，向客户端表示同一关闭连接</li>
+</ul>
+<p>如果中间无其余数据需要处理，可以合并服务端的ACK和FIN可以为合并为一次。</p>
+<br>
+
+<br>
+
+<h4 id="挥手丢失的情况"><a href="#挥手丢失的情况" class="headerlink" title="挥手丢失的情况"></a>挥手丢失的情况</h4><p>FIN的重发次数由<code>tcp_orphan_retrie</code>设置</p>
+<ol>
+<li><strong>第一次挥手丢失</strong></li>
+</ol>
+<p>服务端没有收到FIN，则不会回送ACK。客户端没有收到ACK，触发超时重传，达到上限后直接断开连接，而此时服务端的连接还没关闭，则可分为有数据发送（重传到关闭）和无数据发送（长时间后关闭）的两种情况。</p>
+<ol start="2">
+<li><strong>第二次挥手丢失</strong></li>
+</ol>
+<p>服务端的ACK丢失，客户端没有收到ACK，触发超时重传，达到上限后直接断开连接，而此时服务端处于CLOSE_WAIT状态，后续会发送数据以及发送FIN。</p>
+<ol start="3">
+<li><strong>第三次挥手丢失</strong></li>
+</ol>
+<p>客户端收到ACK后，关于<strong>FIN_WAIT_2</strong>状态：</p>
+<ul>
+<li>若客户端采用的是close()关闭连接，则FIN_WAIT_2状态的持续时间由内核参数<code>tcp_fin_timeout</code>决定，在此时限内没有收到服务端的FIN的话会直接断开连接；</li>
+<li>若客户端采用的是shutdown()关闭连接（明确表示后续还要接收数据，即只关闭客户端连接的<strong>发送</strong>方向，保留接收方向），则FIN_WAIT_2状态会一直持续；</li>
+</ul>
+<p>服务端收到FIN，并回送ACK后，处于<strong>CLOSE_WAIT</strong>状态，后续<strong>何时发送FIN</strong>则由<strong>程序中执行close()的时机</strong>决定。</p>
+<ul>
+<li>第三次挥手丢失，客户端没有回送ACK，服务端触发超时重传FIN，直到超限断开。</li>
+<li>后续客户端则处于FIN_WAIT_2直到超时断开。</li>
+</ul>
+<ol start="4">
+<li><strong>第四次挥手丢失</strong></li>
+</ol>
+<p>客户端发送ACK后进入TIME_WAIT状态（<strong>2MSL</strong>时间）。四挥丢失会触发服务端的FIN超时重传，客户端在TIME_WAIT状态内收到FIN的话也会重发ACK（并且<strong>重置2MSL定时器</strong>）。</p>
+<ul>
+<li>第四次挥手一直丢失，则服务端重发FIN次数达到上线后便会直接关闭。而客户端经过2MSL时长后便会关闭。</li>
+</ul>
+<br>
+
+<br>
+
+<h4 id="关于TIME-WAIT"><a href="#关于TIME-WAIT" class="headerlink" title="关于TIME_WAIT"></a>关于TIME_WAIT</h4><p><strong>为什么TIME_WAIT时长是2MSL</strong></p>
+<p><code>MSL</code> 是 Maximum Segment Lifetime，<strong>报文最大生存时间</strong>。大概是消耗掉最大<strong>TTL</strong>的时间。（Linux下约30s）</p>
+<p>TIME_WAIT 等待 2 倍的 MSL，比较合理的解释是： </p>
+<ul>
+<li>网络中可能存在来自发送方的数据包，当这些发送方的数据包被接收方处理后又会向对方发送响应，所以<strong>一来一回需要等待 2 倍的时间</strong>。</li>
+<li>相当于允许我方发送的报文丢失一次，<strong>留一个时间来接收对方可能重发的报文</strong>。比如，若 ACK 在一个 MSL 内丢失，这样被动方重发的 FIN 会在第 2 个 MSL 内到达。</li>
+</ul>
+<p>为什么不是4MSL、8MSL：因为连续丢包的概率很小，忽略不做处理的性价比更高。</p>
+<br>
+
+<br>
+
+<p><strong>TIME_WAIT状态的作用</strong></p>
+<ol>
+<li>防止<strong>历史连接中的数据</strong>，被后面相同四元组的连接错误的接收。（发生seq绕回的情况，即报文seq出现重复而无法识别新老数据的情况）</li>
+</ol>
+<p>经过2MSL的时间可以确保旧连接的数据包全部失效。</p>
+<ol start="2">
+<li>保证<strong>被动关闭连接方</strong>（此例为服务端）能正确关闭</li>
+</ol>
+<p>即在客户端ACK丢失的情况下，<strong>让客户端有机会收到服务端重发的FIN</strong>，并重发ACK给服务端。</p>
+<p>否则，在客户端关闭之后，服务端后续重发的FIN会返回RST报文</p>
+<img src="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/image-20230511213003866.png" alt="image-20230511213003866" style="zoom:80%;">
+
+
+
+<img src="/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/image-20230511213043392.png" alt="image-20230511213043392" style="zoom: 80%;">
+
+
+
+<p><strong>TIME_WAIT过多的影响</strong></p>
+<ul>
+<li>第一是占用系统资源，比如文件描述符、内存资源、CPU 资源、线程资源等；</li>
+<li>第二是占用端口资源；端口资源也是有限的，一般可以开启的端口为 <code>32768～61000</code>，也可以通过 <code>net.ipv4.ip_local_port_range</code>参数指定范围。</li>
+</ul>
+<p>可以分别对客户端（主要是端口）和服务端（主要是系统资源）进行分析</p>
+<ul>
+<li>如果<strong>服务端</strong>要避免过多的 TIME_WAIT 状态的连接，就<strong>永远不要主动断开连接</strong>，让客户端去断开，由分布在各处的客户端去承受 TIME_WAIT</li>
+</ul>
+<br>
+
+<br>
+
+<h4 id="优雅关闭连接"><a href="#优雅关闭连接" class="headerlink" title="优雅关闭连接"></a>优雅关闭连接</h4><ul>
+<li>默认为优雅关闭连接，即正常地完成4次握手地流程。</li>
+<li>不优雅地关闭连接，对 socket 设置 <em>SO_LINGER</em> 选项：<ul>
+<li>使得调用close()后直接给对方发送RST报文，并关闭连接</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<br>
+
+<h3 id="保活机制"><a href="#保活机制" class="headerlink" title="保活机制"></a>保活机制</h3><p>建立连接后，客户端发生了故障如<strong>宕机、断电</strong>的情况（<strong>进程崩溃</strong>的情况会自己发FIN或RST报文给对方），若服务端不主动发送数据给客户端，会发生什么？</p>
+<p>长时间没有数据交互的情况，对应有<strong>保活机制</strong>，服务端会每隔一个时间间隔发送一个<strong>探测报文</strong>，如果连续几个探测报文都没有响应，则内核会认为连接失效并报告错误信息。</p>
+<ul>
+<li><p>tcp_keepalive_xxx 系列内核参数设置时间。</p>
+</li>
+<li><p>SO_KEEPALIVE 设置socket选项开启保活机制。</p>
+</li>
+</ul>
+<p>此外，我们一般在<strong>应用层</strong>程序实现<strong>定时器、心跳</strong>之类的机制，来关闭长时间没有数据交互的连接。</p>
+<br>
+
+<p><br><br></p>
+<br>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mang959595.github.io/2023/05/11/TCP%E4%B9%8B%E6%A6%82%E5%BF%B5and%E4%B8%89%E6%8F%A1%E5%9B%9B%E6%8C%A5/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/TCP/" rel="tag">TCP</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            TCP之协议机制
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">第五章项目实战</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> FRP
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/123.jpg" alt="b4mang95"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>

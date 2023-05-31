@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-Hans">
+  
+
+    <head>
+      <meta charset="utf-8" />
+        
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Unity入门(一) |  b4mang95</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/images/hexo.png" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      
+<link rel="stylesheet" href="/css/fonts/remixicon.css">
+
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.staticfile.org/pace/1.2.4/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Unity入门-一"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Unity入门(一)
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/" class="article-date">
+  <time datetime="2023-05-26T07:25:06.000Z" itemprop="datePublished">2023-05-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/">游戏开发</a> / <a class="article-category-link" href="/categories/%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91/%E5%AE%A2%E6%88%B7%E7%AB%AF/">客户端</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> Word count:</span>
+            <span class="post-count">1.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> Reading time≈</span>
+            <span class="post-count">6 min</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="Unity新手入门（一）"><a href="#Unity新手入门（一）" class="headerlink" title="Unity新手入门（一）"></a>Unity新手入门（一）</h2><p>资料来源<a target="_blank" rel="noopener" href="https://space.bilibili.com/34412870">擅码网-Monkey的个人空间_哔哩哔哩_bilibili</a></p>
+<h3 id="（1）Unity基础使用"><a href="#（1）Unity基础使用" class="headerlink" title="（1）Unity基础使用"></a>（1）Unity基础使用</h3><p><strong>特点</strong>：开发跨平台，资源商店（含开发插件）</p>
+<p><strong>界面</strong>：</p>
+<ul>
+<li>菜单栏</li>
+<li>状态栏</li>
+<li>操作界面</li>
+</ul>
+<p><strong>项目结构</strong>：</p>
+ <img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524185031458.png" alt="image-20230524185031458" style="zoom:80%;">
+
+<p><strong>Editor</strong> <strong>界面和组织</strong>：</p>
+<ul>
+<li>Project<ul>
+<li>目录文件结构</li>
+</ul>
+</li>
+<li>Hierarchy<ul>
+<li>含有场景内的Gameobj对象</li>
+</ul>
+</li>
+<li>Inspector<ul>
+<li>检查面板</li>
+</ul>
+</li>
+<li>Scene<ul>
+<li>场景视图</li>
+</ul>
+</li>
+</ul>
+<p><strong>场景视图内的操作</strong>：</p>
+<ul>
+<li>几何模型，素材模型</li>
+<li>坐标系（世界坐标系、局部坐标系）</li>
+<li>选择物体按F快速定位，或双击物体</li>
+<li>ALT +鼠标左键旋转、+右键拉远拉近</li>
+<li>光源预渲染失败：需要到lighting设置中generate</li>
+<li>观察模式：透视persp，正交iso</li>
+</ul>
+<h3 id="（2）游戏物体与组件"><a href="#（2）游戏物体与组件" class="headerlink" title="（2）游戏物体与组件"></a>（2）游戏物体与组件</h3><h4 id="游戏物体"><a href="#游戏物体" class="headerlink" title="游戏物体"></a>游戏物体</h4><p>场景中所有物体都是GameObject</p>
+<p>操作：</p>
+<ul>
+<li>F2重命名</li>
+<li>shift+点击首个和末尾的obj可以多选</li>
+<li>ctrl单个选择</li>
+<li>Gizmos菜单Scene界面显示设置</li>
+</ul>
+<h4 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h4><p>inspector窗口</p>
+<p>挂载于GameObject的各种Component</p>
+<h4 id="项目资产管理"><a href="#项目资产管理" class="headerlink" title="项目资产管理"></a>项目资产管理</h4><p>Assets文件夹内容管理</p>
+<p>创建各类二级文件夹</p>
+<h4 id="模型与材质"><a href="#模型与材质" class="headerlink" title="模型与材质"></a>模型与材质</h4><p>模型 Model</p>
+<p>材质 Material</p>
+<p>纹理贴图 Texture</p>
+<p><strong>材质球制作</strong></p>
+<p>贴图与模型之间的中间过渡——材质球</p>
+<ul>
+<li><p>Create material</p>
+</li>
+<li><p>纹理贴图拖到材质的Albedo参数</p>
+<ul>
+<li>Albedo：反照率[贴图]；用于体现模型的纹理，颜色。</li>
+</ul>
+</li>
+<li><p>材质球拖到模型的组件位置</p>
+</li>
+</ul>
+<h4 id="资源复用和预制体"><a href="#资源复用和预制体" class="headerlink" title="资源复用和预制体"></a>资源复用和预制体</h4><p>Prefab</p>
+<p>获取外部资源的Prefab后，放到编辑器内进行二次编辑，然后保存为自己的Prefab</p>
+<p> <img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524194033102.png" alt="image-20230524194033102"></p>
+<p>编辑prefab</p>
+<ul>
+<li>直接编辑文件</li>
+<li>点击Hierarchy中prefab对应的游戏对象的 &gt; icon</li>
+<li>点击对象的Inspector的Open选项</li>
+<li>直接在场景内编辑预制体游戏对象，编辑后点Override-&gt; Apply all</li>
+</ul>
+<p>断开prefab关联</p>
+<ul>
+<li>右键Hierarchy中的游戏对象，选择Prefab-&gt;Unpack</li>
+</ul>
+<h4 id="基础组件"><a href="#基础组件" class="headerlink" title="基础组件"></a>基础组件</h4><h5 id="Transform-组件"><a href="#Transform-组件" class="headerlink" title="Transform 组件"></a>Transform 组件</h5><ul>
+<li>位置</li>
+<li>旋转</li>
+<li>缩放</li>
+</ul>
+<p>位置是相对于世界坐标轴，旋转和缩放是相对于物体自身坐标轴。</p>
+<p>GameObject最基本的组件——Transform。</p>
+<p>Empty object可以用来控制层级关系，是天然的父物体。</p>
+<h5 id="摄像机组件"><a href="#摄像机组件" class="headerlink" title="摄像机组件"></a>摄像机组件</h5><ul>
+<li>视锥体</li>
+<li>选中物体 Align with View（按ctrl+shift+f 快速改变位置 </li>
+<li>第一人称、第三人称、上帝视角、过肩视角…</li>
+</ul>
+<p>常用参数：</p>
+<ul>
+<li>投影 Projection：<ul>
+<li>透视 perspective：可以设置Field of View视野范围FOV</li>
+<li>正交 Orthographic：可以设置 矩形大小Size</li>
+</ul>
+</li>
+<li>裁剪面 Clipping Planes：<ul>
+<li>near，far 控制视锥体的两个面距离摄像机的距离</li>
+</ul>
+</li>
+</ul>
+<p> <img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524201739062.png" alt="image-20230524201739062"></p>
+<h5 id="灯光组件"><a href="#灯光组件" class="headerlink" title="灯光组件"></a>灯光组件</h5><p>类型：</p>
+<ul>
+<li>方向光（太阳）<ul>
+<li><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524202214099.png" alt="image-20230524202214099"></li>
+</ul>
+</li>
+<li>点光源（灯泡）</li>
+<li>聚光灯（探照灯）</li>
+</ul>
+<p>部分属性</p>
+<p> <img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524202327394.png" alt="image-20230524202327394"></p>
+<p> <img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524203010795.png" alt="image-20230524203010795"></p>
+<p>重点：<strong>阴影</strong> 和 <strong>光照模式</strong></p>
+<h4 id="Shader-与-PBR"><a href="#Shader-与-PBR" class="headerlink" title="Shader 与 PBR"></a>Shader 与 PBR</h4><h5 id="Shader"><a href="#Shader" class="headerlink" title="Shader"></a>Shader</h5><p>着色器 Shader，包含如下属性等。 跟材质球是 蛋壳(材质球Material) 和 蛋清蛋黄(着色器Shader) 的关系，即一个负责展示表现效果，一个负责效果的实现</p>
+<p> <img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524203324571.png" alt="image-20230524203324571"></p>
+<p>基本信息</p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524203426130.png" alt="image-20230524203426130"></p>
+<h5 id="PBR"><a href="#PBR" class="headerlink" title="PBR"></a>PBR</h5><p>Physicallly-Based-Rendering 基于物理的渲染</p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524203605166.png" alt="image-20230524203605166"></p>
+<p>工作流程  </p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524204152889.png" alt="image-20230524204152889"></p>
+<h5 id="Unity-标准着色器"><a href="#Unity-标准着色器" class="headerlink" title="Unity 标准着色器"></a>Unity 标准着色器</h5><ul>
+<li>材质球的默认 Shader着色器 为 Standard Shader (Unity内的 PBR 渲染Shader)</li>
+</ul>
+<p>材质球的三种常用效果</p>
+<ul>
+<li>单贴图：将Texture拖到Albedo属性上</li>
+<li>单颜色：直接修改Albedo属性的颜色项</li>
+<li>地面瓷砖效果：<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524234036586.png" alt="image-20230524234036586" style="zoom: 67%;"></li>
+</ul>
+<p>贴图 - 材质球 - Shader - 游戏物体 之间的关系</p>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230524234516928.png" alt="image-20230524234516928" style="zoom:80%;">
+
+
+
+
+
+<h4 id="脚本代码（脚本组件）"><a href="#脚本代码（脚本组件）" class="headerlink" title="脚本代码（脚本组件）"></a>脚本代码（脚本组件）</h4><p>即 C# 脚本代码 </p>
+<ul>
+<li>创建script后要立即重命名，使得脚本名和类名一致。</li>
+<li>往GameObject上挂脚本组件，相当于new一个脚本对象供后续使用。</li>
+</ul>
+ <img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525001709436.png" alt="image-20230525001709436" style="zoom:67%;">
+
+
+
+<p><strong>普通C#项目文件与 Unity C#文件对比</strong></p>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525002444458.png" alt="image-20230525002444458" style="zoom: 67%;">
+
+
+
+
+
+<h5 id="脚本生命周期"><a href="#脚本生命周期" class="headerlink" title="脚本生命周期"></a>脚本生命周期</h5><ul>
+<li><p>C# 控制台项目的脚本类对象生命周期（方法&#x2F;函数）：构造，使用字段、属性、方法，析构</p>
+</li>
+<li><p>继承MonoBehaviour类的脚本类对象的九大生命周期（方法&#x2F;函数）：</p>
+<ol>
+<li>Awake 函数 :</li>
+</ol>
+<p>在加载场景时运行 , 即在游戏开始之前初始化变量或者游戏状态 . 只执行一次</p>
+<ol start="2">
+<li>OnEnable 函数 :</li>
+</ol>
+<p>在激活当前脚本时调用 , 每激活一次就调用一次该方法</p>
+<ol start="3">
+<li>Start 函数 :</li>
+</ol>
+<p>在第一次启动时执行 , 用于游戏对象的初始化 , 在Awake 函数之后执行,只执行一次</p>
+<ol start="4">
+<li><p>Fixed Update : 固定频率调用 , 与硬件无关, 可以在 Edit -&gt; Project Setting -&gt; Time -&gt; Fixed Time Step 修改</p>
+</li>
+<li><p>Update : 几乎每一帧都在调用 , 取决于你的电脑硬件 , 不稳定</p>
+</li>
+<li><p>LateUpdate : 在Update函数之后调用 , 一般用作摄像机跟随</p>
+</li>
+<li><p>OnGUI 函数 : 调用速度是上面的两倍 , 一般用于老版本的 GUI 显示</p>
+</li>
+<li><p>OnDisable 函数 : 和 OnEnable 函数成对出现 , 只要从激活状态变为取消激活状态 , 就会执行一次 (和 OnEnable互斥)</p>
+</li>
+<li><p>OnDestroy 函数 : 当前游戏对象或游戏组件被销毁时执行</p>
+</li>
+</ol>
+</li>
+<li><p>不加访问权限修饰的字段、属性、方法默认为private</p>
+</li>
+</ul>
+<h5 id="获取鼠标键盘操作状态"><a href="#获取鼠标键盘操作状态" class="headerlink" title="获取鼠标键盘操作状态"></a>获取鼠标键盘操作状态</h5><p>时刻检测，在Update里面调用</p>
+<p><strong>鼠标</strong></p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525185943332.png" alt="image-20230525185943332"></p>
+<p>键盘</p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525190200986.png" alt="image-20230525190200986"></p>
+<h5 id="从脚本代码理解游戏对象和组件"><a href="#从脚本代码理解游戏对象和组件" class="headerlink" title="从脚本代码理解游戏对象和组件"></a>从脚本代码理解游戏对象和组件</h5><ul>
+<li><p>值传递：基本类型赋值</p>
+</li>
+<li><p>引用传递：非基本类型赋值，相当于浅拷贝</p>
+</li>
+</ul>
+<p><strong>GameObject 和 gameObject</strong></p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525191849546.png" alt="image-20230525191849546"></p>
+<p><strong>命名方法</strong></p>
+<ul>
+<li>小驼峰命名：首个单词小写，其余单词首字母大写</li>
+<li>帕斯卡命名（大驼峰）：每个单词首字母都大写</li>
+</ul>
+<p><strong>持有对象关系</strong></p>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525193241066.png" alt="image-20230525193241066" style="zoom:80%;">
+
+<ul>
+<li>持有<strong>自身游戏对象</strong>：使用gameObject属性获取</li>
+<li>持有<strong>其他游戏物体对象</strong><ul>
+<li><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525192845788.png" alt="image-20230525192845788" style="zoom: 67%;"></li>
+<li>可以用成员变量来存放引用，延长使用周期<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525193100022.png" alt="image-20230525193100022" style="zoom:67%;"></li>
+</ul>
+</li>
+<li>持有<strong>自身组件对象</strong><ul>
+<li><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525193218416.png" alt="image-20230525193218416" style="zoom:67%;"></li>
+</ul>
+</li>
+<li>持有其他游戏对象的组件对象<ul>
+<li>结合前面“持有<strong>其他游戏物体对象</strong>”和“持有<strong>自身组件对象</strong>”</li>
+</ul>
+</li>
+</ul>
+<h4 id="Transform组件的代码控制"><a href="#Transform组件的代码控制" class="headerlink" title="Transform组件的代码控制"></a>Transform组件的代码控制</h4><h5 id="移动物体位置"><a href="#移动物体位置" class="headerlink" title="移动物体位置"></a>移动物体位置</h5><ul>
+<li>Translate()方法<ul>
+<li><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525200237435.png" alt="image-20230525200237435" style="zoom:80%;"></li>
+</ul>
+</li>
+<li>结合键盘输入，可以设置四方向移动</li>
+</ul>
+<h3 id="（3）物理系统"><a href="#（3）物理系统" class="headerlink" title="（3）物理系统"></a>（3）物理系统</h3><ul>
+<li>三个最基础的系统：<strong>物理、动画、UI</strong></li>
+<li>此外还有<strong>输入控制、特效、导航、音效、渲染、热更新系统</strong>等</li>
+</ul>
+<p>Unity物理系统：模拟了 <strong>重力</strong> 和 <strong>碰撞</strong></p>
+<ul>
+<li><p>分有 3D物理（基于PhysX引擎） 和 2D物理（基于Box2D引擎）</p>
+</li>
+<li><p>主要有 刚体组件（重力） 和 碰撞器组件（碰撞）</p>
+</li>
+</ul>
+<h4 id="刚体"><a href="#刚体" class="headerlink" title="刚体"></a>刚体</h4><p>刚体组件的参数：</p>
+<ul>
+<li>Mass 质量</li>
+<li>Drag 阻力</li>
+<li>Angular Drag 角阻力</li>
+<li>Use Gravity 重力开关</li>
+<li>Is Kinematic 运动学开关</li>
+</ul>
+<p>移动刚体组件的位置</p>
+<ul>
+<li>MovePosition(Vector3)方法<ul>
+<li><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525202623202.png" alt="image-20230525202623202" style="zoom:67%;"></li>
+</ul>
+</li>
+</ul>
+<p>刚体组件添加动力</p>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525203319825.png" alt="image-20230525203319825" style="zoom:67%;">
+
+
+
+<p><strong>固定更新</strong></p>
+<p>Update 和 FixedUpdate</p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525204535359.png" alt="image-20230525204535359"></p>
+<p><strong>控制组件的启用与否</strong></p>
+<ul>
+<li>Inspector界面勾选</li>
+<li>代码控制：<ul>
+<li>GameObject<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525204925251.png" alt="image-20230525204925251" style="zoom:80%;"></li>
+<li>Component<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525205107297.png" alt="image-20230525205107297" style="zoom:80%;"></li>
+</ul>
+</li>
+</ul>
+<p><strong>轴向约束控制</strong></p>
+<p>Constraints约束</p>
+<ul>
+<li>position和rotation</li>
+<li>xyz三个轴</li>
+</ul>
+<h4 id="（非物理组件）网格-Mesh"><a href="#（非物理组件）网格-Mesh" class="headerlink" title="（非物理组件）网格 Mesh"></a>（非物理组件）网格 Mesh</h4><p>网格：三维模型的数据文件，美术完成三维建模就是完成模型的网格制作。三维模型由点线面组成。</p>
+<ul>
+<li><p><strong>Mesh Filter组件</strong></p>
+<ul>
+<li>设置网格模型（文件）</li>
+<li><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525205549024.png" alt="image-20230525205549024" style="zoom:80%;"></li>
+</ul>
+</li>
+<li><p><strong>Mesh Renderer组件</strong></p>
+<ul>
+<li>设置网格模型的渲染</li>
+<li>核心参数<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525205947620.png" alt="image-20230525205947620" style="zoom:80%;"></li>
+</ul>
+</li>
+</ul>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525210116122.png" alt="image-20230525210116122" style="zoom:80%;">
+
+
+
+
+
+<h4 id="碰撞器"><a href="#碰撞器" class="headerlink" title="碰撞器"></a>碰撞器</h4><p>和刚体组件配合使用</p>
+<ul>
+<li>Box、Sphere、Mesh、Capsule四种常用collider模型</li>
+</ul>
+<p>参数：</p>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525211319012.png" alt="image-20230525211319012" style="zoom:80%;">
+
+
+
+<h5 id="碰撞检测"><a href="#碰撞检测" class="headerlink" title="碰撞检测"></a>碰撞检测</h5><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230525212908508.png" alt="image-20230525212908508" style="zoom:80%;">
+
+<ul>
+<li>collision Detection 参数设置碰撞检测频率</li>
+<li>gameObject.Collision 只读属性，返回物理碰撞到的游戏物体</li>
+</ul>
+<h5 id="触发检测"><a href="#触发检测" class="headerlink" title="触发检测"></a>触发检测</h5><p>Collider组件的 Is Trigger 选项</p>
+<ul>
+<li>勾选后，不会产生物理碰撞，而是进行触发检测</li>
+<li>触发的三种状态跟碰撞检测相同</li>
+</ul>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230526141317266.png" alt="image-20230526141317266" style="zoom:80%;">
+
+<ul>
+<li>gameObject.Collider 只读属性，返回物理触发到的游戏物体</li>
+</ul>
+<h3 id="（4）Transfom组件控制"><a href="#（4）Transfom组件控制" class="headerlink" title="（4）Transfom组件控制"></a>（4）Transfom组件控制</h3><h4 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h4><ul>
+<li>欧拉角<ul>
+<li>存在万向锁</li>
+</ul>
+</li>
+<li>四元数<ul>
+<li>无法直观地表示旋转角度</li>
+</ul>
+</li>
+</ul>
+<p>Unity的使用</p>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230526143606371.png" alt="image-20230526143606371" style="zoom:80%;">
+
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230526143748810.png" alt="image-20230526143748810" style="zoom:80%;">
+
+
+
+<p><strong>游戏物体持续旋转</strong></p>
+<img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230526143913425.png" alt="image-20230526143913425" style="zoom:80%;">
+
+
+
+<p><strong>中心点的改变</strong></p>
+<ul>
+<li>创建空子物体，移动到特定位置</li>
+<li>空子物体改为同级空物体</li>
+<li>将原物体作为空物体的子物体</li>
+</ul>
+<p>Scene界面的设置</p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230526145520652.png" alt="image-20230526145520652"></p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230526145531225.png" alt="image-20230526145531225"></p>
+<h3 id="Unity协程相关"><a href="#Unity协程相关" class="headerlink" title="Unity协程相关"></a>Unity协程相关</h3><p>切换时机</p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/image-20230526151919486.png" alt="image-20230526151919486"></p>
+<p><img src="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzMxNDgwODM5,size_16,color_FFFFFF,t_70.png" alt="img"></p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://mang959595.github.io/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%B8%80/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Unity/" rel="tag">Unity</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/05/26/Unity%E5%85%A5%E9%97%A8-%E4%BA%8C/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Unity入门(二)
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2023/05/11/%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8UDP%E5%81%9A%E5%88%B0TCP%E7%9A%84%E6%95%88%E6%9E%9C/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">如何使用UDP做到TCP的效果</div>
+      </a>
+    
+  </nav>
+
+  
+   
+    
+    <script src="https://cdn.staticfile.org/twikoo/1.4.18/twikoo.all.min.js"></script>
+    <div id="twikoo" class="twikoo"></div>
+    <script>
+        twikoo.init({
+            envId: ""
+        })
+    </script>
+ 
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> FRP
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>Visitors:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>Views:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>    
+    </main>
+    <div class="float_btns">
+      <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+    </div>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/123.jpg" alt="b4mang95"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="Search">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.staticfile.org/jquery-modal/0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.staticfile.org/justifiedGallery/3.8.1/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.staticfile.org/photoswipe/4.1.3/default-skin/default-skin.min.css">
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe.min.js"></script>
+<script src="https://cdn.staticfile.org/photoswipe/4.1.3/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.staticfile.org/clipboard.js/2.0.10/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
