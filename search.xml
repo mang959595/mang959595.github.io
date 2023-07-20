@@ -5221,4 +5221,100 @@
         <tag>Unity</tag>
       </tags>
   </entry>
+  <entry>
+    <title>初探图形流水线（渲染管线）</title>
+    <url>/2023/06/01/%E5%88%9D%E6%8E%A2%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%88%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="什么是图形流水线"><a href="#什么是图形流水线" class="headerlink" title="什么是图形流水线"></a>什么是图形流水线</h1><p>链接：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/137780634">猴子也能看懂的渲染管线（Render Pipeline） - 知乎 (zhihu.com)</a></p>
+<p>一图流：</p>
+<img src="/2023/06/01/%E5%88%9D%E6%8E%A2%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%88%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%EF%BC%89/image-20230601195513975.png" alt="image-20230601195513975" style="zoom:80%;">
+
+
+
+<img src="/2023/06/01/%E5%88%9D%E6%8E%A2%E5%9B%BE%E5%BD%A2%E5%A4%84%E7%90%86%E6%B5%81%E6%B0%B4%E7%BA%BF%EF%BC%88%E6%B8%B2%E6%9F%93%E7%AE%A1%E7%BA%BF%EF%BC%89/image-20230602162311045.png" alt="image-20230602162311045" style="zoom:80%;">
+
+
+
+<p>相关概念：</p>
+<ul>
+<li>显存<ul>
+<li>GPU显存是一种高速缓存，用于存储图形处理器需要的数据。GPU显存是专门为图形处理器设计的，因此它具有比CPU内存更高的带宽和更低的延迟。GPU显存通常用于存储<strong>纹理、顶点数据、渲染目标和其他与图形相关</strong>的数据。</li>
+</ul>
+</li>
+<li>渲染管线<ul>
+<li>渲染管线是一种将<strong>3D场景转换为2D图像</strong>的过程，它包括<strong>几何处理、光照计算、纹理映射等多个阶段</strong>。这些阶段可以被分为<strong>顶点处理</strong>、<strong>光栅化</strong>和<strong>像素处理</strong>三个部分。</li>
+</ul>
+</li>
+<li>渲染图元<ul>
+<li>渲染图元是指在图形处理流水线中的基本图形单元，例如点、线和三角形。在渲染过程中，这些基本图形单元被组合成更复杂的几何体，例如多边形和曲面。这些几何体可以被进一步处理，例如进行光照计算、纹理映射等操作。最终，这些几何体被转换为像素，并在屏幕上显示出来。</li>
+</ul>
+</li>
+<li>顶点<ul>
+<li>在图形处理流水线中，顶点是指几何体的基本构成单元。在三维图形中，顶点通常由三个浮点数表示，分别表示顶点的x、y和z坐标。在渲染过程中，顶点被组合成更复杂的几何体，例如多边形和曲面。这些几何体可以被进一步处理，例如进行光照计算、纹理映射等操作。最终，这些几何体被转换为像素，并在屏幕上显示出来。</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>图形学</category>
+      </categories>
+      <tags>
+        <tag>图形学, 渲染管线</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>初探GPU运作方式及特点</title>
+    <url>/2023/06/01/%E5%88%9D%E6%8E%A2GPU%E8%BF%90%E4%BD%9C%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%89%B9%E7%82%B9/</url>
+    <content><![CDATA[<h1 id="GPU的特点以及与CPU有何不同"><a href="#GPU的特点以及与CPU有何不同" class="headerlink" title="GPU的特点以及与CPU有何不同"></a>GPU的特点以及与CPU有何不同</h1><h2 id="New-Bing-的回答"><a href="#New-Bing-的回答" class="headerlink" title="New Bing 的回答"></a>New Bing 的回答</h2><p>GPU和CPU的区别在于它们的设计目标不同。</p>
+<ul>
+<li>CPU需要<strong>很强的通用性</strong>来处理<strong>各种不同的数据类型</strong>，同时又要逻辑判断又会引入大量的<strong>分支跳转和中断</strong>的处理。这些都使得CPU的内部结构异常复杂。</li>
+<li>而GPU面对的则是<strong>类型高度统一的</strong>、<strong>相互无依赖的</strong>大规模数据和<strong>不需要被打断的</strong>纯净的计算环境。</li>
+<li>于是CPU和GPU就呈现出非常不同的架构。GPU采用了<u>数量众多的计算单元和超长的流水线</u>，但只有<u>非常简单的控制逻辑</u>并<u>省去了Cache</u><a href="https://blog.csdn.net/shuiyixin/article/details/82915378">1</a>。</li>
+</ul>
+<p>简单来说，&#96;GPU是专门为PC或者嵌入式设备进行<strong>图像运算工作</strong>的微处理器，而CPU则是一台计算机的<strong>控制和运算核心</strong>，它主要功能便是解释计算机发出的指令以及处理电脑软件中的大数据<a href="https://zhidao.baidu.com/question/422288800.html">2</a>。</p>
+<p>相关链接：</p>
+<p><a href="https://zhuanlan.zhihu.com/p/592006016">聊聊GPU与CPU的区别 - 知乎 (zhihu.com)</a></p>
+<h2 id="架构对比"><a href="#架构对比" class="headerlink" title="架构对比"></a>架构对比</h2><p>CPU and GPU</p>
+<p> <img src="/2023/06/01/%E5%88%9D%E6%8E%A2GPU%E8%BF%90%E4%BD%9C%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%89%B9%E7%82%B9/image-20230601192543579.png" alt="image-20230601192543579" style="zoom: 55%;"> <img src="/2023/06/01/%E5%88%9D%E6%8E%A2GPU%E8%BF%90%E4%BD%9C%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%89%B9%E7%82%B9/image-20230601192628892.png" alt="image-20230601192628892" style="zoom: 60%;"></p>
+<img src="/2023/06/01/%E5%88%9D%E6%8E%A2GPU%E8%BF%90%E4%BD%9C%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%89%B9%E7%82%B9/image-20230601194723789.png" alt="image-20230601194723789" style="zoom:67%;"> 
+
+<ul>
+<li>CPU 基于低延时的设计：</li>
+<li>CPU有强大的ALU（算术运算单元）,它可以在很少的时钟周期内完成算术计算。<ul>
+<li>当今的CPU可以达到64bit 双精度。执行双精度浮点源算的加法和乘法只需要1～3个时钟周期。CPU的时钟周期的频率是非常高的，达到1.532～3gigahertz(千兆HZ, 10的9次方).大的缓存也可以降低延时。保存很多的数据放在缓存里面，当需要访问的这些数据，只要在之前访问过的，如今直接在缓存里面取即可。</li>
+<li>复杂的逻辑控制单元。当程序含有多个分支的时候，它通过提供分支预测的能力来降低延时。数据转发。 当一些指令依赖前面的指令结果时，数据转发的逻辑控制单元决定这些指令在pipeline中的位置并且尽可能快的转发一个指令的结果给后续的指令。这些动作需要很多的对比电路单元和转发电路单元。</li>
+</ul>
+</li>
+</ul>
+ <img src="/2023/06/01/%E5%88%9D%E6%8E%A2GPU%E8%BF%90%E4%BD%9C%E6%96%B9%E5%BC%8F%E5%8F%8A%E7%89%B9%E7%82%B9/image-20230601194746798.png" alt="image-20230601194746798" style="zoom:67%;">
+
+<ul>
+<li>GPU是基于大的吞吐量设计。<ul>
+<li>GPU的特点是有很多的ALU和很少的cache. 缓存的目的不是保存后面需要访问的数据的，这点和CPU不同，而是为thread提高服务的。如果有很多线程需要访问同一个相同的数据，缓存会合并这些访问，然后再去访问dram（因为需要访问的数据保存在dram中而不是cache里面），获取数据后cache会转发这个数据给对应的线程，这个时候是数据转发的角色。但是由于需要访问dram，自然会带来延时的问题。</li>
+</ul>
+</li>
+<li>GPU的控制单元（左边黄色区域块）可以把多个的访问合并成少的访问。<ul>
+<li>GPU的虽然有dram延时，却有非常多的ALU和非常多的thread. 为啦平衡内存延时的问题，我们可以中充分利用多的ALU的特性达到一个非常大的吞吐量的效果。尽可能多的分配多的Threads.通常来看GPU ALU会有非常重的pipeline就是因为这样。所以与CPU擅长逻辑控制，串行的运算。和通用类型数据运算不同，GPU擅长的是大规模并发计算，这也正是密码破解等所需要的。所以GPU除了图像处理，也越来越多的参与到计算当中来。</li>
+</ul>
+</li>
+</ul>
+<h3 id="GPU的由来"><a href="#GPU的由来" class="headerlink" title="GPU的由来"></a><strong>GPU的由来</strong></h3><p>计算机对图像进行实时渲染， 一般需要经过<strong>图形流水线</strong>的过程：<code>顶点处理-&gt;图元处理-&gt;栅格化-&gt;片段处理-&gt;像素操作</code>, 期间需要大量的计算，比如 640×480的分辨率的屏幕，为了显示游戏画面，大概有30万个像素需要渲染 ，为了让人眼看到画面动起来，其不像电影一样只需要24帧，至少需要60帧，即每秒我们需要完成 1800 万次单个像素的渲染，每个像素都需要经过<strong>图形流水线过程</strong>，需要耗费大量资源。</p>
+<p>由于图像渲染的流程是固定的，通过硬件来解决这个问题，那就设计一个不需要考虑CPU的流水线停顿、乱序执行、 分支预测、内存管理、IO等等的各类问题的芯片，这其实就是GPU。</p>
+<h3 id="GPU优化设计思路"><a href="#GPU优化设计思路" class="headerlink" title="GPU优化设计思路"></a>GPU优化设计思路</h3><p>现代的 GPU 为了图形渲染、深度学习上有相较于CPU更强大的性能，做出来哪些设计上的优化：</p>
+<ol>
+<li>由于GPU不需要考虑CPU的流水线停顿、乱序执行、分支预测等等的各类问题，只需要流式计算的功能，所以内部许多CPU的电路是不需要的，这样就节约了大量空间</li>
+<li>由于GPU相比CPU电路就简单多了，这样就可以塞入更多的电路，即更多的”核”，他们都是<strong>并行</strong>的，能够极大提升性能</li>
+<li>除了塞更多的核，为了更大程度提升GPU的性能，还采用 <strong>SIMT</strong> 技术，可以把多条数据，交给不同的线程去处理。类似于CPU中，SIMD技术，但是其只能一次性取出了固定长度的多个数据，放到寄存器里面，用一个指令去执行</li>
+<li>GPU同样采用<strong>超线程</strong>技术，当任务计算遇到停顿的时候，调度一些别的计算任务给当前的 ALU ，这样就需要保证核心中提供更多的执行上下文给ALU算数计算单元使用</li>
+</ol>
+<h3 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h3><p>CPU和GPU因为最初用来处理的任务就不同，所以设计上有不小的区别，而某些任务和GPU最初用来解决的问题比较相似，所以用GPU来算了，GPU的运算速度取决于雇了多少小学生，CPU的运算速度取决于请了多么厉害的教授，教授处理复杂任务的能力是碾压小学生的，但是对于没那么复杂的任务，还是顶不住人多。</p>
+<p>当然现在的GPU也能做一些稍微复杂的工作了，相当于升级成初中生高中生的水平，但还需要CPU来把数据喂到嘴边才能开始干活，究竟还是靠CPU来管的。</p>
+]]></content>
+      <categories>
+        <category>图形学</category>
+      </categories>
+      <tags>
+        <tag>GPU, 图形学</tag>
+      </tags>
+  </entry>
 </search>
