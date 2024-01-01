@@ -9,11 +9,11 @@ categories:
 
 # 3D RPG Demo回顾
 
-
-
 ## 1.创建项目
 
 包含 **项目创建，渲染管线设置，资源导入，资源材质渲染升级**
+
+<!--more-->
 
 - 新建3D项目
 - Window->PackageManager(Packages/ Unity Registry)中下载和导入 **Universal RP** 通用渲染管线

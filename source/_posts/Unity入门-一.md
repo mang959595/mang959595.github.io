@@ -21,9 +21,11 @@ categories:
 - 状态栏
 - 操作界面
 
+<!--more-->
+
 **项目结构**：
 
- <img src="Unity入门-一/image-20230524185031458.png" alt="image-20230524185031458" style="zoom:80%;" />
+<img src="Unity入门-一/image-20230524185031458.png" alt="image-20230524185031458" style="zoom:80%;" />
 
 **Editor** **界面和组织**：
 

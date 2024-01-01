@@ -23,6 +23,8 @@ categories:
 
 #### C/S结构
 
+<!--more-->
+
 **简介**
 
 - 服务器 - 客户机，即 Client - Server（C/S）结构。**C/S 结构通常采取两层结构。服务器负责数据的管理，客户机负责完成与用户的交互任务。**客户机是因特网上访问别人信息的机器，服务器则是提供信息供人访问的计算机。
@@ -3044,8 +3046,8 @@ typedef uint32_t in_addr_t;
   ```
 
 5. 通信
-  接收数据：read/recv
-  发送数据：write/send
+    接收数据：read/recv
+    发送数据：write/send
 
 6. 关闭连接
 close();
@@ -3078,8 +3080,8 @@ close();
   ```
 
 4. 通信
-  接收数据：read/recv
-  发送数据：write/send
+    接收数据：read/recv
+    发送数据：write/send
 
 5. 关闭连接
 close();
