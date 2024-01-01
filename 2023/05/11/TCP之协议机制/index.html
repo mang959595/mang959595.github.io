@@ -112,6 +112,8 @@
 <p>主要讨论TCP实现可靠的信息传输的几种机制：<strong>重传机制</strong>、<strong>流量控制（滑动窗口）</strong>、<strong>拥塞控制</strong></p>
 <p>此外还有<strong>粘包</strong>问题<strong>拆包</strong>处理</p>
 <hr>
+<span id="more"></span>
+
 <h2 id="重传机制"><a href="#重传机制" class="headerlink" title="重传机制"></a>重传机制</h2><h3 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h3><p><strong>数据的发送方</strong>，在发送数据后，以<strong>收到ack响应</strong>作为数据成功发送的标志。</p>
 <p>在发送数据时会设置一个<strong>定时器</strong>，若在限定时间内没有收到ack响应，说明<u>发送的数据丢失</u>（或<u>ack丢失</u>），需要<strong>重传</strong>。</p>
 <blockquote>
@@ -383,7 +385,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2015-2024
+        2022-2024
         <i class="ri-heart-fill heart_icon"></i> FRP
       </li>
     </ul>
@@ -707,7 +709,9 @@
 </script>
  
 <!-- CanvasBackground -->
-
+ 
+<script src="/js/dz.js"></script>
+ 
 <script>
   if (window.mermaid) {
     mermaid.initialize({ theme: "forest" });

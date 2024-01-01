@@ -115,7 +115,9 @@
 
 <h2 id="4-1-计算机网络相关知识"><a href="#4-1-计算机网络相关知识" class="headerlink" title="4.1 计算机网络相关知识"></a>4.1 计算机网络相关知识</h2><br>
 
-<h3 id="4-1-1-网络结构模式"><a href="#4-1-1-网络结构模式" class="headerlink" title="4.1.1 网络结构模式"></a>4.1.1 网络结构模式</h3><h4 id="C-x2F-S结构"><a href="#C-x2F-S结构" class="headerlink" title="C&#x2F;S结构"></a>C&#x2F;S结构</h4><p><strong>简介</strong></p>
+<h3 id="4-1-1-网络结构模式"><a href="#4-1-1-网络结构模式" class="headerlink" title="4.1.1 网络结构模式"></a>4.1.1 网络结构模式</h3><h4 id="C-x2F-S结构"><a href="#C-x2F-S结构" class="headerlink" title="C&#x2F;S结构"></a>C&#x2F;S结构</h4><span id="more"></span>
+
+<p><strong>简介</strong></p>
 <ul>
 <li>服务器 - 客户机，即 Client - Server（C&#x2F;S）结构。<strong>C&#x2F;S 结构通常采取两层结构。服务器负责数据的管理，客户机负责完成与用户的交互任务。</strong>客户机是因特网上访问别人信息的机器，服务器则是提供信息供人访问的计算机。</li>
 <li><strong>客户机通过局域网与服务器相连，接受用户的请求，并通过网络向服务器提出请求，对数据库进行操作。服务器接受客户机的请求，将数据提交给客户机，客户机将数据进行计算并将结果呈现给用户。</strong>服务器还要提供完善安全保护及对数据完整性的处理等操作，并允许多个客户机同时访问服务器，这就对服务器的硬件处理数据能力提出了很高的要求。</li>
@@ -1454,7 +1456,7 @@
   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span> <span class="title">cliaddr</span>;</span></span><br><span class="line"><span class="type">int</span> cfd = accept(lfd, &amp;cliaddr, len);</span><br></pre></td></tr></table></figure>
 
 <ol start="5">
-<li><p>通信<br>  接收数据：read&#x2F;recv<br>  发送数据：write&#x2F;send</p>
+<li><p>通信<br> 接收数据：read&#x2F;recv<br> 发送数据：write&#x2F;send</p>
 </li>
 <li><p>关闭连接<br>close();</p>
 </li>
@@ -1478,7 +1480,7 @@
   <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_un</span> <span class="title">serveraddr</span>;</span></span><br><span class="line"></span><br><span class="line">connect(fd, &amp;serveraddr, <span class="keyword">sizeof</span>(serveraddr));</span><br></pre></td></tr></table></figure>
 
 <ol start="4">
-<li><p>通信<br>  接收数据：read&#x2F;recv<br>  发送数据：write&#x2F;send</p>
+<li><p>通信<br> 接收数据：read&#x2F;recv<br> 发送数据：write&#x2F;send</p>
 </li>
 <li><p>关闭连接<br>close();</p>
 </li>
@@ -1613,7 +1615,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2015-2024
+        2022-2024
         <i class="ri-heart-fill heart_icon"></i> FRP
       </li>
     </ul>
@@ -1937,7 +1939,9 @@
 </script>
  
 <!-- CanvasBackground -->
-
+ 
+<script src="/js/dz.js"></script>
+ 
 <script>
   if (window.mermaid) {
     mermaid.initialize({ theme: "forest" });
