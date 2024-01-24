@@ -162,194 +162,6 @@
       </tags>
   </entry>
   <entry>
-    <title>TCP之协议机制</title>
-    <url>/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h1 id="TCP之协议机制"><a href="#TCP之协议机制" class="headerlink" title="TCP之协议机制"></a>TCP之协议机制</h1><hr>
-<p>主要讨论TCP实现可靠的信息传输的几种机制：<strong>重传机制</strong>、<strong>流量控制（滑动窗口）</strong>、<strong>拥塞控制</strong></p>
-<p>此外还有<strong>粘包</strong>问题<strong>拆包</strong>处理</p>
-<hr>
-<span id="more"></span>
-
-<h2 id="重传机制"><a href="#重传机制" class="headerlink" title="重传机制"></a>重传机制</h2><h3 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h3><p><strong>数据的发送方</strong>，在发送数据后，以<strong>收到ack响应</strong>作为数据成功发送的标志。</p>
-<p>在发送数据时会设置一个<strong>定时器</strong>，若在限定时间内没有收到ack响应，说明<u>发送的数据丢失</u>（或<u>ack丢失</u>），需要<strong>重传</strong>。</p>
-<blockquote>
-<p>RTT 和 RTO</p>
-<ul>
-<li><strong>RTT</strong>，Round-Trip Time 往返时延，即从发送数据到收到ack的时间大小。</li>
-<li><strong>RTO</strong>，Restransmission Timeout 超时重传时间，超时定时器设置。</li>
-</ul>
-<p><strong>RTO</strong> 应该设置为略大于 <strong>RTT</strong> 的大小。并且根据网络实际情况，RTT和RTO都是动态变化的。</p>
-</blockquote>
-<h3 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h3><h4 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h4><p>不依靠<strong>时间</strong>来判断是否需要重传，而是按<strong>收到的ack</strong>判断。减少了判定重传所需的时间。</p>
-<ul>
-<li><p>发送方发送的数据包seq&#x3D;2丢失了，且后续还有成功发送的数据包</p>
-</li>
-<li><p>此时接收方没有收到seq&#x3D;2，于是在此后都会回应ack&#x3D;2；</p>
-</li>
-<li><p>发送方收到几次相同的ack&#x3D;2，说明seq&#x3D;2丢失了，于是触发了重传。</p>
-</li>
-</ul>
-<img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230511225957231.png" alt="image-20230511225957231" style="zoom:80%;">
-
-
-
-<p>这里会有一个问题：如何确定需要重传的内容（除了重传ack&#x3D;2对应的包，<strong>是否还需要重传后续所有的包</strong>）</p>
-<h4 id="SACK-选择性确认"><a href="#SACK-选择性确认" class="headerlink" title="SACK 选择性确认"></a>SACK 选择性确认</h4><p><strong>通信双方</strong>需要在TCP头部选项字段里添加<strong>SACK选项</strong>。</p>
-<p>情况</p>
-<ul>
-<li>发送方发送的数据丢失</li>
-</ul>
-<p>ack数据包中会有 记录<strong>已接收的数据情况</strong>的内容，于是发送方可以根据情况来选择要重发的数据包。</p>
-<ul>
-<li>接收方发现收到的数据seq非目标序列号时，会回发原来的 ack，但会使用 sack 记录当前的接收情况。</li>
-<li>这种情况下 ack 会比 sack 小</li>
-</ul>
-<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230511233550529.png" alt="image-20230511233550529"></p>
-<p><strong>Duplicate SACK 重复选择性确认</strong></p>
-<p>也即D-SACK，接收方通过记录<strong>重复接收的数据</strong>，让发送方明确数据是否丢失。</p>
-<p>情况：</p>
-<ul>
-<li>ack丢失</li>
-<li>网络延时</li>
-</ul>
-<p>ack 会比 sack 大</p>
-<p>作用：</p>
-<ul>
-<li>可以让「发送方」知道，是发出去的包丢了，还是接收方回应的 ACK 包丢了;</li>
-<li>可以知道是不是「发送方」的数据包被网络延迟了;</li>
-<li>可以知道网络中是不是把「发送方」的数据包给复制了;</li>
-</ul>
-<h2 id="流量控制-滑动窗口"><a href="#流量控制-滑动窗口" class="headerlink" title="流量控制-滑动窗口"></a>流量控制-滑动窗口</h2><h4 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h4><p>解决的问题：</p>
-<ul>
-<li>每发送一份数据，都要等到收到ack之后才发送下一份数据。</li>
-<li>效率低</li>
-</ul>
-<p>使用的方法：</p>
-<ul>
-<li>发送窗口的实现实际上是操作系统开辟的一个<strong>缓存空间</strong>，发送方主机在等到确认应答返回之前，必须<strong>在缓冲区中保留已发送的数据</strong>。如果按期收到确认应答（根据<strong>最新的ack</strong>即可，<strong>累计确认</strong>），此时数据就可以从缓存区清除。</li>
-<li><strong>TCP头部</strong>中的<strong>window</strong>大小字段，用来表示接收方<strong>接收窗口</strong>的空闲空间大小。发送方可以根据接受方发来的ack中的window字段来调整发送的数据量。</li>
-<li>发送方的<strong>发送窗口</strong><br><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512000432964.png" alt="image-20230512000432964"><ul>
-<li>需要记录 1.<strong>窗口起始地址</strong> 2.<strong>下一个可发送字节的地址</strong> 3.<strong>窗口末尾下一个字节的地址</strong>（起始地址+窗口大小的偏移）</li>
-</ul>
-</li>
-<li>接收方的<strong>接收窗口</strong><br><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512000733074.png" alt="image-20230512000733074"><ul>
-<li>需要记录 1.<strong>窗口起始地址</strong> 2.<strong>期望的下一个字节的地址</strong> 3.<strong>窗口末尾下一个字节的地址</strong></li>
-<li>接收窗口中的数据在<strong>接收方回送ack且应用层提取之后</strong>就可以移除并更新窗口</li>
-</ul>
-</li>
-</ul>
-<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><p>解决的问题：</p>
-<ul>
-<li>发送方不能无脑的发数据给接收方，要考虑接收方处理能力。</li>
-<li>如果一直无脑的发数据给对方，但对方处理不过来，那么就会导致触发重发机制，从而导致网络流量的无端的浪费。</li>
-</ul>
-<p>解决的方法：</p>
-<ul>
-<li>设置滑动窗口</li>
-<li>动态调整滑动窗口大小（窗口大小代表着缓冲区情况）</li>
-</ul>
-<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512001914792.png" alt="image-20230512001914792"></p>
-<p>注意：</p>
-<ul>
-<li>如果发生了先减少缓冲区内存，再收缩窗口，就会出现丢包的现象。</li>
-<li>为了防止这种情况发生，TCP 规定是<strong>不允许同时减少缓存又收缩窗口</strong>的，而是采用<strong>先收缩窗口</strong>，过段时间<strong>再减少缓存</strong>，这样就可以避免了丢包情况</li>
-</ul>
-<h4 id="窗口关闭（大小为0）"><a href="#窗口关闭（大小为0）" class="headerlink" title="窗口关闭（大小为0）"></a>窗口关闭（大小为0）</h4><p>窗口关闭后潜在的死锁问题（后面开启窗口的ack包丢失所导致）</p>
-<img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512002308803.png" alt="image-20230512002308803" style="zoom:80%;">
-
-<ul>
-<li>为了解决这个问题，TCP 为每个连接设有一个持续定时器，<strong>只要 TCP 连接一方收到对方的零窗口通知，就启动持续计时器。</strong></li>
-<li>如果持续计时器超时，就会发送<strong>窗口探测 ( Window probe ) 报文</strong>，而对方在确认这个探测报文时，给出自己现在的接收窗口大小。</li>
-<li>若探测成功则继续发送数据，否则每次探测会更新计时器，到达上限则会使用RST断开连接。</li>
-</ul>
-<h4 id="糊涂窗口综合症（小额数据发送）"><a href="#糊涂窗口综合症（小额数据发送）" class="headerlink" title="糊涂窗口综合症（小额数据发送）"></a>糊涂窗口综合症（小额数据发送）</h4><p>情况：</p>
-<ul>
-<li>接收方繁忙时处理数据效率很低，导致接收窗口很小，使得发送方的发送窗口也很小</li>
-<li>每次接收方处理一点数据就腾出几个字节的窗口空间，并告诉发送方。而发送方立即发送几个字节的数据。（TCP头部就40多字节了，因此效率很低）</li>
-</ul>
-<p>解决方法：</p>
-<ul>
-<li><p>接收方：当接收方窗口小于某个大小（MSS，1&#x2F;2缓冲区大小）时，统统当作 <strong>0</strong> 告诉发送方，不让发送方发数据。</p>
-</li>
-<li><p>发送方：<strong>Nagle</strong> 算法，<strong>延迟发送</strong>，满足下面<strong>任意一个</strong>条件才发送，否则把要发的数据屯着。</p>
-<ul>
-<li>条件一：要等到窗口大小 &gt;&#x3D; <code>MSS</code> 并且 数据大小 &gt;&#x3D; <code>MSS</code>；</li>
-<li>条件二：收到之前发送数据的 <code>ack</code> 回包；</li>
-</ul>
-<blockquote>
-<p>如果对于一些需要小数据包交互的场景的程序，比如，telnet 或 ssh 这样的交互性比较强的程序，则需要关闭 Nagle 算法。</p>
-<p>setsockopt TCP_NODELAY</p>
-</blockquote>
-</li>
-</ul>
-<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><p>流量控制只是对双方的发送和接收能力进行协调配合，对于<strong>网络情况</strong>的控制则需要<strong>拥塞控制</strong>机制来做到。</p>
-<p>解决的问题：</p>
-<ul>
-<li>网络出现拥堵，会触发重传机制，如果不做限制，一直重传下去，则会导致网络情况越来越糟。</li>
-<li>形成恶性循环。</li>
-</ul>
-<p>解决方法：</p>
-<ul>
-<li>TCP被设计成无私的协议，当发现网络发送拥堵时，会先减少自己发送的数据量</li>
-<li>采用一个变量“ <strong>拥塞窗口</strong> <strong>cwnd</strong> ”实现拥塞控制<ul>
-<li>只要网络中没有出现拥塞，<code>cwnd</code> 就会增大；</li>
-<li>但网络中出现了拥塞，<code>cwnd</code> 就减少；</li>
-</ul>
-</li>
-<li>发送窗口大小 <strong>swnd</strong> &#x3D; min(<strong>cwnd</strong>, <strong>rwnd</strong>)</li>
-</ul>
-<p>发生<strong>超时重传</strong>就认为网络出现拥塞；</p>
-<p>四个拥塞控制算法：慢启动、拥塞避免、拥塞发生、快速恢复</p>
-<h3 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h3><ul>
-<li>当发送方每收到一个 ACK，拥塞窗口 cwnd 的大小就会加 1。相当于每轮翻一倍。</li>
-<li>发送包的数量呈<strong>指数增长</strong></li>
-<li>当达到<strong>慢启动门限</strong> <strong>ssthresh</strong>(slow start threshold)后，转为 <strong>拥塞避免算法</strong></li>
-</ul>
-<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512013125907.png" alt="image-20230512013125907"></p>
-<h3 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><ul>
-<li>每当收到一个 ACK 时，cwnd 增加 <strong>1&#x2F;cwnd</strong>。相当于cwnd每轮增加 1 。</li>
-<li>发送包的数量呈<strong>线性增长</strong>。</li>
-<li>直到发送丢包，则转入<strong>拥塞发生</strong>算法</li>
-</ul>
-<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512013510913.png" alt="image-20230512013510913"></p>
-<h3 id="拥塞发生"><a href="#拥塞发生" class="headerlink" title="拥塞发生"></a>拥塞发生</h3><p>对 <strong>超时重传</strong> 和 <strong>快速重传</strong> 有不同的策略：</p>
-<p>针对超时重传（网络情况更为糟糕）</p>
-<ul>
-<li><code>ssthresh</code> 设为 <code>cwnd/2</code>，即将慢启动门限设为当前cwnd的一半。</li>
-<li><code>cwnd</code> 重置为 <strong>初始化值</strong></li>
-<li>重新开始<strong>慢启动</strong>。</li>
-</ul>
-<img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512013838738.png" alt="超时重传拥塞发生" style="zoom:80%;">
-
-
-
-
-
-<p>针对快速重传（网络情况可能不好）</p>
-<ul>
-<li><code>cwnd = cwnd/2</code> ，拥塞窗口减半;</li>
-<li><code>ssthresh = cwnd</code>，慢启动门限设为减半后的拥塞窗口;</li>
-<li>进入<strong>快速恢复算法</strong></li>
-</ul>
-<h3 id="快速恢复"><a href="#快速恢复" class="headerlink" title="快速恢复"></a>快速恢复</h3><p>快速重传和快速恢复算法一般同时使用。</p>
-<ul>
-<li><code>cwnd = ssthresh+3</code>， 相当于前面减半后直接+3（引发快速重传的三个数据包确定是收到了，所以直接+3）；</li>
-<li>重传丢失的数据包</li>
-<li>若收到重复的ack，则 cwnd+&#x3D;1（目的是为了尽快处理&#x2F;发送丢失的数据包）</li>
-<li>若收到新数据的ack，则 cwnd &#x3D; ssthresh，并恢复为<strong>拥塞避免算法</strong>（做出自我牺牲）</li>
-</ul>
-<p>作为 <strong>拥塞发生(超时重传)&gt;&gt;慢启动</strong> 的加速版，即 <strong>拥塞发生(快速重传)&gt;&gt;快速恢复&gt;&gt;拥塞避免</strong> ，在正确处理完丢失的数据包之后，使得cwnd处于一个更高的起点。</p>
-<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512014231996.png" alt="image-20230512014231996"></p>
-]]></content>
-      <categories>
-        <category>网络</category>
-        <category>TCP</category>
-      </categories>
-      <tags>
-        <tag>TCP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>3D RPG Demo回顾</title>
     <url>/2023/06/06/3D-RPG-Demo%E5%9B%9E%E9%A1%BE/</url>
     <content><![CDATA[<h1 id="3D-RPG-Demo回顾"><a href="#3D-RPG-Demo回顾" class="headerlink" title="3D RPG Demo回顾"></a>3D RPG Demo回顾</h1><h2 id="1-创建项目"><a href="#1-创建项目" class="headerlink" title="1.创建项目"></a>1.创建项目</h2><p>包含 <strong>项目创建，渲染管线设置，资源导入，资源材质渲染升级</strong></p>
@@ -1287,6 +1099,194 @@
       </categories>
       <tags>
         <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>TCP之协议机制</title>
+    <url>/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h1 id="TCP之协议机制"><a href="#TCP之协议机制" class="headerlink" title="TCP之协议机制"></a>TCP之协议机制</h1><hr>
+<p>主要讨论TCP实现可靠的信息传输的几种机制：<strong>重传机制</strong>、<strong>流量控制（滑动窗口）</strong>、<strong>拥塞控制</strong></p>
+<p>此外还有<strong>粘包</strong>问题<strong>拆包</strong>处理</p>
+<hr>
+<span id="more"></span>
+
+<h2 id="重传机制"><a href="#重传机制" class="headerlink" title="重传机制"></a>重传机制</h2><h3 id="超时重传"><a href="#超时重传" class="headerlink" title="超时重传"></a>超时重传</h3><p><strong>数据的发送方</strong>，在发送数据后，以<strong>收到ack响应</strong>作为数据成功发送的标志。</p>
+<p>在发送数据时会设置一个<strong>定时器</strong>，若在限定时间内没有收到ack响应，说明<u>发送的数据丢失</u>（或<u>ack丢失</u>），需要<strong>重传</strong>。</p>
+<blockquote>
+<p>RTT 和 RTO</p>
+<ul>
+<li><strong>RTT</strong>，Round-Trip Time 往返时延，即从发送数据到收到ack的时间大小。</li>
+<li><strong>RTO</strong>，Restransmission Timeout 超时重传时间，超时定时器设置。</li>
+</ul>
+<p><strong>RTO</strong> 应该设置为略大于 <strong>RTT</strong> 的大小。并且根据网络实际情况，RTT和RTO都是动态变化的。</p>
+</blockquote>
+<h3 id="快速重传"><a href="#快速重传" class="headerlink" title="快速重传"></a>快速重传</h3><h4 id="基本"><a href="#基本" class="headerlink" title="基本"></a>基本</h4><p>不依靠<strong>时间</strong>来判断是否需要重传，而是按<strong>收到的ack</strong>判断。减少了判定重传所需的时间。</p>
+<ul>
+<li><p>发送方发送的数据包seq&#x3D;2丢失了，且后续还有成功发送的数据包</p>
+</li>
+<li><p>此时接收方没有收到seq&#x3D;2，于是在此后都会回应ack&#x3D;2；</p>
+</li>
+<li><p>发送方收到几次相同的ack&#x3D;2，说明seq&#x3D;2丢失了，于是触发了重传。</p>
+</li>
+</ul>
+<img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230511225957231.png" alt="image-20230511225957231" style="zoom:80%;">
+
+
+
+<p>这里会有一个问题：如何确定需要重传的内容（除了重传ack&#x3D;2对应的包，<strong>是否还需要重传后续所有的包</strong>）</p>
+<h4 id="SACK-选择性确认"><a href="#SACK-选择性确认" class="headerlink" title="SACK 选择性确认"></a>SACK 选择性确认</h4><p><strong>通信双方</strong>需要在TCP头部选项字段里添加<strong>SACK选项</strong>。</p>
+<p>情况</p>
+<ul>
+<li>发送方发送的数据丢失</li>
+</ul>
+<p>ack数据包中会有 记录<strong>已接收的数据情况</strong>的内容，于是发送方可以根据情况来选择要重发的数据包。</p>
+<ul>
+<li>接收方发现收到的数据seq非目标序列号时，会回发原来的 ack，但会使用 sack 记录当前的接收情况。</li>
+<li>这种情况下 ack 会比 sack 小</li>
+</ul>
+<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230511233550529.png" alt="image-20230511233550529"></p>
+<p><strong>Duplicate SACK 重复选择性确认</strong></p>
+<p>也即D-SACK，接收方通过记录<strong>重复接收的数据</strong>，让发送方明确数据是否丢失。</p>
+<p>情况：</p>
+<ul>
+<li>ack丢失</li>
+<li>网络延时</li>
+</ul>
+<p>ack 会比 sack 大</p>
+<p>作用：</p>
+<ul>
+<li>可以让「发送方」知道，是发出去的包丢了，还是接收方回应的 ACK 包丢了;</li>
+<li>可以知道是不是「发送方」的数据包被网络延迟了;</li>
+<li>可以知道网络中是不是把「发送方」的数据包给复制了;</li>
+</ul>
+<h2 id="流量控制-滑动窗口"><a href="#流量控制-滑动窗口" class="headerlink" title="流量控制-滑动窗口"></a>流量控制-滑动窗口</h2><h4 id="滑动窗口"><a href="#滑动窗口" class="headerlink" title="滑动窗口"></a>滑动窗口</h4><p>解决的问题：</p>
+<ul>
+<li>每发送一份数据，都要等到收到ack之后才发送下一份数据。</li>
+<li>效率低</li>
+</ul>
+<p>使用的方法：</p>
+<ul>
+<li>发送窗口的实现实际上是操作系统开辟的一个<strong>缓存空间</strong>，发送方主机在等到确认应答返回之前，必须<strong>在缓冲区中保留已发送的数据</strong>。如果按期收到确认应答（根据<strong>最新的ack</strong>即可，<strong>累计确认</strong>），此时数据就可以从缓存区清除。</li>
+<li><strong>TCP头部</strong>中的<strong>window</strong>大小字段，用来表示接收方<strong>接收窗口</strong>的空闲空间大小。发送方可以根据接受方发来的ack中的window字段来调整发送的数据量。</li>
+<li>发送方的<strong>发送窗口</strong><br><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512000432964.png" alt="image-20230512000432964"><ul>
+<li>需要记录 1.<strong>窗口起始地址</strong> 2.<strong>下一个可发送字节的地址</strong> 3.<strong>窗口末尾下一个字节的地址</strong>（起始地址+窗口大小的偏移）</li>
+</ul>
+</li>
+<li>接收方的<strong>接收窗口</strong><br><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512000733074.png" alt="image-20230512000733074"><ul>
+<li>需要记录 1.<strong>窗口起始地址</strong> 2.<strong>期望的下一个字节的地址</strong> 3.<strong>窗口末尾下一个字节的地址</strong></li>
+<li>接收窗口中的数据在<strong>接收方回送ack且应用层提取之后</strong>就可以移除并更新窗口</li>
+</ul>
+</li>
+</ul>
+<h4 id="流量控制"><a href="#流量控制" class="headerlink" title="流量控制"></a>流量控制</h4><p>解决的问题：</p>
+<ul>
+<li>发送方不能无脑的发数据给接收方，要考虑接收方处理能力。</li>
+<li>如果一直无脑的发数据给对方，但对方处理不过来，那么就会导致触发重发机制，从而导致网络流量的无端的浪费。</li>
+</ul>
+<p>解决的方法：</p>
+<ul>
+<li>设置滑动窗口</li>
+<li>动态调整滑动窗口大小（窗口大小代表着缓冲区情况）</li>
+</ul>
+<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512001914792.png" alt="image-20230512001914792"></p>
+<p>注意：</p>
+<ul>
+<li>如果发生了先减少缓冲区内存，再收缩窗口，就会出现丢包的现象。</li>
+<li>为了防止这种情况发生，TCP 规定是<strong>不允许同时减少缓存又收缩窗口</strong>的，而是采用<strong>先收缩窗口</strong>，过段时间<strong>再减少缓存</strong>，这样就可以避免了丢包情况</li>
+</ul>
+<h4 id="窗口关闭（大小为0）"><a href="#窗口关闭（大小为0）" class="headerlink" title="窗口关闭（大小为0）"></a>窗口关闭（大小为0）</h4><p>窗口关闭后潜在的死锁问题（后面开启窗口的ack包丢失所导致）</p>
+<img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512002308803.png" alt="image-20230512002308803" style="zoom:80%;">
+
+<ul>
+<li>为了解决这个问题，TCP 为每个连接设有一个持续定时器，<strong>只要 TCP 连接一方收到对方的零窗口通知，就启动持续计时器。</strong></li>
+<li>如果持续计时器超时，就会发送<strong>窗口探测 ( Window probe ) 报文</strong>，而对方在确认这个探测报文时，给出自己现在的接收窗口大小。</li>
+<li>若探测成功则继续发送数据，否则每次探测会更新计时器，到达上限则会使用RST断开连接。</li>
+</ul>
+<h4 id="糊涂窗口综合症（小额数据发送）"><a href="#糊涂窗口综合症（小额数据发送）" class="headerlink" title="糊涂窗口综合症（小额数据发送）"></a>糊涂窗口综合症（小额数据发送）</h4><p>情况：</p>
+<ul>
+<li>接收方繁忙时处理数据效率很低，导致接收窗口很小，使得发送方的发送窗口也很小</li>
+<li>每次接收方处理一点数据就腾出几个字节的窗口空间，并告诉发送方。而发送方立即发送几个字节的数据。（TCP头部就40多字节了，因此效率很低）</li>
+</ul>
+<p>解决方法：</p>
+<ul>
+<li><p>接收方：当接收方窗口小于某个大小（MSS，1&#x2F;2缓冲区大小）时，统统当作 <strong>0</strong> 告诉发送方，不让发送方发数据。</p>
+</li>
+<li><p>发送方：<strong>Nagle</strong> 算法，<strong>延迟发送</strong>，满足下面<strong>任意一个</strong>条件才发送，否则把要发的数据屯着。</p>
+<ul>
+<li>条件一：要等到窗口大小 &gt;&#x3D; <code>MSS</code> 并且 数据大小 &gt;&#x3D; <code>MSS</code>；</li>
+<li>条件二：收到之前发送数据的 <code>ack</code> 回包；</li>
+</ul>
+<blockquote>
+<p>如果对于一些需要小数据包交互的场景的程序，比如，telnet 或 ssh 这样的交互性比较强的程序，则需要关闭 Nagle 算法。</p>
+<p>setsockopt TCP_NODELAY</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h2><p>流量控制只是对双方的发送和接收能力进行协调配合，对于<strong>网络情况</strong>的控制则需要<strong>拥塞控制</strong>机制来做到。</p>
+<p>解决的问题：</p>
+<ul>
+<li>网络出现拥堵，会触发重传机制，如果不做限制，一直重传下去，则会导致网络情况越来越糟。</li>
+<li>形成恶性循环。</li>
+</ul>
+<p>解决方法：</p>
+<ul>
+<li>TCP被设计成无私的协议，当发现网络发送拥堵时，会先减少自己发送的数据量</li>
+<li>采用一个变量“ <strong>拥塞窗口</strong> <strong>cwnd</strong> ”实现拥塞控制<ul>
+<li>只要网络中没有出现拥塞，<code>cwnd</code> 就会增大；</li>
+<li>但网络中出现了拥塞，<code>cwnd</code> 就减少；</li>
+</ul>
+</li>
+<li>发送窗口大小 <strong>swnd</strong> &#x3D; min(<strong>cwnd</strong>, <strong>rwnd</strong>)</li>
+</ul>
+<p>发生<strong>超时重传</strong>就认为网络出现拥塞；</p>
+<p>四个拥塞控制算法：慢启动、拥塞避免、拥塞发生、快速恢复</p>
+<h3 id="慢启动"><a href="#慢启动" class="headerlink" title="慢启动"></a>慢启动</h3><ul>
+<li>当发送方每收到一个 ACK，拥塞窗口 cwnd 的大小就会加 1。相当于每轮翻一倍。</li>
+<li>发送包的数量呈<strong>指数增长</strong></li>
+<li>当达到<strong>慢启动门限</strong> <strong>ssthresh</strong>(slow start threshold)后，转为 <strong>拥塞避免算法</strong></li>
+</ul>
+<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512013125907.png" alt="image-20230512013125907"></p>
+<h3 id="拥塞避免"><a href="#拥塞避免" class="headerlink" title="拥塞避免"></a>拥塞避免</h3><ul>
+<li>每当收到一个 ACK 时，cwnd 增加 <strong>1&#x2F;cwnd</strong>。相当于cwnd每轮增加 1 。</li>
+<li>发送包的数量呈<strong>线性增长</strong>。</li>
+<li>直到发送丢包，则转入<strong>拥塞发生</strong>算法</li>
+</ul>
+<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512013510913.png" alt="image-20230512013510913"></p>
+<h3 id="拥塞发生"><a href="#拥塞发生" class="headerlink" title="拥塞发生"></a>拥塞发生</h3><p>对 <strong>超时重传</strong> 和 <strong>快速重传</strong> 有不同的策略：</p>
+<p>针对超时重传（网络情况更为糟糕）</p>
+<ul>
+<li><code>ssthresh</code> 设为 <code>cwnd/2</code>，即将慢启动门限设为当前cwnd的一半。</li>
+<li><code>cwnd</code> 重置为 <strong>初始化值</strong></li>
+<li>重新开始<strong>慢启动</strong>。</li>
+</ul>
+<img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512013838738.png" alt="超时重传拥塞发生" style="zoom:80%;">
+
+
+
+
+
+<p>针对快速重传（网络情况可能不好）</p>
+<ul>
+<li><code>cwnd = cwnd/2</code> ，拥塞窗口减半;</li>
+<li><code>ssthresh = cwnd</code>，慢启动门限设为减半后的拥塞窗口;</li>
+<li>进入<strong>快速恢复算法</strong></li>
+</ul>
+<h3 id="快速恢复"><a href="#快速恢复" class="headerlink" title="快速恢复"></a>快速恢复</h3><p>快速重传和快速恢复算法一般同时使用。</p>
+<ul>
+<li><code>cwnd = ssthresh+3</code>， 相当于前面减半后直接+3（引发快速重传的三个数据包确定是收到了，所以直接+3）；</li>
+<li>重传丢失的数据包</li>
+<li>若收到重复的ack，则 cwnd+&#x3D;1（目的是为了尽快处理&#x2F;发送丢失的数据包）</li>
+<li>若收到新数据的ack，则 cwnd &#x3D; ssthresh，并恢复为<strong>拥塞避免算法</strong>（做出自我牺牲）</li>
+</ul>
+<p>作为 <strong>拥塞发生(超时重传)&gt;&gt;慢启动</strong> 的加速版，即 <strong>拥塞发生(快速重传)&gt;&gt;快速恢复&gt;&gt;拥塞避免</strong> ，在正确处理完丢失的数据包之后，使得cwnd处于一个更高的起点。</p>
+<p><img src="/2023/05/11/TCP%E4%B9%8B%E5%8D%8F%E8%AE%AE%E6%9C%BA%E5%88%B6/image-20230512014231996.png" alt="image-20230512014231996"></p>
+]]></content>
+      <categories>
+        <category>网络</category>
+        <category>TCP</category>
+      </categories>
+      <tags>
+        <tag>TCP</tag>
       </tags>
   </entry>
   <entry>
@@ -3034,6 +3034,414 @@
       </tags>
   </entry>
   <entry>
+    <title>异常的分类和处理</title>
+    <url>/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h2 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类</h2><br>
+
+<h3 id="异常分类和处理思路"><a href="#异常分类和处理思路" class="headerlink" title="异常分类和处理思路"></a>异常分类和处理思路</h3><ul>
+<li><p><strong>网络异常</strong>：如连接超时、连接中断、DNS解析失败等。</p>
+<ol>
+<li><strong>错误重试</strong>：对于临时性的网络异常，可以尝试重新执行失败的操作，如重新建立连接或重新发送请求。</li>
+<li><strong>超时设置</strong>：为网络操作设置合理的超时时间，当操作耗时超过设定的阈值时，应该放弃当前操作并进行适当的处理。</li>
+<li><strong>断线重连</strong>：针对长连接的情况，当检测到连接断开时，可以尝试自动重新建立连接，以保持与服务端的通信。</li>
+<li><strong>异常通知</strong>：将网络异常信息记录下来，并向相关人员发送通知，以便及时发现和处理潜在的问题。</li>
+<li><strong>降级处理</strong>：对于一些关键操作，可以提供备用方案或者降级处理，以确保系统在部分网络异常的情况下仍能够正常运行。</li>
+<li><strong>连接池管理</strong>：对于频繁建立连接的场景，使用连接池可以减少连接建立的开销，同时在连接出现问题时能够及时进行回收和重建。</li>
+<li><strong>异常捕获和处理</strong>：在代码中合理捕获网络相关异常，并进行适当的处理，包括错误日志记录、资源释放等。</li>
+</ol>
+<br>
+
+<span id="more"></span>
+</li>
+<li><p><strong>数据库异常</strong>：包括连接失败、查询错误、事务处理问题等。</p>
+<ul>
+<li><strong>连接失败</strong>：实施连接池技术，通过合适的配置和管理来减少连接失败的可能性，并在连接失败时进行重试操作。另外，确保数据库连接字符串配置正确，以避免连接失败。</li>
+<li><strong>查询错误</strong>：编写健壮的SQL查询语句，进行输入验证和参数化查询，以防止SQL注入攻击，并通过合适的异常处理机制来捕获并处理查询错误。</li>
+<li><strong>事务处理问题</strong>：使用数据库事务来确保原子性、一致性、隔离性和持久性（ACID特性），并在遇到事务处理问题时实施适当的回滚操作或补偿措施，以维护数据的完整性。</li>
+<li><strong>连接超时和资源释放</strong>：设置合理的数据库连接超时时间，及时释放数据库连接以避免资源泄露。同时，使用try-with-resources或类似的语言特性来确保在使用后关闭数据库连接和释放相关资源。</li>
+<li><strong>监控和报警</strong>：建立数据库性能监控系统，追踪数据库连接池的使用情况、查询性能等指标，并设置报警规则以便及时发现潜在的数据库异常情况。</li>
+<li><strong>日志记录</strong>：在应用程序中添加适当的日志记录，记录数据库操作的详细信息，以便在发生异常时进行故障诊断和排查。</li>
+</ul>
+<br>
+</li>
+<li><p><strong>文件系统异常</strong>：例如文件不存在、权限不足、IO错误等。</p>
+<br>
+</li>
+<li><p><strong>代码逻辑异常</strong>：由于程序设计或实现问题引起的异常，比如空指针引用、数组越界等。</p>
+<ul>
+<li><strong>代码审查</strong>：定期进行代码审查，特别关注潜在的空指针引用、数组越界等问题。通过同行评审或利用静态代码分析工具来发现可能存在的问题。</li>
+<li><strong>输入验证</strong>：对外部输入数据进行严格验证，确保输入符合预期的格式和范围。这可以有效防止数组越界等问题。</li>
+<li><strong>异常处理</strong>：在代码中增加适当的异常处理机制，捕获并处理可能导致空指针引用或数组越界的情况，以避免程序崩溃。</li>
+<li><strong>单元测试</strong>：编写全面的单元测试用例，覆盖各种边界条件和异常情况，以确保代码在面对异常时能够正确处理。</li>
+<li><strong>日志记录</strong>：在程序中添加适当的日志记录，可以帮助开发人员追踪程序执行过程中出现的异常情况，以便快速定位和修复问题。</li>
+</ul>
+<br>
+</li>
+<li><p><strong>第三方服务异常</strong>：调用外部服务时出现的异常，如API调用失败、认证问题等。</p>
+<ul>
+<li><strong>异常捕获和日志记录</strong>：在调用第三方服务的地方，使用合适的异常处理机制来捕获异常，并将异常信息作为日志记录下来，以便后续的分析和研究。</li>
+<li><strong>重试机制</strong>：当第三方服务发生异常时，可以尝试进行重试操作。重试的次数和时间间隔可以根据具体情况进行调整。使用指数退避算法，逐渐增加重试间隔时间，可以避免过度压力和频繁调用外部服务。同时，需要控制重试次数，以免无限制地重试导致系统资源耗尽。</li>
+<li><strong>用户友好的错误提示</strong>：对于用户发起的请求，如果第三方服务发生异常，需要向用户展示有意义的错误提示信息，以便用户理解和解决问题。可以根据异常类型返回相应的错误码和错误信息，或提供相关的解决方法。</li>
+<li><strong>降级处理和备选方案</strong>：当第三方服务无法正常提供服务时，可以考虑降级处理，使用备选方案或本地缓存数据来代替。例如，如果某些服务不可用，可以使用默认值或预先缓存的数据进行响应，以保持系统的可用性。</li>
+<li><strong>监控和报警</strong>：及时监控第三方服务的可用性和性能，通过合适的监控系统来收集指标数据，识别潜在的问题和风险。当发生异常时，触发报警机制，及时通知相关团队进行处理和恢复。</li>
+</ul>
+<br>
+</li>
+<li><p><strong>资源耗尽异常</strong>：内存、CPU、线程池等资源耗尽导致的异常。</p>
+<ul>
+<li><strong>异常处理与回滚</strong>：当发生资源耗尽异常时，可以先捕获异常并进行相应的处理。可能的处理方式包括中止当前操作，回滚事务，释放资源，关闭连接等。这样可以尽量避免异常向上传递，导致更严重的问题。</li>
+<li><strong>重新分配资源</strong>：对于发生资源耗尽的情况，可以考虑重新分配或增加资源。例如，增加服务器的内存，增加线程池的大小，使用更高配置的硬件等。然后重新启动系统，并确保资源得到合理分配，以避免资源耗尽重复发生。</li>
+<li><strong>快速定位问题原因</strong>：对于资源耗尽，需要迅速定位具体的原因。可以通过查看系统日志、监控工具和性能分析工具等来定位导致资源耗尽的具体原因，例如错误的配置、持续高负载、死锁等。</li>
+<li><strong>限制资源使用量</strong>：通过调整相应的配置参数，限制系统的资源使用量。例如，降低线程池的大小，限制请求的并发数，设置合理的内存使用上限等。这样可以在资源耗尽异常发生时，避免进一步的资源浪费。</li>
+</ul>
+<br>
+</li>
+<li><p><strong>安全异常</strong>：包括拒绝访问、未经授权的操作等安全相关异常。</p>
+</li>
+</ul>
+<br>
+
+<h3 id="异常捕获和处理方式"><a href="#异常捕获和处理方式" class="headerlink" title="异常捕获和处理方式"></a>异常捕获和处理方式</h3><p><strong>使用 exception 机制</strong></p>
+<ol>
+<li>Try-Catch语句：使用try块包围可能引发异常的代码，然后使用catch块捕获并处理相应的异常。</li>
+<li>Finally块：可以在try-catch结构中添加finally块，无论是否发生异常，其中的代码都会被执行，通常用于资源清理等操作。</li>
+<li>异常类型匹配：针对不同类型的异常，可以使用多个catch块进行捕获和处理，以执行针对特定异常类型的特定逻辑。</li>
+<li>抛出异常：在遇到无法处理的情况下，可以通过throw语句主动抛出异常，以通知调用者或上层代码出现了问题。</li>
+<li>异常链传递：在捕获异常后，可以选择将当前异常封装在新的异常中并重新抛出，以保留原始异常信息，并让调用者能够更清晰地了解异常发生的上下文。</li>
+<li>自定义异常：针对特定业务场景，可以创建自定义的异常类来标识和处理特定的异常情况，使得异常处理更加具体和精确。</li>
+<li>异常处理策略：针对不同类型的异常，可以采取不同的处理策略，如重试、回滚、记录日志、通知相关人员等。</li>
+</ol>
+<p><strong>不使用 exception 机制</strong></p>
+<ol>
+<li>返回错误码或错误状态：在函数或方法调用发生异常时，返回一个特定的错误码或错误状态，由调用方来检查并处理异常情况。</li>
+<li>回调机制：通过回调函数或回调接口将异常信息传递给调用方，让调用方自行处理异常情况。</li>
+<li>异步通知：使用异步通知机制，当发生异常时向相关组件或模块发送通知，由接收方来处理异常情况。</li>
+<li>使用断言：在开发阶段通过断言来检查程序中的不变量和前置条件，以及对可能出现异常的地方进行预先检查。</li>
+<li>使用条件判断语句：在执行关键操作之前，通过条件判断语句来检查输入参数、环境状态等，以避免可能引发异常的情况发生。</li>
+</ol>
+<br>
+
+<br>
+
+<h2 id="异常的传递（不使用-Try-Catch）"><a href="#异常的传递（不使用-Try-Catch）" class="headerlink" title="异常的传递（不使用 Try Catch）"></a>异常的传递（不使用 Try Catch）</h2><h3 id="网络层操作失败产生的异常"><a href="#网络层操作失败产生的异常" class="headerlink" title="网络层操作失败产生的异常"></a>网络层操作失败产生的异常</h3><p>此处以网络操作 connect 为例</p>
+<h4 id="从网络库的操作开始往上看"><a href="#从网络库的操作开始往上看" class="headerlink" title="从网络库的操作开始往上看"></a>从网络库的操作开始往上看</h4><p>以使用 libuv 网络库中的 uv_tcp_connect 函数为例</p>
+<ul>
+<li>其返回值是一个 int，代表一个 error code，为0则表示成功，否则表示失败</li>
+<li>error code 的值是事先定义好的</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">uv_tcp_connect</span><span class="params">(<span class="type">uv_connect_t</span>* req,</span></span><br><span class="line"><span class="params">                   <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">                   <span class="type">const</span> <span class="keyword">struct</span> sockaddr* addr,</span></span><br><span class="line"><span class="params">                   uv_connect_cb cb)</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> addrlen;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;type != UV_TCP)</span><br><span class="line">    <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (addr-&gt;sa_family == AF_INET)</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (addr-&gt;sa_family == AF_INET6)</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in6);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> uv__tcp_connect(req, handle, addr, addrlen, cb);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<br>
+
+<p>上层的用户函数可能是一个 init() 函数，用来初始化一些网络资源</p>
+<ul>
+<li>用户使用时，根据 uv_tcp_connect 函数的返回值判断执行是否成功即可</li>
+<li>此处使用 goto Exit0 转到单一出口处，进行用户 Init 函数中的错误处理，并通过 return false 返回用户函数的执行结果</li>
+</ul>
+<p><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111140902402.png" alt="image-20240111140902402"></p>
+<p><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111141135793.png" alt="image-20240111141135793"></p>
+<br>
+
+<br>
+
+<p>再往上层看调用了 Init() 函数的地方，这里是在一个断线重连的操作中调用了 Init() ，即函数 TryReconnect()</p>
+<ul>
+<li>通过判断Init()的结果，可以区分重连请求成功还是失败（此处并非真正的重连成功，只是connect请求成功。当连接建立时，会在 uv_tcp_connect 设置的回调函数中对连接结果进行判断和处理）</li>
+<li>此处同样使用goto，对重连请求失败的情况进行处理，并将结果返回给再上一层</li>
+</ul>
+<p><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111141930566.png" alt="image-20240111141930566"></p>
+<br>
+
+<br>
+
+<p>再往上一层看，哪里调用了 TryReconnect()，这里是在一个Update里面定期对掉线队列里的连接进行重连尝试</p>
+<ul>
+<li>但是这里是直接将重连函数结果丢弃了</li>
+<li>结合前面来看，在 TryReconnect 函数里已经把失败情况下的连接重新加到了掉线队列里，所以此处丢弃 TryReconnect 结果是没问题的，但是最好还是判断一下并输出日志，方便查看情况。</li>
+</ul>
+<p><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111142939480.png" alt="image-20240111142939480"></p>
+<br>
+
+<br>
+
+<h4 id="从网络库的操作开始往下看"><a href="#从网络库的操作开始往下看" class="headerlink" title="从网络库的操作开始往下看"></a>从网络库的操作开始往下看</h4><p>直接上代码</p>
+<p>第一层</p>
+<ul>
+<li>主要是进行了一些条件、参数的判断和处理</li>
+<li>然后调用第二层函数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 顶层第一层</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uv_tcp_connect</span><span class="params">(<span class="type">uv_connect_t</span>* req,</span></span><br><span class="line"><span class="params">                   <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">                   <span class="type">const</span> <span class="keyword">struct</span> sockaddr* addr,</span></span><br><span class="line"><span class="params">                   uv_connect_cb cb)</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> addrlen;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;type != UV_TCP)</span><br><span class="line">    <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (addr-&gt;sa_family == AF_INET)</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (addr-&gt;sa_family == AF_INET6)</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in6);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> uv__tcp_connect(req, handle, addr, addrlen, cb);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<br>
+
+<p>第二层</p>
+<ul>
+<li>进行错误码的转换</li>
+<li>调用第三层函数，获取其 error code 并按需转换</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 第二层</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uv__tcp_connect</span><span class="params">(<span class="type">uv_connect_t</span>* req,</span></span><br><span class="line"><span class="params">                    <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">                    <span class="type">const</span> <span class="keyword">struct</span> sockaddr* addr,</span></span><br><span class="line"><span class="params">                    <span class="type">unsigned</span> <span class="type">int</span> addrlen,</span></span><br><span class="line"><span class="params">                    uv_connect_cb cb)</span> &#123;</span><br><span class="line">  <span class="type">int</span> err;</span><br><span class="line"></span><br><span class="line">  err = uv_tcp_try_connect(req, handle, addr, addrlen, cb);</span><br><span class="line">  <span class="keyword">if</span> (err)</span><br><span class="line">    <span class="keyword">return</span> uv_translate_sys_error(err); <span class="comment">// 只是将一些系统错误码换成libuv的错误码</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<br>
+
+<br>
+
+<p>第三层</p>
+<ul>
+<li>真正进行底层的系统调用，包含各个过程的子函数</li>
+<li>一般是直接返回各个过程中异常的错误码</li>
+<li>也有不太一样的，比如 handle-&gt;delayed_error<ul>
+<li>在 uv_tcp_try_bind 里面，WSAEADDRINUSE 错误是不直接返回错误码的，而是暂且认为 uv_tcp_connect 请求成功，并设置tcp句柄的 delayed_error ，最终在处理 pending req 时将错误信息传递到 uv_tcp_connect  请求设置的回调函数中进行处理</li>
+<li><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111150833055.png" alt="uv_try_bind内部"></li>
+<li><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111151150825.png" alt="回调函数"></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 第三层</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">uv_tcp_try_connect</span><span class="params">(<span class="type">uv_connect_t</span>* req,</span></span><br><span class="line"><span class="params">                              <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">                              <span class="type">const</span> <span class="keyword">struct</span> sockaddr* addr,</span></span><br><span class="line"><span class="params">                              <span class="type">unsigned</span> <span class="type">int</span> addrlen,</span></span><br><span class="line"><span class="params">                              uv_connect_cb cb)</span> &#123;</span><br><span class="line">  <span class="type">uv_loop_t</span>* loop = handle-&gt;loop;</span><br><span class="line">  TCP_INITIAL_RTO_PARAMETERS retransmit_ioctl;</span><br><span class="line">  <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span>* <span class="title">bind_addr</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_storage</span> <span class="title">converted</span>;</span></span><br><span class="line">  BOOL success;</span><br><span class="line">  DWORD bytes;</span><br><span class="line">  <span class="type">int</span> err;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 函数 1</span></span><br><span class="line">  err = uv__convert_to_localhost_if_unspecified(addr, &amp;converted);</span><br><span class="line">  <span class="keyword">if</span> (err)</span><br><span class="line">    <span class="keyword">return</span> err;</span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;delayed_error != <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">goto</span> out;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!(handle-&gt;flags &amp; UV_HANDLE_BOUND)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (addrlen == <span class="keyword">sizeof</span>(uv_addr_ip4_any_)) &#123;</span><br><span class="line">      bind_addr = (<span class="type">const</span> <span class="keyword">struct</span> sockaddr*) &amp;uv_addr_ip4_any_;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (addrlen == <span class="keyword">sizeof</span>(uv_addr_ip6_any_)) &#123;</span><br><span class="line">      bind_addr = (<span class="type">const</span> <span class="keyword">struct</span> sockaddr*) &amp;uv_addr_ip6_any_;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">abort</span>();</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    <span class="comment">// 函数 2</span></span><br><span class="line">    err = uv_tcp_try_bind(handle, bind_addr, addrlen, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (err)</span><br><span class="line">      <span class="keyword">return</span> err;</span><br><span class="line">    <span class="keyword">if</span> (handle-&gt;delayed_error != <span class="number">0</span>)</span><br><span class="line">      <span class="keyword">goto</span> out;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异常情况</span></span><br><span class="line">  <span class="keyword">if</span> (!handle-&gt;tcp.conn.func_connectex) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!uv_get_connectex_function(handle-&gt;socket, &amp;handle-&gt;tcp.conn.func_connectex)) &#123;</span><br><span class="line">      <span class="keyword">return</span> WSAEAFNOSUPPORT;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* This makes connect() fail instantly if the target port on the localhost</span></span><br><span class="line"><span class="comment">   * is not reachable, instead of waiting for 2s. We do not care if this fails.</span></span><br><span class="line"><span class="comment">   * This only works on Windows version 10.0.16299 and later.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">if</span> (uv__is_fast_loopback_fail_supported() &amp;&amp; uv__is_loopback(&amp;converted)) &#123;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;retransmit_ioctl, <span class="number">0</span>, <span class="keyword">sizeof</span>(retransmit_ioctl));</span><br><span class="line">    retransmit_ioctl.Rtt = TCP_INITIAL_RTO_NO_SYN_RETRANSMISSIONS;</span><br><span class="line">    retransmit_ioctl.MaxSynRetransmissions = TCP_INITIAL_RTO_NO_SYN_RETRANSMISSIONS;</span><br><span class="line">        <span class="comment">// 配置 TCP 初始重传超时和最大 SYN 重传次数等参数</span></span><br><span class="line">    WSAIoctl(handle-&gt;socket,</span><br><span class="line">             SIO_TCP_INITIAL_RTO,</span><br><span class="line">             &amp;retransmit_ioctl,</span><br><span class="line">             <span class="keyword">sizeof</span>(retransmit_ioctl),</span><br><span class="line">             <span class="literal">NULL</span>,</span><br><span class="line">             <span class="number">0</span>,</span><br><span class="line">             &amp;bytes,</span><br><span class="line">             <span class="literal">NULL</span>,</span><br><span class="line">             <span class="literal">NULL</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line"></span><br><span class="line">  UV_REQ_INIT(req, UV_CONNECT);</span><br><span class="line">  req-&gt;handle = (<span class="type">uv_stream_t</span>*) handle;</span><br><span class="line">  req-&gt;cb = cb;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;req-&gt;u.io.overlapped, <span class="number">0</span>, <span class="keyword">sizeof</span>(req-&gt;u.io.overlapped));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 无法立即处理的错误，不直接返回错误码给上层</span></span><br><span class="line">  <span class="comment">// 这里是把请求塞到tcp句柄的待办队列里，等下一个loop的时候将请求取出来，调用回调进行最终的(错误)处理</span></span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;delayed_error != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">/* Process the req without IOCP. */</span></span><br><span class="line">    handle-&gt;reqs_pending++;</span><br><span class="line">    REGISTER_HANDLE_REQ(loop, handle, req);</span><br><span class="line">    uv_insert_pending_req(loop, (<span class="type">uv_req_t</span>*)req);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 调用 Windows API，这里应该是通过加载动态库来调用的</span></span><br><span class="line">  success = handle-&gt;tcp.conn.func_connectex(handle-&gt;socket,</span><br><span class="line">                                            (<span class="type">const</span> <span class="keyword">struct</span> sockaddr*) &amp;converted,</span><br><span class="line">                                            addrlen,</span><br><span class="line">                                            <span class="literal">NULL</span>,</span><br><span class="line">                                            <span class="number">0</span>,</span><br><span class="line">                                            &amp;bytes,</span><br><span class="line">                                            &amp;req-&gt;u.io.overlapped);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (UV_SUCCEEDED_WITHOUT_IOCP(success)) &#123;</span><br><span class="line">    <span class="comment">/* Process the req without IOCP. */</span></span><br><span class="line">    handle-&gt;reqs_pending++;</span><br><span class="line">    REGISTER_HANDLE_REQ(loop, handle, req);</span><br><span class="line">    uv_insert_pending_req(loop, (<span class="type">uv_req_t</span>*)req);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (UV_SUCCEEDED_WITH_IOCP(success)) &#123;</span><br><span class="line">    <span class="comment">/* The req will be processed with IOCP. */</span></span><br><span class="line">    handle-&gt;reqs_pending++;</span><br><span class="line">    REGISTER_HANDLE_REQ(loop, handle, req);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 这里返回API调用出错的 Windows 错误码</span></span><br><span class="line">    <span class="keyword">return</span> WSAGetLastError();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<br>
+
+<br>
+
+<p>感兴趣的可以看一下 libuv 对待办队列中的请求完成结果的处理</p>
+<ul>
+<li>这里会对 delayed_error 状态进行判断，取出err并传给回调函数</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">uv_process_tcp_connect_req</span><span class="params">(<span class="type">uv_loop_t</span>* loop, <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">    <span class="type">uv_connect_t</span>* req)</span> &#123;</span><br><span class="line">  <span class="type">int</span> err;</span><br><span class="line"></span><br><span class="line">  assert(handle-&gt;type == UV_TCP);</span><br><span class="line"></span><br><span class="line">  UNREGISTER_HANDLE_REQ(loop, handle, req);</span><br><span class="line"></span><br><span class="line">  err = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;delayed_error) &#123;</span><br><span class="line">    <span class="comment">/* To smooth over the differences between unixes errors that</span></span><br><span class="line"><span class="comment">     * were reported synchronously on the first connect can be delayed</span></span><br><span class="line"><span class="comment">     * until the next tick--which is now.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    err = handle-&gt;delayed_error;</span><br><span class="line">    handle-&gt;delayed_error = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (REQ_SUCCESS(req)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (handle-&gt;flags &amp; UV_HANDLE_CLOSING) &#123;</span><br><span class="line">      <span class="comment">/* use UV_ECANCELED for consistency with Unix */</span></span><br><span class="line">      err = ERROR_OPERATION_ABORTED;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (setsockopt(handle-&gt;socket,</span><br><span class="line">                          SOL_SOCKET,</span><br><span class="line">                          SO_UPDATE_CONNECT_CONTEXT,</span><br><span class="line">                          <span class="literal">NULL</span>,</span><br><span class="line">                          <span class="number">0</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">      uv_connection_init((<span class="type">uv_stream_t</span>*)handle);</span><br><span class="line">      handle-&gt;flags |= UV_HANDLE_READABLE | UV_HANDLE_WRITABLE;</span><br><span class="line">      loop-&gt;active_tcp_streams++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      err = WSAGetLastError();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    err = GET_REQ_SOCK_ERROR(req);</span><br><span class="line">  &#125;</span><br><span class="line">  req-&gt;cb(req, uv_translate_sys_error(err));</span><br><span class="line"></span><br><span class="line">  DECREASE_PENDING_REQ_COUNT(handle);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>编程</category>
+        <category>异常处理</category>
+      </categories>
+      <tags>
+        <tag>异常</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>MySQL基础学习</title>
+    <url>/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><p><strong>关系型数据库的三大范式</strong></p>
+<ul>
+<li>第一范式：<ul>
+<li>单一字段只能表示一种数据（字段的原子性）</li>
+<li>（否则可分为多个字段）</li>
+</ul>
+</li>
+<li>第二范式：<ul>
+<li>非主键必须依赖整个主键，而非部分主键</li>
+<li>（否则可以分为多个表）</li>
+</ul>
+</li>
+<li>第三范式：<ul>
+<li>非主键必须直接依赖主键，不能间接依赖</li>
+<li>（否则可以分为多个表）</li>
+</ul>
+</li>
+</ul>
+<span id="more"></span>
+
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>事务的四大特性</strong></p>
+<ul>
+<li>原子性：事务中的操作 要么全部成功，要么全部失败回滚</li>
+<li>一致性：一个事务执行前后，数据库的状态保持一致（类比能量守恒）</li>
+<li>隔离性：一个事务只能读到已经提交的修改</li>
+<li>持久性：一个事务一旦提交，对数据库中的数据的改变是永久性的，即使数据库系统遇到故障也不会丢失事务操作所做的修改。</li>
+</ul>
+<p><strong>事务的隔离等级</strong></p>
+<p>前置概念</p>
+<ul>
+<li><strong>脏读</strong>：一个事务处理过程中读取了另一个未提交的事务中的数据<ul>
+<li>当一个事务对数据进行修改但还没有提交时，其他事务可能会读取到这个尚未提交的数据。</li>
+<li>类似的情况在并发编程中被称为<strong>竞态条件</strong>（Race Condition），它指的是多个线程同时访问临界资源，并且对该资源进行修改，从而导致结果的不确定性或错误。</li>
+<li>数据库通常使用锁机制来控制并发访问。</li>
+</ul>
+</li>
+<li><strong>不可重复读</strong><ul>
+<li>一个事务范围内，多次相同的查询却返回了不同的数据值</li>
+<li>原因是在查询间隔内，另一个事务修改了数据并提交了</li>
+</ul>
+</li>
+<li><strong>幻读</strong><ul>
+<li>对于一个事务，在前面进行了查询，之后又有其他事务插入或删除数据，导致前面查询到的数据失去有效性。</li>
+<li>原因：使用了读取一致性级别不同的事务隔离级别</li>
+</ul>
+</li>
+</ul>
+<p>MySQL的四种隔离级别</p>
+<ul>
+<li><strong>串行化</strong> Serializable<ul>
+<li>强制事务顺序，使之不可能相互冲突，解决幻读</li>
+</ul>
+</li>
+<li><strong>可重复读</strong> Repeatable Read<ul>
+<li>默认事务隔离级别，确保同一事务的多个实例在并发读取数据时，会看到同样的数据行，解决了不可重复读的问题。</li>
+</ul>
+</li>
+<li><strong>读已提交</strong> Read Committed<ul>
+<li>一个事务只能看见已经提交的事务所做的改变，避免脏读</li>
+</ul>
+</li>
+<li><strong>读未提交</strong> Read Uncommitted<ul>
+<li>所有的事务都可以看到其他未提交事务的执行结果</li>
+</ul>
+</li>
+</ul>
+<p>生存环境一般使用 <strong>读已提交RC</strong></p>
+<ul>
+<li>为什么使用RC而不是RR<ul>
+<li>RR存在<u>间隙锁</u>，更容易出现死锁</li>
+<li>RR级别下，<u>条件列未命中索引</u>会锁表，而RC级别下只锁行</li>
+<li>可见RC的并发性高于RR</li>
+<li>另外不可重复读问题<u>有时候</u>是可接受的</li>
+</ul>
+</li>
+</ul>
+<h2 id="编码与字符集"><a href="#编码与字符集" class="headerlink" title="编码与字符集"></a>编码与字符集</h2><p><strong>编码和字符集</strong></p>
+<ul>
+<li>ASCII<ul>
+<li>单字符：8bits，1Byte</li>
+<li>只能表示256个字符</li>
+</ul>
+</li>
+<li>各种特殊编码，如中文的 GB2312，希腊语的 greek，俄语的 cp866</li>
+<li>Unicode，统一各种编码为一种<ul>
+<li>单字符：2~4Byte</li>
+<li><img src="/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/image-20240104222222435.png" alt="image-20240104222222435" style="zoom:80%;"></li>
+</ul>
+</li>
+<li>UTF-8<ul>
+<li>优化了Unicode的字符中不必要的字节</li>
+</ul>
+</li>
+<li>总结<ul>
+<li>按照一定规则把符号和二进制码对应起来，这就是<strong>编码</strong>。而把n多这种已经编码的字符聚在一起，就是我们常说的<strong>字符集</strong>。</li>
+<li>比如utf-8字符集就是所有utf-8编码格式的字符的合集。</li>
+</ul>
+</li>
+</ul>
+<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h3><blockquote>
+<p>是什么</p>
+<ul>
+<li>索引用于加快磁盘数据的访问，属于用空间换时间</li>
+<li>索引记录的内容有一组数据的关键字和数据各个部分的存储位置，通过某些数据结构（B树、B+树）组织关键字，在这样数据结构上对关键字进行查询，从而找到关键字对应数据的存储位置，再到磁盘中直接获取。</li>
+<li>数据存储在磁盘中的某个位置，我们要访问某个磁盘中的数据<ul>
+<li>在没有使用索引的情况下，就得把全部相关的数据加载到内存中（如果数据量很大，就需要加载多次，非常耗时），然后再从内存中遍历找到数据。</li>
+<li>使用索引，只需将索引加载到内存，然后在索引中根据关键字找到数据的存储位置，便可直接找到磁盘中数据并进行加载<ul>
+<li>一般来说不会一次性加载所有的索引节点，如果是B树，B+树，每次会根据需要加载一定数量的节点，对磁盘的访问次数最多等于树的高度</li>
+<li>此外，对于高频使用的索引，还会将其缓存到内存中</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>索引键值一般就是该行数据某个列上的具体值</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><strong>GPT</strong></p>
+<p>Q: 对于数据库中的一列，为其建立索引，那么其键值是什么，查找某个数据的过程是怎样的</p>
+<p>A:</p>
+<p>在为数据库中的一列建立索引时，键值是该列中的具体值。具体来说，对于每个索引条目，键值是该列中一行数据的值。</p>
+<p>当进行通过索引进行数据查询时，数据库系统会使用索引树的结构来加速查询过程。以下是查找某个数据的一般过程：</p>
+<ol>
+<li>查询条件：首先，根据查询语句中的条件确定需要查找的数据。</li>
+<li>索引搜索：数据库会根据索引的键值进行搜索。如果该列上有索引，并且该索引适用于查询条件，则数据库系统会根据索引树进行搜索。</li>
+<li>索引树遍历：数据库系统会依次遍历索引树的节点，从根节点开始，在每个节点选择合适的子节点继续查找，直到找到满足查询条件的数据。</li>
+<li>数据访问：一旦找到满足条件的索引节点，数据库系统会使用该节点中的指针来访问相应的数据行。这可能涉及到磁盘读取操作，将数据从磁盘中加载到内存。</li>
+<li>数据返回：找到满足条件的数据行后，数据库系统会将其返回给用户。</li>
+</ol>
+<p>需要注意的是，索引的目的是为了加速数据的查询操作。索引的建立和使用需要在一定程度上增加存储空间和维护开销。因此，对于不频繁搜索的列或一些其他条件，建立索引可能并不总是必要或有效的选择。</p>
+</blockquote>
+<p>作用</p>
+<ul>
+<li>数据是存储在磁盘上的</li>
+<li>查询数据时，如果没有索引，会加载所有的数据到内存，依次进行检索，读取磁盘次数较多。</li>
+<li>有了索引，就不需要加载所有数据，因为B+树的高度一般在2-4层，最多只需要读取2-4次磁盘，查询速度大大提升。</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li><strong>加快数据查找的速度</strong></li>
+<li>为用来排序或者是分组的字段添加索引，可以加快分组和排序的速度</li>
+<li>加快表与表之间的连接</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>建立索引需要<strong>占用物理空间</strong></li>
+<li>会降低表的增删改的效率，因为每次对表记录进行增删改，需要进行<strong>动态维护索引</strong>，导致增删改时间变长</li>
+</ul>
+<p>使用场景</p>
+<ul>
+<li>经常用于查询的字段</li>
+<li>经常用于连接的字段建立索引</li>
+<li>经常需要排序的字段建立索引（建立索引就排好序了）</li>
+</ul>
+<p>不适用的</p>
+<ul>
+<li><code>where</code>条件中用不到的字段不适合建立索引</li>
+<li>表记录较少</li>
+<li>需要经常增删改</li>
+<li><strong>参与列计算</strong>的列不适合建索引</li>
+<li><strong>区分度不高</strong>的字段不适合建立索引，如性别</li>
+</ul>
+<h3 id="索引的数据结构"><a href="#索引的数据结构" class="headerlink" title="索引的数据结构"></a>索引的数据结构</h3><h4 id="线性索引"><a href="#线性索引" class="headerlink" title="线性索引"></a>线性索引</h4><ul>
+<li>用有序数组组织索引</li>
+<li>可以通过二分查找快速找到键值位置</li>
+<li>当数据量太大时，可以分为多层线性索引，在最底层记录每一个数据的存储位置</li>
+<li>缺点<ul>
+<li>对于数组，增删的代价比较大</li>
+</ul>
+</li>
+</ul>
+<h4 id="B树索引"><a href="#B树索引" class="headerlink" title="B树索引"></a>B树索引</h4><p>2-3树即3阶B树</p>
+<img src="/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/image-20240106191056937.png" alt="image-20240106191056937" style="zoom:80%;">
+
+<h4 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h4><ul>
+<li>中间结点中，只保存关键字的值（引导） </li>
+<li>叶子节点中，保存关键字以及相应的数据记录（即数据记录存放在叶子结点）</li>
+</ul>
+<img src="/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/image-20240106192038264.png" alt="image-20240106192038264" style="zoom:80%;">
+
+<ul>
+<li>支持范围查找 ： 同一层的结点还通过链表相连</li>
+</ul>
+<blockquote>
+<p>B树和B+树的插入、删除产生的分裂和合并以及层次变化的过程，可以去看下一华工数据结构慕课。</p>
+</blockquote>
+<ul>
+<li>也有不完全一样的定义方式</li>
+</ul>
+<img src="/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/image-20240106225126484.png" alt="image-20240106225126484" style="zoom:80%;">
+
+<h4 id="哈希表索引"><a href="#哈希表索引" class="headerlink" title="哈希表索引"></a>哈希表索引</h4><ul>
+<li>哈希索引是基于哈希表实现的，对于每一行数据，存储引擎会对索引列进行哈希计算得到哈希码，并且哈希算法要尽量保证不同的列值计算出的哈希码值是不同的。</li>
+<li>将哈希码的值作为哈希表的key值，将指向数据行的指针作为哈希表的value值。</li>
+<li>这样查找一个数据的时间复杂度就是O(1)，一般多用于精确查找。</li>
+</ul>
+<p>与 B+树 索引的比较</p>
+<ul>
+<li>哈希索引<strong>不支持排序</strong>，因为哈希表是无序的。</li>
+<li>哈希索引<strong>不支持范围查找</strong>。</li>
+<li>哈希索引<strong>不支持模糊查询</strong>及多列索引的最左前缀匹配。</li>
+<li>因为哈希表中会<strong>存在哈希冲突</strong>，所以哈希索引的性能是不稳定的，而B+树索引的性能是相对稳定的，每次查询都是从根节点到叶子节点。</li>
+</ul>
+<h4 id="为什么B-树比B树更适合实现数据库索引？"><a href="#为什么B-树比B树更适合实现数据库索引？" class="headerlink" title="为什么B+树比B树更适合实现数据库索引？"></a>为什么B+树比B树更适合实现数据库索引？</h4><ul>
+<li>由于B+树的数据都存储在叶子结点中，叶子结点均为索引，方便扫库，只需要扫一遍叶子结点即可，但是B树因为其分支结点同样存储着数据，我们要找到具体的数据，需要进行一次中序遍历按序来扫，所以B+树更加适合在区间查询的情况，而在数据库中基于范围的查询是非常频繁的，所以通常B+树用于数据库索引。</li>
+<li>B+树的节点只存储索引key值，具体信息的地址存在于叶子节点的地址中。这就使以页为单位的索引中可以存放更多的节点。减少更多的I&#x2F;O支出。</li>
+<li>B+树的查询效率更加稳定，任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。</li>
+</ul>
+<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="架构篇"><a href="#架构篇" class="headerlink" title="架构篇"></a>架构篇</h3>]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>MySQL</category>
+      </categories>
+      <tags>
+        <tag>MySQL</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>框架汇总</title>
     <url>/2022/07/31/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/</url>
     <content><![CDATA[<h1 id="算法学习"><a href="#算法学习" class="headerlink" title="算法学习"></a>算法学习</h1><br>
@@ -3558,6 +3966,446 @@
       </categories>
       <tags>
         <tag>多线程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>第五章项目实战</title>
+    <url>/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/</url>
+    <content><![CDATA[<h1 id="5-项目相关知识点"><a href="#5-项目相关知识点" class="headerlink" title="5.项目相关知识点"></a>5.项目相关知识点</h1><br>
+
+<br>
+
+<br>
+
+<h2 id="5-1-阻塞-x2F-非阻塞，同步-x2F-异步"><a href="#5-1-阻塞-x2F-非阻塞，同步-x2F-异步" class="headerlink" title="5.1 阻塞&#x2F;非阻塞，同步&#x2F;异步"></a>5.1 阻塞&#x2F;非阻塞，同步&#x2F;异步</h2><p>此处是对于 <strong>网络IO</strong></p>
+<p>IO的两个阶段：1.<strong>数据就绪</strong> 2.<strong>数据读写</strong></p>
+<br>
+
+<p><strong>数据就绪</strong>	操作系统、内核缓冲区中</p>
+<ul>
+<li>阻塞   ：调用IO方法的线程进入阻塞状态</li>
+<li>非阻塞  ：不改变线程的状态，通过返回值判断</li>
+</ul>
+<br>
+
+<p><strong>数据读写</strong>	缓冲区的数据&lt;–&gt;内存</p>
+<ul>
+<li>同步   : 应用程序自行读写</li>
+<li>异步   : 操作系统辅助读写   （异步IO接口、通知方式）</li>
+</ul>
+<br>
+
+<span id="more"></span>
+
+<blockquote>
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230303232426115.png" alt="image-20230303232426115" style="zoom:80%;">
+
+<p>陈硕：在处理IO的时候，阻塞和非阻塞都是同步IO，只有使用了特殊的API才是异步IO</p>
+</blockquote>
+<br>
+
+<p>对于网络IO</p>
+<ul>
+<li>一个典型的<strong>网络IO接口调用</strong>，分为两个阶段，分别是“<strong>数据就绪</strong>” 和 “<strong>数据读写</strong>”<ul>
+<li><strong>数据就绪</strong>阶段分为<strong>阻塞和非阻塞</strong>，表现得结果就是，<strong>阻塞当前线程</strong>或是<strong>直接返回</strong>。</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<ul>
+<li><p><strong>同步</strong>表示A向B请求调用一个网络IO接口时（或者调用某个业务逻辑API接口时），<strong>数据的读写</strong>都是由<strong>请求方A自己来完成的</strong>（不管是阻塞还是非阻塞）</p>
+</li>
+<li><p><strong>异步</strong>表示A向B请求调用一个网络IO接口时（或者调用某个业务逻辑API接口时），向B传入<strong>请求的事件</strong>以及<strong>事件发生时通知的方式</strong>，<strong>A就可以处理其它逻辑了</strong>，当B监听到事件处理完成后，会用事先约定好的通知方式，通知A处理结果。</p>
+<ul>
+<li><p>同步阻塞</p>
+</li>
+<li><p>同步非阻塞</p>
+</li>
+<li><p>异步阻塞</p>
+</li>
+<li><p>异步非阻塞</p>
+</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h2 id="5-2-Linux的五种IO模型"><a href="#5-2-Linux的五种IO模型" class="headerlink" title="5.2 Linux的五种IO模型"></a>5.2 Linux的五种IO模型</h2><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230303232426115.png" alt="image-20230303232426115" style="zoom:80%;">
+
+<h3 id="阻塞-blocking"><a href="#阻塞-blocking" class="headerlink" title="阻塞 blocking"></a>阻塞 blocking</h3><p>调用者调用了某个函数，等待这个函数返回，期间什么也不做，不停的去检查这个函数有没有返回，必须等待这个函数返回才能进行下一步操作。</p>
+<p>以read为例：</p>
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304000806869.png" alt="image-20230304000806869" style="zoom:80%;">
+
+<br>
+
+<h3 id="非阻塞-non-blocking（NIO）"><a href="#非阻塞-non-blocking（NIO）" class="headerlink" title="非阻塞 non-blocking（NIO）"></a>非阻塞 non-blocking（NIO）</h3><p>非阻塞等待，每隔一段时间就去检测IO事件是否就绪，若没有就绪就可以做其他事。</p>
+<p>非阻塞I&#x2F;O执行系统调用总是立即返回，不管事件是否已经发生。若事件没有发生，则返回-1，此时可以根据errno区分情况。</p>
+<p>对于<strong>accept，recv和send</strong>，事件未发生时，errno通常被设置为<strong>EAGAIN</strong>。</p>
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304001316512.png" alt="image-20230304001316512" style="zoom:80%;">
+
+<br>
+
+<h3 id="IO复用（multiplexing）"><a href="#IO复用（multiplexing）" class="headerlink" title="IO复用（multiplexing）"></a>IO复用（multiplexing）</h3><p>Linux用select&#x2F;poll&#x2F;epoll函数实现IO复用模型，这些函数也会使进程阻塞，但是和阻塞IO所不同的是这些函数<strong>可以同时阻塞多个IO操作</strong>。而且可以<strong>同时对多个读操作、写操作的IO函数进行检测</strong>。直到有数据可读或可写时，才真正调用IO操作函数。</p>
+<p>用于在一个服务端线程中响应多个客户端，但是不是处理高并发的（多线程多进程）。</p>
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304002733110.png" alt="image-20230304002733110" style="zoom:80%;">
+
+<br>
+
+<h3 id="信号驱动（signal-driven）"><a href="#信号驱动（signal-driven）" class="headerlink" title="信号驱动（signal-driven）"></a>信号驱动（signal-driven）</h3><p>Linux用套接口进行信号驱动IO，安装一个<strong>信号处理函数</strong>，进程继续运行并不阻塞。当IO事件就绪，进程收到SIGIO信号，然后处理IO事件。</p>
+<ul>
+<li>内核在数据准备阶段是异步的，在数据读写结段是同步的</li>
+<li>与非阻塞IO的区别在于它提供了消息通知机制，不需要用户进程不断轮询检查，减少了系统API的调用次数，提高了效率</li>
+</ul>
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304003340232.png" alt="image-20230304003340232" style="zoom:80%;">
+
+<br>
+
+<h3 id="异步IO（asynchronous）"><a href="#异步IO（asynchronous）" class="headerlink" title="异步IO（asynchronous）"></a>异步IO（asynchronous）</h3><p>Linux中，可以调用 aio_read 函数告诉内核<strong>描述符缓冲区指针</strong>和<strong>缓冲区的大小</strong>、<strong>文件偏移</strong>及<strong>通知的方式</strong>等，然后立即返回，当内核将数据拷贝到缓冲区后，在通知应用程序。</p>
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304004046738.png" alt="image-20230304004046738" style="zoom:80%;">
+
+<br>
+
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304004303084.png" alt="image-20230304004303084" style="zoom:80%;">
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h2 id="5-3-Web服务器简介及http协议"><a href="#5-3-Web服务器简介及http协议" class="headerlink" title="5.3 Web服务器简介及http协议"></a>5.3 Web服务器简介及http协议</h2><h3 id="Web-Server"><a href="#Web-Server" class="headerlink" title="Web Server"></a>Web Server</h3><p>网页服务器</p>
+<p>一个 Web Server 就是一个<strong>服务器软件</strong>（程序），或者是<strong>运行这个服务器软件的硬件</strong>（计算机）。</p>
+<p>其主要功能就是通过 <strong>HTTP</strong> 协议与<strong>客户端</strong>（通常是浏览器Browser）进行<strong>通信</strong>，来<strong>接收、存储、处理</strong>来自客户端的 <strong>HTTP请求</strong> ，并对其请求做出 <strong>HTTP响应</strong> ，返回给客户端其请求的内容（<strong>文件、网页等</strong>）或返回一个 <strong>Error 信息</strong>。</p>
+<br>
+
+<p><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304004705396.png" alt="image-20230304004705396"></p>
+<br>
+
+<p>通常用户使用 Web浏览器 与相应服务器进行通信。在浏览器中键入<strong>”域名“或”IP:Port“</strong>，浏览器先将你的<strong>域名解析成相应的IP地址</strong>或者直接根据你的IP地址向对应的Web服务器发送一个 <strong>HTTP请求</strong> 。这一过程首先要通过<strong>TCP协议的三次握手</strong>建立与目标Web服务器的连接，然后HTTP协议生成针对目标Web服务器的<strong>HTTP请求报文</strong>，通过<strong>TCP、IP等协议</strong>发送到目标服务器上。</p>
+<br>
+
+<br>
+
+<br>
+
+<h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><p><strong>简介</strong></p>
+<p><strong>超文本传输协议</strong>（Hypertext Transfer Protocol，HTTP）是一个简单的 <strong>请求-响应</strong> 协议，它通常运行在 TCP 之上。</p>
+<ul>
+<li>它指定了客户端可能发送给服务器<strong>什么样的消息</strong>以及得到<strong>什么样的响应</strong>。</li>
+<li>请求和响应消息的<strong>头</strong>以 ASCII 形式给出；而<strong>消息内容</strong>则具有一个类似 MIME 的格式。</li>
+<li>HTTP是万维网的数据通信的基础。</li>
+</ul>
+<p><strong>概述</strong></p>
+<p>HTTP 是一个客户端终端（用户）和服务器端（网站）请求和应答的标准（TCP）。</p>
+<ul>
+<li>通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个<strong>客户端</strong>为<strong>用户代理程序</strong>（user agent）。</li>
+<li>应答的服务器上存储着一些资源，比如 HTML 文件和图像。我们称这个<strong>应答服务器</strong>为<strong>源服务器</strong>（origin server）。在用户代理和源服务器中间可能存在多个“<strong>中间层</strong>”，比如<strong>代理服务器</strong>、<strong>网关</strong>或者<strong>隧道</strong>（tunnel）。</li>
+<li>尽管 TCP&#x2F;IP 协议是互联网上最流行的应用，HTTP 协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议上，或其他网络上实现。<strong>HTTP 假定其下层协议提供可靠的传输</strong>。因此，任何能够提供这种保证的协议都可以被其使用。因此也就是其在  TCP&#x2F;IP 协议族使用 TCP 作为其传输层。</li>
+</ul>
+<p>通常，由HTTP客户端发起一个请求，创建一个到服务器指定端口（默认是80端口）的 TCP 连接。HTTP服务器则在那个端口监听客户端的请求。一旦收到请求，服务器会向客户端返回一个状态，比如”HTTP&#x2F;1.1 200 OK”，以及返回的内容，如请求的文件、错误消息、或者其它信息。</p>
+<br>
+
+<p><strong>工作原理</strong></p>
+<p>HTTP 协议定义 Web 客户端如何从 Web 服务器请求 Web 页面，以及服务器如何把 Web 页面传送给客户端。HTTP 协议采用了<strong>请求&#x2F;响应模型</strong>。</p>
+<ul>
+<li>客户端向服务器发送一个<strong>请求报文</strong>，请求报文包含<strong>请求的方法</strong>、<strong>URL</strong>、<strong>协议版本</strong>、<strong>请求头部</strong>和<strong>请求数据</strong>。</li>
+<li>服务器以一个<strong>状态行</strong>作为响应，响应的内容包括<strong>协议的版本</strong>、<strong>成功或者错误代码</strong>、<strong>服务器信息</strong>、<strong>响应头部</strong>和<strong>响应数据</strong>。</li>
+</ul>
+<p><strong>HTTP请求&#x2F;响应的步骤：</strong></p>
+<ol>
+<li>客户端连接到 Web服务器<ul>
+<li>客户端比如浏览器，与Web服务器的HTTP端口(默认为<strong>80</strong>)建立一个TCP套接字连接</li>
+</ul>
+</li>
+<li>客户端发送HTTP请求<ul>
+<li>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由 <strong>请求行</strong>、<strong>请求头部</strong>、<strong>空行</strong>和<strong>请求数据</strong> 4部分组成</li>
+</ul>
+</li>
+<li>服务器接受请求并返回HTTP响应<ul>
+<li>Web服务器<strong>解析请求</strong>，<strong>定位请求资源</strong>。</li>
+<li>服务器<strong>将资源副本写到TCP套接字</strong>，由客户端读取。</li>
+<li>一个响应由 <strong>状态行</strong>、<strong>响应头部</strong>、<strong>空行</strong>和<strong>响应数据</strong> 4部分组成</li>
+</ul>
+</li>
+<li>释放连接 TCP 连接<ul>
+<li>若 connection 模式为 <strong>close</strong> ，则服务器主动关闭 TCP 连接，客户端被动关闭连接，释放TCP连接；</li>
+<li>若 connection 模式为 <strong>keepalive</strong> ，则该连接会保持一段时间，在该时间内可以继续接收请求；</li>
+</ul>
+</li>
+<li>客户端浏览器解析 HTML 内容<ul>
+<li>客户端浏览器<strong>首先解析状态行</strong>，查看表明请求是否成功的状态代码。<strong>然后解析每一个响应头</strong>，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口显示。</li>
+</ul>
+</li>
+</ol>
+<br>
+
+<p>例如：在浏览器地址栏输入URL，按下回车之后</p>
+<ol>
+<li>浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的IP地址</li>
+<li>解析出IP地址后，根据该IP地址和默认端口80，和服务器建立TCP连接</li>
+<li>浏览器发出读取文件（URL中域名后面部分对应的文件）的HTTP请求，该请求报文作为TCP三次握手的第三个报文的数据发送给服务器</li>
+<li>服务器对浏览器请求做出响应，并把对应的HTML文本发送给浏览器</li>
+<li>释放TCP连接</li>
+<li>浏览器将解析该HTML文本并显示内容</li>
+</ol>
+<br>
+
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304011652447.png" alt="image-20230304011652447" style="zoom:80%;">
+
+<blockquote>
+<p>HTTP协议规定，请求从客户端发出，最后服务端响应请求并返回。也即，是先从客户端开始建立通信的，<strong>服务端在没有接收到请求之前不会发送响应</strong>。</p>
+</blockquote>
+<br>
+
+<br>
+
+<br>
+
+<h3 id="http报文格式"><a href="#http报文格式" class="headerlink" title="http报文格式"></a>http报文格式</h3><p><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304015519816.png" alt="请求报文格式"></p>
+<p><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304015552413.png" alt="响应报文格式"></p>
+<br>
+
+<p>Web服务器要<strong>解析请求，并生成响应信息</strong></p>
+<br>
+
+<p>我们要了解各种<strong>请求头响应头</strong>的含义，以及<strong>状态码</strong>的含义</p>
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304020932915.png" alt="image-20230304020932915" style="zoom:80%;">
+
+<br>
+
+<p>HTTP请求的各种<strong>请求方法</strong>，这里主要用 GET 和 POST<br><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304021118740.png" alt="image-20230304021118740" style="zoom:80%;"></p>
+<br>
+
+<br>
+
+<br>
+
+<h2 id="5-4-服务器编程基本框架"><a href="#5-4-服务器编程基本框架" class="headerlink" title="5.4 服务器编程基本框架"></a>5.4 服务器编程基本框架</h2><p>以及两种高效的<strong>事件处理模式</strong></p>
+<br>
+
+<h3 id="基本框架"><a href="#基本框架" class="headerlink" title="基本框架"></a>基本框架</h3><p>Web 服务器程序种类繁多，但基本框架都一样，不同之处在于逻辑处理。</p>
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304022023757.png" alt="image-20230304022023757" style="zoom:80%;">
+
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>I&#x2F;O 处理单元</td>
+<td>处理客户连接，读写网络数据</td>
+</tr>
+<tr>
+<td>逻辑单元</td>
+<td>业务进程或线程</td>
+</tr>
+<tr>
+<td>网络存储单元</td>
+<td>数据库、文件或缓存</td>
+</tr>
+<tr>
+<td>请求队列</td>
+<td>各单元之间的通信方式</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p><strong>I&#x2F;O处理单元</strong>是服务器管理客户连接的模块。它通常要完成一下工作：</p>
+<ul>
+<li>等待并接受新的客户链接</li>
+<li>接收客户数据</li>
+<li>将服务器响应数据返回给客户端</li>
+</ul>
+<p>但是数据的收发不一定在I&#x2F;O处理单元中执行，也可能在逻辑单元中执行，具体取决于事件处理模式</p>
+</li>
+<li><p>一个<strong>逻辑单元</strong>通常是一个进程或线程。它分析并处理客户数据，然后将结果<strong>传递给I&#x2F;O处理单元</strong>或者<strong>直接发送给客户端</strong>（取决于事件处理模式）。服务器通常拥有多个逻辑单元，以实现对多个客户任务的并发处理</p>
+</li>
+<li><p><strong>网络存储单元</strong>可以是数据库、缓存和文件，但不是必须的</p>
+</li>
+<li><p><strong>请求队列</strong>是个单元之间的通信方式的抽象。</p>
+<ul>
+<li>I&#x2F;O处理单元接收到客户请求时，需要以某种方式通知一个逻辑单元来处理该请求。</li>
+<li>同样，多个逻辑单元同时访问一个存储单元时，也需要采用某种机制来协调处理竞态条件。</li>
+<li>请求队列通常被实现为<strong>池(进程池、线程池)的一部分</strong>。</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<br>
+
+<h3 id="两种高效的事件处理模式"><a href="#两种高效的事件处理模式" class="headerlink" title="两种高效的事件处理模式"></a>两种高效的事件处理模式</h3><p>服务器程序通常需要处理三类事件：</p>
+<ul>
+<li>I&#x2F;O事件</li>
+<li>信号</li>
+<li>定时事件</li>
+</ul>
+<br>
+
+<p>两种高效的事件处理模式：</p>
+<ul>
+<li><strong>Reactor</strong>   (一般用同步I&#x2F;O模型实现)</li>
+<li><strong>Proactor</strong>  (一般用异步I&#x2F;O模型实现，或者用同步I&#x2F;O模型模拟)</li>
+</ul>
+<br>
+
+<h4 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h4><ul>
+<li><p>要求<strong>主线程</strong>(<strong>I&#x2F;O处理单元</strong>)只负责<u>监听文件描述符上是否有事件发生</u>，有的话就立即将该事件通知<strong>工作线程</strong>（<strong>逻辑单元</strong>），将socket可读可写事件放入<strong>请求队列</strong>，交给工作线程处理。除此之外，主线程不做任何其他实质性的工作。</p>
+</li>
+<li><p><u>读写数据，接受新的连接，以及处理客户请求</u>均在<strong>工作线程</strong>中完成。</p>
+</li>
+</ul>
+<br>
+
+<p>使用同步I&#x2F;O(epoll_wait为例)实现的Reactor模式的工作流程：</p>
+<ol>
+<li>主线程往epoll内核事件表中注册socket上的读就绪事件</li>
+<li>主线程调用epoll_wait等待socket上有数据可读</li>
+<li>当socket上有数据可读时，epoll_wait通知主线程。主线程则将socket可读事件放入请求队列</li>
+<li>睡眠在请求队列上的某个工作线程被唤醒，它从socket读取数据，并处理客户请求，然后往epoll内核事件表中注册该socket上的写就绪事件</li>
+<li>主线程调用epoll_wait等待socket可写</li>
+<li>当socket可写时，epoll_wait通知主线程。主线程将socket可写事件放入请求队列</li>
+<li>睡眠在请求队列上的某个工作线程被唤醒，他往socket上写入服务器处理客户请求的结果</li>
+</ol>
+<br>
+
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304030515214.png" alt="image-20230304030515214" style="zoom:90%;">
+
+<br>
+
+<br>
+
+<h4 id="Proactor"><a href="#Proactor" class="headerlink" title="Proactor"></a>Proactor</h4><ul>
+<li>将所有的<strong>I&#x2F;O操作</strong>都交给<strong>主线程和内核</strong>来处理(进行读、写)，<strong>工作线程仅仅负责业务逻辑</strong>。</li>
+</ul>
+<br>
+
+<p>使用异步I&#x2F;O模型实现的Proactor模式的工作流程：（以 aio_read 和 aio_wirte 为例)</p>
+<ol>
+<li><strong>主线程</strong>调用 aio_read 函数向内核注册socket上的<strong>读完成事件</strong>，并告诉内核用户<strong>读缓冲区的位置</strong>，以及读操作完成时<strong>如何通知应用程序</strong>(这里以信号为例)</li>
+<li>主线程继续处理其他逻辑</li>
+<li>当socket上的数据被读入缓冲区后，内核将向应用程序发送一个信号，以通知应用程序数据已经可用</li>
+<li><strong>应用程序</strong>预先定义好的<strong>信号处理函数</strong>选择一个工作线程来处理客户请求。<br><strong>工作线程</strong>处理完客户请求后，调用 aio_write 函数向内核注册socket上的写完成事件，并告诉内核用户写缓冲区的位置，以及写操作完成时如何通知应用程序。</li>
+<li>主线程继续处理其他逻辑</li>
+<li>当用户数据被写入socket之后，内核将向应用程序发送以一个信号，以通知应用程序数据已经发送完毕</li>
+<li>应用程序预先定义好的信号处理函数选择一个工作线程来做善后工作，比如决定是否关闭socket</li>
+</ol>
+<br>
+
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304032743438.png" alt="image-20230304032743438" style="zoom:90%;">
+
+
+
+<br>
+
+<br>
+
+<h4 id="模拟Proactor模式"><a href="#模拟Proactor模式" class="headerlink" title="模拟Proactor模式"></a>模拟Proactor模式</h4><p>使用<strong>同步I&#x2F;O</strong>方式模拟Procator模式。</p>
+<p><strong>原理</strong>：主线程执行数据读写操作，读写完成之后，主线程向工作线程通知这一”完成事件”。从工作线程的角度看，它们就直接获得了数据读写的结果，接下来要做的只是对读写的结果进行逻辑处理。</p>
+<br>
+
+<p>使用同步I&#x2F;O模型(epoll_wait为例)模拟Proactor模式的工作流程：</p>
+<ol>
+<li>主线程往epoll内核事件表中注册socket上的读就绪事件</li>
+<li>主线程调用epoll_wait等待socket上有数据可读</li>
+<li>当socket上有数据可读时，epoll_wait通知主线程。主线程从socket循环读取数据，直到没有更多数据可读，然后将读取到的数据封装成一个请求对象并插入请求队列</li>
+<li>睡眠在请求队列上的某个工作线程被唤醒，它获得请求对象并处理客户请求，然后往epoll内核事件表中注册socket上的写就绪事件</li>
+<li>主线程调用epoll_wait等待socket可写</li>
+<li>当socket可写时，epoll_wait通知主线程。主线程往socket上写入服务器处理客户请求的结果</li>
+</ol>
+<br>
+
+<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304033941878.png" alt="image-20230304033941878" style="zoom:90%;">
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h2 id="5-5-线程同步机制类封装及线程池实现"><a href="#5-5-线程同步机制类封装及线程池实现" class="headerlink" title="5.5 线程同步机制类封装及线程池实现"></a>5.5 线程同步机制类封装及线程池实现</h2><h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>线程池是由服务器预先创建的一组子线程，线程池中的线程数量应该和 CPU 数量差不多。</p>
+<ul>
+<li>线程池中的所有子线程都运行着相同的代码。</li>
+<li>当有新的任务到来时，主线程将通过某种方式选择线程池中的某一个子线程来为之服务。</li>
+<li>相于与动态的创建子线程，选择一个已经存在的子线程的代价显然要小得多。</li>
+<li>至于主线程选择哪个子线程来为新任务服务，则有多种方式：<ul>
+<li>主线程使用<strong>某种算法</strong>来主动选择子线程。最简单、最常用的算法是随机算法和 Round Robin（轮流选取）算法，但更优秀、更智能的算法将使任务在各个工作线程中更均匀地分配，从而减轻服务器的整体压力。</li>
+<li>主线程和所有子线程通过一个<strong>共享的工作队列</strong>来同步，子线程都睡眠在该工作队列上。当有新的任务到来时，主线程将任务添加到工作队列中。这将唤醒正在等待任务的子线程，不过只有一个子线程将获得新任务的”接管权“，它可以从工作队列中取出任务并执行之，而其他子线程将继续睡眠在工作队列上。</li>
+</ul>
+</li>
+</ul>
+<br>
+
+<p><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304143320886.png" alt="线程池模型"></p>
+<br>
+
+<p><strong>线程数量</strong></p>
+<p>线程池中的<strong>线程数量最直接的限制因素</strong>是中央处理器(CPU)的处理器(processors&#x2F;cores)的数量N ：如果你的CPU是4-cores的，对于<strong>CPU密集型</strong>的任务(如视频剪辑等消耗CPU计算资源的任务)来说，那线程池中的线程数量最好也设置为4（或者+1防止其他因素造成的线程阻塞）；对于<strong>IO密集型</strong>的任务，一般要多于CPU的核数，因为线程间竞争的不是CPU的计算资源而是IO，IO的处理一般较慢，多于cores数的线程将为CPU争取更多的任务，不至在线程处理IO的过程造成CPU空闲导致资源浪费。</p>
+<p>还可以动态控制线程池中的线程数量。</p>
+<br>
+
+<p><strong>线程池的特点</strong></p>
+<ul>
+<li><strong>空间换时间</strong>，浪费服务器的硬件资源，换取运行效率。</li>
+<li>池是一组资源的集合，这组资源在服务器启动之初就被完全创建好并初始化，这称为<strong>静态资源</strong>。</li>
+<li>当服务器进入正式运行阶段，开始处理客户请求的时候，如果它需要相关的资源，可以直接从池中获取，<strong>无需动态分配</strong>。</li>
+<li>当服务器处理完一个客户连接后，可以把相关的资源放回池中，<strong>无需执行系统调用释放资源</strong>。</li>
+</ul>
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<br>
+
+<h2 id="5-6-其他内容"><a href="#5-6-其他内容" class="headerlink" title="5.6 其他内容"></a>5.6 其他内容</h2><p><strong>EPOLLONESHOT事件</strong></p>
+<ul>
+<li>即使可以使用 ET 模式，一个socket 上的某个事件还是可能被触发多次。这在并发程序中就会引起一个问题。比如一个线程在读取完某个 socket 上的数据后开始处理这些数据，而在数据的处理过程中该socket 上又有新数据可读（EPOLLIN 再次被触发），此时另外一个线程被唤醒来读取这些新的数据。于是就出现了两个线程同时操作一个 socket 的局面。一个socket连接在任一时刻都只被一个线程处理，可以使用 epoll 的 EPOLLONESHOT 事件实现。</li>
+<li>对于注册了 EPOLLONESHOT 事件的文件描述符，操作系统最多触发其上注册的一个可读、可写或者异常事件，且只触发一次，除非我们使用 epoll_ctl 函数重置该文件描述符上注册的 EPOLLONESHOT 事件。这样，当一个线程在处理某个 socket 时，其他线程是不可能有机会操作该 socket 的。但反过来思考，注册了 EPOLLONESHOT 事件的 socket 一旦被某个线程处理完毕， 该线程就应该立即重置这个socket 上的 EPOLLONESHOT 事件，以确保这个 socket 下一次可读时，其 EPOLLIN 事件能被触发，进而让其他工作线程有机会继续处理这个 socket。</li>
+</ul>
+<br>
+
+<br>
+
+<br>
+
+<p><strong>有限状态机</strong></p>
+<ol>
+<li>有限状态机：逻辑单元内部的一种高效编程方法：有限状态机（finite state machine）。有的应用层协议头部包含数据包类型字段，每种类型可以映射为逻辑单元的一种执行状态，服务器可以根据它来编写相应的处理逻辑。如下是一种状态独立的有限状态机：</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">STATE_MACHINE</span>( Package _pack )</span><br><span class="line">&#123;</span><br><span class="line">	PackageType _type = _pack.<span class="built_in">GetType</span>();</span><br><span class="line">	<span class="keyword">switch</span>( _type )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">case</span> type_A:</span><br><span class="line">			<span class="built_in">process_package_A</span>( _pack );</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> type_B:</span><br><span class="line">			<span class="built_in">process_package_B</span>( _pack );</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="comment">// 上面是一个简单的有限状态机，只不过该状态机的每个状态都是相互独立的，即状态之间没有相互转移。</span></span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>状态之间的转移是需要状态机内部驱动，如下代码：</li>
+</ol>
+<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">STATE_MACHINE</span>()</span><br><span class="line">&#123;</span><br><span class="line">	State cur_State = type_A;</span><br><span class="line">	<span class="keyword">while</span>( cur_State != type_C )</span><br><span class="line">	&#123;</span><br><span class="line">		Package _pack = <span class="built_in">getNewPackage</span>();</span><br><span class="line">		<span class="keyword">switch</span>( cur_State )</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> type_A:</span><br><span class="line">                <span class="built_in">process_package_state_A</span>( _pack );</span><br><span class="line">                cur_State = type_B;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> type_B:</span><br><span class="line">                <span class="built_in">process_package_state_B</span>( _pack );</span><br><span class="line">                cur_State = type_C;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该状态机包含三种状态：type_A、type_B 和 type_C，其中 type_A 是状态机的开始状态，type_C 是状态机的结束状态。状态机的当前状态记录在 cur_State 变量中。在一趟循环过程中，状态机先通getNewPackage 方法获得一个新的数据包，然后根据 cur_State 变量的值判断如何处理该数据包。数据包处理完之后，状态机通过给 cur_State 变量传递目标状态值来实现状态转移。那么当状态机进入下一趟循环时，它将执行新的状态对应的逻辑。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>C++开发</category>
+        <category>高性能服务器</category>
+      </categories>
+      <tags>
+        <tag>web服务器</tag>
       </tags>
   </entry>
   <entry>
@@ -4596,443 +5444,85 @@
       </tags>
   </entry>
   <entry>
-    <title>第五章项目实战</title>
-    <url>/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/</url>
-    <content><![CDATA[<h1 id="5-项目相关知识点"><a href="#5-项目相关知识点" class="headerlink" title="5.项目相关知识点"></a>5.项目相关知识点</h1><br>
-
-<br>
-
-<br>
-
-<h2 id="5-1-阻塞-x2F-非阻塞，同步-x2F-异步"><a href="#5-1-阻塞-x2F-非阻塞，同步-x2F-异步" class="headerlink" title="5.1 阻塞&#x2F;非阻塞，同步&#x2F;异步"></a>5.1 阻塞&#x2F;非阻塞，同步&#x2F;异步</h2><p>此处是对于 <strong>网络IO</strong></p>
-<p>IO的两个阶段：1.<strong>数据就绪</strong> 2.<strong>数据读写</strong></p>
-<br>
-
-<p><strong>数据就绪</strong>	操作系统、内核缓冲区中</p>
-<ul>
-<li>阻塞   ：调用IO方法的线程进入阻塞状态</li>
-<li>非阻塞  ：不改变线程的状态，通过返回值判断</li>
+    <title>邮件服务实现思路</title>
+    <url>/2024/01/05/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/</url>
+    <content><![CDATA[<h2 id="Mail-Server"><a href="#Mail-Server" class="headerlink" title="Mail Server"></a>Mail Server</h2><ul>
+<li>管理玩家的邮箱数据，包括从数据库（数据库代理服务器）加载、修改并保存到数据库<ul>
+<li>与数据库代理的交互，会有监控机制监控操作是否成功，若不成功则会进行重试</li>
+<li>重试次数会有上限，或者限流，防止压垮数据库</li>
 </ul>
-<br>
-
-<p><strong>数据读写</strong>	缓冲区的数据&lt;–&gt;内存</p>
-<ul>
-<li>同步   : 应用程序自行读写</li>
-<li>异步   : 操作系统辅助读写   （异步IO接口、通知方式）</li>
+</li>
+<li>向GS请求验证玩家是否满足接受邮件的条件</li>
+<li>向GS请求验证玩家是否满足领取附件的条件</li>
+<li>向GS通知玩家领取附件</li>
+<li>与客户端直接进行交互（由GS转发）<ul>
+<li>客户端视角：<ul>
+<li>获取所有邮件</li>
+<li>设置已读</li>
+<li>删除邮件</li>
+<li>领取附件</li>
 </ul>
-<br>
-
+</li>
+<li>Mail Server 视角：<ul>
+<li>同步邮箱</li>
+<li>同步新邮件</li>
+<li>数据增删查改</li>
+<li>邮件过期通知</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <span id="more"></span>
 
-<blockquote>
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230303232426115.png" alt="image-20230303232426115" style="zoom:80%;">
-
-<p>陈硕：在处理IO的时候，阻塞和非阻塞都是同步IO，只有使用了特殊的API才是异步IO</p>
-</blockquote>
-<br>
-
-<p>对于网络IO</p>
-<ul>
-<li>一个典型的<strong>网络IO接口调用</strong>，分为两个阶段，分别是“<strong>数据就绪</strong>” 和 “<strong>数据读写</strong>”<ul>
-<li><strong>数据就绪</strong>阶段分为<strong>阻塞和非阻塞</strong>，表现得结果就是，<strong>阻塞当前线程</strong>或是<strong>直接返回</strong>。</li>
+<h2 id="Game-Server"><a href="#Game-Server" class="headerlink" title="Game Server"></a>Game Server</h2><ul>
+<li>注册到 Mail Server 后，Mail Server 同步过来该服（所在group）的所有邮件</li>
+<li>验证玩家是否符合接收邮件的条件，并将符合的邮件及其对应的玩家告知 Mail Server，Mail Server更新邮件数据</li>
+<li>验证玩家是否符合接受附件的条件，符合则在GS这边更新玩家的附件内容，并告知 Mail Server 附件条件符合的玩家情况，Mail Server 更新玩家邮件附件领取状态</li>
+<li>GS发送广播邮件过程<ul>
+<li>GS 先向 Mail Server 通知要发送广播邮件</li>
+<li>Mail Server 更新 GS 的广播邮件数据，并发给 GS 验证广播邮件的请求</li>
+<li>GS 分帧验证符合接收邮件条件的在线玩家，并将符合情况发给 Mail Server</li>
+<li>Mail Server 更新各个在线玩家的邮件数据，并给对应的在线玩家发送该广播邮件（由GS转发）</li>
+</ul>
+</li>
+<li>GS发送单播邮件过程<ul>
+<li>GS 先向 Mail Server 通知要发送单播邮件给某个玩家</li>
+<li>Mail Server 更新玩家数据，并给对应玩家发送该广播邮件（由GS转发）</li>
 </ul>
 </li>
 </ul>
-<br>
-
-<ul>
-<li><p><strong>同步</strong>表示A向B请求调用一个网络IO接口时（或者调用某个业务逻辑API接口时），<strong>数据的读写</strong>都是由<strong>请求方A自己来完成的</strong>（不管是阻塞还是非阻塞）</p>
-</li>
-<li><p><strong>异步</strong>表示A向B请求调用一个网络IO接口时（或者调用某个业务逻辑API接口时），向B传入<strong>请求的事件</strong>以及<strong>事件发生时通知的方式</strong>，<strong>A就可以处理其它逻辑了</strong>，当B监听到事件处理完成后，会用事先约定好的通知方式，通知A处理结果。</p>
-<ul>
-<li><p>同步阻塞</p>
-</li>
-<li><p>同步非阻塞</p>
-</li>
-<li><p>异步阻塞</p>
-</li>
-<li><p>异步非阻塞</p>
-</li>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="GS广播邮件时不在线的玩家，在其上线后如何收到邮件"><a href="#GS广播邮件时不在线的玩家，在其上线后如何收到邮件" class="headerlink" title="GS广播邮件时不在线的玩家，在其上线后如何收到邮件"></a>GS广播邮件时不在线的玩家，在其上线后如何收到邮件</h3><ul>
+<li>首先，Mail Server 记录有每个玩家已接收的最新邮件序号，记录有 GS（所在group）上的所有邮件</li>
+<li>可以推测，每当 Mail Server 向 GS 请求验证完玩家收取邮件的条件后，若玩家能够接收邮件，Mail Server 会更新其收到的最新邮件序号</li>
+<li>于是，不在线的玩家的最新邮件序号可能是过时的，当玩家登陆时，Mail Server 要向GS请求验证该玩家的邮件接收</li>
+<li>GS 的做法是，从玩家的最新邮件序号开始，遍历自己同步到的邮件列表，验证每一个序号大于玩家当前最新邮件序号的邮件，并将符合的邮件的序号加入到回包中，发回给 Mail Server</li>
+<li>Mail Server 根据验证情况，更新玩家的邮件数据和最新邮件序号</li>
+</ul>
+<h3 id="客户端的视角"><a href="#客户端的视角" class="headerlink" title="客户端的视角"></a>客户端的视角</h3><ul>
+<li>客户端登陆后，Mail Server 会收到玩家上线通知，并加载玩家的邮箱数据</li>
+<li>Mail Server 加载完成后，通知客户端加载完成（但不立即同步邮箱数据）</li>
+<li>客户端通过 UI 交互触发同步邮箱数据请求，Mail Server 发送邮箱同步数据</li>
+<li>客户端之后可以通过检查邮箱数据请求，与 Mail Server 校对邮箱数据是否是最新的（通过最新邮件序号）<ul>
+<li>不是最新的的话，Mail Server 需要发送同步数据给客户都</li>
 </ul>
 </li>
+<li>客户端可以进行邮件的读取、删除、领取附件的请求</li>
+<li>客户端在线时，若有新的邮件，Mail Server 会发送单个邮件同步数据过来</li>
 </ul>
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<h2 id="5-2-Linux的五种IO模型"><a href="#5-2-Linux的五种IO模型" class="headerlink" title="5.2 Linux的五种IO模型"></a>5.2 Linux的五种IO模型</h2><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230303232426115.png" alt="image-20230303232426115" style="zoom:80%;">
-
-<h3 id="阻塞-blocking"><a href="#阻塞-blocking" class="headerlink" title="阻塞 blocking"></a>阻塞 blocking</h3><p>调用者调用了某个函数，等待这个函数返回，期间什么也不做，不停的去检查这个函数有没有返回，必须等待这个函数返回才能进行下一步操作。</p>
-<p>以read为例：</p>
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304000806869.png" alt="image-20230304000806869" style="zoom:80%;">
-
-<br>
-
-<h3 id="非阻塞-non-blocking（NIO）"><a href="#非阻塞-non-blocking（NIO）" class="headerlink" title="非阻塞 non-blocking（NIO）"></a>非阻塞 non-blocking（NIO）</h3><p>非阻塞等待，每隔一段时间就去检测IO事件是否就绪，若没有就绪就可以做其他事。</p>
-<p>非阻塞I&#x2F;O执行系统调用总是立即返回，不管事件是否已经发生。若事件没有发生，则返回-1，此时可以根据errno区分情况。</p>
-<p>对于<strong>accept，recv和send</strong>，事件未发生时，errno通常被设置为<strong>EAGAIN</strong>。</p>
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304001316512.png" alt="image-20230304001316512" style="zoom:80%;">
-
-<br>
-
-<h3 id="IO复用（multiplexing）"><a href="#IO复用（multiplexing）" class="headerlink" title="IO复用（multiplexing）"></a>IO复用（multiplexing）</h3><p>Linux用select&#x2F;poll&#x2F;epoll函数实现IO复用模型，这些函数也会使进程阻塞，但是和阻塞IO所不同的是这些函数<strong>可以同时阻塞多个IO操作</strong>。而且可以<strong>同时对多个读操作、写操作的IO函数进行检测</strong>。直到有数据可读或可写时，才真正调用IO操作函数。</p>
-<p>用于在一个服务端线程中响应多个客户端，但是不是处理高并发的（多线程多进程）。</p>
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304002733110.png" alt="image-20230304002733110" style="zoom:80%;">
-
-<br>
-
-<h3 id="信号驱动（signal-driven）"><a href="#信号驱动（signal-driven）" class="headerlink" title="信号驱动（signal-driven）"></a>信号驱动（signal-driven）</h3><p>Linux用套接口进行信号驱动IO，安装一个<strong>信号处理函数</strong>，进程继续运行并不阻塞。当IO事件就绪，进程收到SIGIO信号，然后处理IO事件。</p>
-<ul>
-<li>内核在数据准备阶段是异步的，在数据读写结段是同步的</li>
-<li>与非阻塞IO的区别在于它提供了消息通知机制，不需要用户进程不断轮询检查，减少了系统API的调用次数，提高了效率</li>
+<h3 id="Mail-Server-的性能考虑"><a href="#Mail-Server-的性能考虑" class="headerlink" title="Mail Server 的性能考虑"></a>Mail Server 的性能考虑</h3><ul>
+<li>数据结构：邮件数据以有序的形式组织</li>
+<li>用户量：只有当玩家上线或者需要给玩家发送邮件时，才从数据库中加载玩家的邮箱数据</li>
+<li>过期处理：仅对在线玩家做实时的过期判断</li>
+<li>每帧限制处理数量，防止卡帧丢帧</li>
 </ul>
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304003340232.png" alt="image-20230304003340232" style="zoom:80%;">
-
-<br>
-
-<h3 id="异步IO（asynchronous）"><a href="#异步IO（asynchronous）" class="headerlink" title="异步IO（asynchronous）"></a>异步IO（asynchronous）</h3><p>Linux中，可以调用 aio_read 函数告诉内核<strong>描述符缓冲区指针</strong>和<strong>缓冲区的大小</strong>、<strong>文件偏移</strong>及<strong>通知的方式</strong>等，然后立即返回，当内核将数据拷贝到缓冲区后，在通知应用程序。</p>
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304004046738.png" alt="image-20230304004046738" style="zoom:80%;">
-
-<br>
-
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304004303084.png" alt="image-20230304004303084" style="zoom:80%;">
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<h2 id="5-3-Web服务器简介及http协议"><a href="#5-3-Web服务器简介及http协议" class="headerlink" title="5.3 Web服务器简介及http协议"></a>5.3 Web服务器简介及http协议</h2><h3 id="Web-Server"><a href="#Web-Server" class="headerlink" title="Web Server"></a>Web Server</h3><p>网页服务器</p>
-<p>一个 Web Server 就是一个<strong>服务器软件</strong>（程序），或者是<strong>运行这个服务器软件的硬件</strong>（计算机）。</p>
-<p>其主要功能就是通过 <strong>HTTP</strong> 协议与<strong>客户端</strong>（通常是浏览器Browser）进行<strong>通信</strong>，来<strong>接收、存储、处理</strong>来自客户端的 <strong>HTTP请求</strong> ，并对其请求做出 <strong>HTTP响应</strong> ，返回给客户端其请求的内容（<strong>文件、网页等</strong>）或返回一个 <strong>Error 信息</strong>。</p>
-<br>
-
-<p><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304004705396.png" alt="image-20230304004705396"></p>
-<br>
-
-<p>通常用户使用 Web浏览器 与相应服务器进行通信。在浏览器中键入<strong>”域名“或”IP:Port“</strong>，浏览器先将你的<strong>域名解析成相应的IP地址</strong>或者直接根据你的IP地址向对应的Web服务器发送一个 <strong>HTTP请求</strong> 。这一过程首先要通过<strong>TCP协议的三次握手</strong>建立与目标Web服务器的连接，然后HTTP协议生成针对目标Web服务器的<strong>HTTP请求报文</strong>，通过<strong>TCP、IP等协议</strong>发送到目标服务器上。</p>
-<br>
-
-<br>
-
-<br>
-
-<h3 id="http协议"><a href="#http协议" class="headerlink" title="http协议"></a>http协议</h3><p><strong>简介</strong></p>
-<p><strong>超文本传输协议</strong>（Hypertext Transfer Protocol，HTTP）是一个简单的 <strong>请求-响应</strong> 协议，它通常运行在 TCP 之上。</p>
-<ul>
-<li>它指定了客户端可能发送给服务器<strong>什么样的消息</strong>以及得到<strong>什么样的响应</strong>。</li>
-<li>请求和响应消息的<strong>头</strong>以 ASCII 形式给出；而<strong>消息内容</strong>则具有一个类似 MIME 的格式。</li>
-<li>HTTP是万维网的数据通信的基础。</li>
-</ul>
-<p><strong>概述</strong></p>
-<p>HTTP 是一个客户端终端（用户）和服务器端（网站）请求和应答的标准（TCP）。</p>
-<ul>
-<li>通过使用网页浏览器、网络爬虫或者其它的工具，客户端发起一个HTTP请求到服务器上指定端口（默认端口为80）。我们称这个<strong>客户端</strong>为<strong>用户代理程序</strong>（user agent）。</li>
-<li>应答的服务器上存储着一些资源，比如 HTML 文件和图像。我们称这个<strong>应答服务器</strong>为<strong>源服务器</strong>（origin server）。在用户代理和源服务器中间可能存在多个“<strong>中间层</strong>”，比如<strong>代理服务器</strong>、<strong>网关</strong>或者<strong>隧道</strong>（tunnel）。</li>
-<li>尽管 TCP&#x2F;IP 协议是互联网上最流行的应用，HTTP 协议中，并没有规定必须使用它或它支持的层。事实上，HTTP可以在任何互联网协议上，或其他网络上实现。<strong>HTTP 假定其下层协议提供可靠的传输</strong>。因此，任何能够提供这种保证的协议都可以被其使用。因此也就是其在  TCP&#x2F;IP 协议族使用 TCP 作为其传输层。</li>
-</ul>
-<p>通常，由HTTP客户端发起一个请求，创建一个到服务器指定端口（默认是80端口）的 TCP 连接。HTTP服务器则在那个端口监听客户端的请求。一旦收到请求，服务器会向客户端返回一个状态，比如”HTTP&#x2F;1.1 200 OK”，以及返回的内容，如请求的文件、错误消息、或者其它信息。</p>
-<br>
-
-<p><strong>工作原理</strong></p>
-<p>HTTP 协议定义 Web 客户端如何从 Web 服务器请求 Web 页面，以及服务器如何把 Web 页面传送给客户端。HTTP 协议采用了<strong>请求&#x2F;响应模型</strong>。</p>
-<ul>
-<li>客户端向服务器发送一个<strong>请求报文</strong>，请求报文包含<strong>请求的方法</strong>、<strong>URL</strong>、<strong>协议版本</strong>、<strong>请求头部</strong>和<strong>请求数据</strong>。</li>
-<li>服务器以一个<strong>状态行</strong>作为响应，响应的内容包括<strong>协议的版本</strong>、<strong>成功或者错误代码</strong>、<strong>服务器信息</strong>、<strong>响应头部</strong>和<strong>响应数据</strong>。</li>
-</ul>
-<p><strong>HTTP请求&#x2F;响应的步骤：</strong></p>
-<ol>
-<li>客户端连接到 Web服务器<ul>
-<li>客户端比如浏览器，与Web服务器的HTTP端口(默认为<strong>80</strong>)建立一个TCP套接字连接</li>
-</ul>
-</li>
-<li>客户端发送HTTP请求<ul>
-<li>通过TCP套接字，客户端向Web服务器发送一个文本的请求报文，一个请求报文由 <strong>请求行</strong>、<strong>请求头部</strong>、<strong>空行</strong>和<strong>请求数据</strong> 4部分组成</li>
-</ul>
-</li>
-<li>服务器接受请求并返回HTTP响应<ul>
-<li>Web服务器<strong>解析请求</strong>，<strong>定位请求资源</strong>。</li>
-<li>服务器<strong>将资源副本写到TCP套接字</strong>，由客户端读取。</li>
-<li>一个响应由 <strong>状态行</strong>、<strong>响应头部</strong>、<strong>空行</strong>和<strong>响应数据</strong> 4部分组成</li>
-</ul>
-</li>
-<li>释放连接 TCP 连接<ul>
-<li>若 connection 模式为 <strong>close</strong> ，则服务器主动关闭 TCP 连接，客户端被动关闭连接，释放TCP连接；</li>
-<li>若 connection 模式为 <strong>keepalive</strong> ，则该连接会保持一段时间，在该时间内可以继续接收请求；</li>
-</ul>
-</li>
-<li>客户端浏览器解析 HTML 内容<ul>
-<li>客户端浏览器<strong>首先解析状态行</strong>，查看表明请求是否成功的状态代码。<strong>然后解析每一个响应头</strong>，响应头告知以下为若干字节的HTML文档和文档的字符集。客户端浏览器读取响应数据HTML，根据HTML的语法对其进行格式化，并在浏览器窗口显示。</li>
-</ul>
-</li>
-</ol>
-<br>
-
-<p>例如：在浏览器地址栏输入URL，按下回车之后</p>
-<ol>
-<li>浏览器向 DNS 服务器请求解析该 URL 中的域名所对应的IP地址</li>
-<li>解析出IP地址后，根据该IP地址和默认端口80，和服务器建立TCP连接</li>
-<li>浏览器发出读取文件（URL中域名后面部分对应的文件）的HTTP请求，该请求报文作为TCP三次握手的第三个报文的数据发送给服务器</li>
-<li>服务器对浏览器请求做出响应，并把对应的HTML文本发送给浏览器</li>
-<li>释放TCP连接</li>
-<li>浏览器将解析该HTML文本并显示内容</li>
-</ol>
-<br>
-
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304011652447.png" alt="image-20230304011652447" style="zoom:80%;">
-
-<blockquote>
-<p>HTTP协议规定，请求从客户端发出，最后服务端响应请求并返回。也即，是先从客户端开始建立通信的，<strong>服务端在没有接收到请求之前不会发送响应</strong>。</p>
-</blockquote>
-<br>
-
-<br>
-
-<br>
-
-<h3 id="http报文格式"><a href="#http报文格式" class="headerlink" title="http报文格式"></a>http报文格式</h3><p><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304015519816.png" alt="请求报文格式"></p>
-<p><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304015552413.png" alt="响应报文格式"></p>
-<br>
-
-<p>Web服务器要<strong>解析请求，并生成响应信息</strong></p>
-<br>
-
-<p>我们要了解各种<strong>请求头响应头</strong>的含义，以及<strong>状态码</strong>的含义</p>
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304020932915.png" alt="image-20230304020932915" style="zoom:80%;">
-
-<br>
-
-<p>HTTP请求的各种<strong>请求方法</strong>，这里主要用 GET 和 POST<br><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304021118740.png" alt="image-20230304021118740" style="zoom:80%;"></p>
-<br>
-
-<br>
-
-<br>
-
-<h2 id="5-4-服务器编程基本框架"><a href="#5-4-服务器编程基本框架" class="headerlink" title="5.4 服务器编程基本框架"></a>5.4 服务器编程基本框架</h2><p>以及两种高效的<strong>事件处理模式</strong></p>
-<br>
-
-<h3 id="基本框架"><a href="#基本框架" class="headerlink" title="基本框架"></a>基本框架</h3><p>Web 服务器程序种类繁多，但基本框架都一样，不同之处在于逻辑处理。</p>
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304022023757.png" alt="image-20230304022023757" style="zoom:80%;">
-
-<table>
-<thead>
-<tr>
-<th>模块</th>
-<th>功能</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>I&#x2F;O 处理单元</td>
-<td>处理客户连接，读写网络数据</td>
-</tr>
-<tr>
-<td>逻辑单元</td>
-<td>业务进程或线程</td>
-</tr>
-<tr>
-<td>网络存储单元</td>
-<td>数据库、文件或缓存</td>
-</tr>
-<tr>
-<td>请求队列</td>
-<td>各单元之间的通信方式</td>
-</tr>
-</tbody></table>
-<ul>
-<li><p><strong>I&#x2F;O处理单元</strong>是服务器管理客户连接的模块。它通常要完成一下工作：</p>
-<ul>
-<li>等待并接受新的客户链接</li>
-<li>接收客户数据</li>
-<li>将服务器响应数据返回给客户端</li>
-</ul>
-<p>但是数据的收发不一定在I&#x2F;O处理单元中执行，也可能在逻辑单元中执行，具体取决于事件处理模式</p>
-</li>
-<li><p>一个<strong>逻辑单元</strong>通常是一个进程或线程。它分析并处理客户数据，然后将结果<strong>传递给I&#x2F;O处理单元</strong>或者<strong>直接发送给客户端</strong>（取决于事件处理模式）。服务器通常拥有多个逻辑单元，以实现对多个客户任务的并发处理</p>
-</li>
-<li><p><strong>网络存储单元</strong>可以是数据库、缓存和文件，但不是必须的</p>
-</li>
-<li><p><strong>请求队列</strong>是个单元之间的通信方式的抽象。</p>
-<ul>
-<li>I&#x2F;O处理单元接收到客户请求时，需要以某种方式通知一个逻辑单元来处理该请求。</li>
-<li>同样，多个逻辑单元同时访问一个存储单元时，也需要采用某种机制来协调处理竞态条件。</li>
-<li>请求队列通常被实现为<strong>池(进程池、线程池)的一部分</strong>。</li>
-</ul>
-</li>
-</ul>
-<br>
-
-<br>
-
-<h3 id="两种高效的事件处理模式"><a href="#两种高效的事件处理模式" class="headerlink" title="两种高效的事件处理模式"></a>两种高效的事件处理模式</h3><p>服务器程序通常需要处理三类事件：</p>
-<ul>
-<li>I&#x2F;O事件</li>
-<li>信号</li>
-<li>定时事件</li>
-</ul>
-<br>
-
-<p>两种高效的事件处理模式：</p>
-<ul>
-<li><strong>Reactor</strong>   (一般用同步I&#x2F;O模型实现)</li>
-<li><strong>Proactor</strong>  (一般用异步I&#x2F;O模型实现，或者用同步I&#x2F;O模型模拟)</li>
-</ul>
-<br>
-
-<h4 id="Reactor模式"><a href="#Reactor模式" class="headerlink" title="Reactor模式"></a>Reactor模式</h4><ul>
-<li><p>要求<strong>主线程</strong>(<strong>I&#x2F;O处理单元</strong>)只负责<u>监听文件描述符上是否有事件发生</u>，有的话就立即将该事件通知<strong>工作线程</strong>（<strong>逻辑单元</strong>），将socket可读可写事件放入<strong>请求队列</strong>，交给工作线程处理。除此之外，主线程不做任何其他实质性的工作。</p>
-</li>
-<li><p><u>读写数据，接受新的连接，以及处理客户请求</u>均在<strong>工作线程</strong>中完成。</p>
-</li>
-</ul>
-<br>
-
-<p>使用同步I&#x2F;O(epoll_wait为例)实现的Reactor模式的工作流程：</p>
-<ol>
-<li>主线程往epoll内核事件表中注册socket上的读就绪事件</li>
-<li>主线程调用epoll_wait等待socket上有数据可读</li>
-<li>当socket上有数据可读时，epoll_wait通知主线程。主线程则将socket可读事件放入请求队列</li>
-<li>睡眠在请求队列上的某个工作线程被唤醒，它从socket读取数据，并处理客户请求，然后往epoll内核事件表中注册该socket上的写就绪事件</li>
-<li>主线程调用epoll_wait等待socket可写</li>
-<li>当socket可写时，epoll_wait通知主线程。主线程将socket可写事件放入请求队列</li>
-<li>睡眠在请求队列上的某个工作线程被唤醒，他往socket上写入服务器处理客户请求的结果</li>
-</ol>
-<br>
-
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304030515214.png" alt="image-20230304030515214" style="zoom:90%;">
-
-<br>
-
-<br>
-
-<h4 id="Proactor"><a href="#Proactor" class="headerlink" title="Proactor"></a>Proactor</h4><ul>
-<li>将所有的<strong>I&#x2F;O操作</strong>都交给<strong>主线程和内核</strong>来处理(进行读、写)，<strong>工作线程仅仅负责业务逻辑</strong>。</li>
-</ul>
-<br>
-
-<p>使用异步I&#x2F;O模型实现的Proactor模式的工作流程：（以 aio_read 和 aio_wirte 为例)</p>
-<ol>
-<li><strong>主线程</strong>调用 aio_read 函数向内核注册socket上的<strong>读完成事件</strong>，并告诉内核用户<strong>读缓冲区的位置</strong>，以及读操作完成时<strong>如何通知应用程序</strong>(这里以信号为例)</li>
-<li>主线程继续处理其他逻辑</li>
-<li>当socket上的数据被读入缓冲区后，内核将向应用程序发送一个信号，以通知应用程序数据已经可用</li>
-<li><strong>应用程序</strong>预先定义好的<strong>信号处理函数</strong>选择一个工作线程来处理客户请求。<br><strong>工作线程</strong>处理完客户请求后，调用 aio_write 函数向内核注册socket上的写完成事件，并告诉内核用户写缓冲区的位置，以及写操作完成时如何通知应用程序。</li>
-<li>主线程继续处理其他逻辑</li>
-<li>当用户数据被写入socket之后，内核将向应用程序发送以一个信号，以通知应用程序数据已经发送完毕</li>
-<li>应用程序预先定义好的信号处理函数选择一个工作线程来做善后工作，比如决定是否关闭socket</li>
-</ol>
-<br>
-
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304032743438.png" alt="image-20230304032743438" style="zoom:90%;">
-
-
-
-<br>
-
-<br>
-
-<h4 id="模拟Proactor模式"><a href="#模拟Proactor模式" class="headerlink" title="模拟Proactor模式"></a>模拟Proactor模式</h4><p>使用<strong>同步I&#x2F;O</strong>方式模拟Procator模式。</p>
-<p><strong>原理</strong>：主线程执行数据读写操作，读写完成之后，主线程向工作线程通知这一”完成事件”。从工作线程的角度看，它们就直接获得了数据读写的结果，接下来要做的只是对读写的结果进行逻辑处理。</p>
-<br>
-
-<p>使用同步I&#x2F;O模型(epoll_wait为例)模拟Proactor模式的工作流程：</p>
-<ol>
-<li>主线程往epoll内核事件表中注册socket上的读就绪事件</li>
-<li>主线程调用epoll_wait等待socket上有数据可读</li>
-<li>当socket上有数据可读时，epoll_wait通知主线程。主线程从socket循环读取数据，直到没有更多数据可读，然后将读取到的数据封装成一个请求对象并插入请求队列</li>
-<li>睡眠在请求队列上的某个工作线程被唤醒，它获得请求对象并处理客户请求，然后往epoll内核事件表中注册socket上的写就绪事件</li>
-<li>主线程调用epoll_wait等待socket可写</li>
-<li>当socket可写时，epoll_wait通知主线程。主线程往socket上写入服务器处理客户请求的结果</li>
-</ol>
-<br>
-
-<img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304033941878.png" alt="image-20230304033941878" style="zoom:90%;">
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<h2 id="5-5-线程同步机制类封装及线程池实现"><a href="#5-5-线程同步机制类封装及线程池实现" class="headerlink" title="5.5 线程同步机制类封装及线程池实现"></a>5.5 线程同步机制类封装及线程池实现</h2><h3 id="线程池"><a href="#线程池" class="headerlink" title="线程池"></a>线程池</h3><p>线程池是由服务器预先创建的一组子线程，线程池中的线程数量应该和 CPU 数量差不多。</p>
-<ul>
-<li>线程池中的所有子线程都运行着相同的代码。</li>
-<li>当有新的任务到来时，主线程将通过某种方式选择线程池中的某一个子线程来为之服务。</li>
-<li>相于与动态的创建子线程，选择一个已经存在的子线程的代价显然要小得多。</li>
-<li>至于主线程选择哪个子线程来为新任务服务，则有多种方式：<ul>
-<li>主线程使用<strong>某种算法</strong>来主动选择子线程。最简单、最常用的算法是随机算法和 Round Robin（轮流选取）算法，但更优秀、更智能的算法将使任务在各个工作线程中更均匀地分配，从而减轻服务器的整体压力。</li>
-<li>主线程和所有子线程通过一个<strong>共享的工作队列</strong>来同步，子线程都睡眠在该工作队列上。当有新的任务到来时，主线程将任务添加到工作队列中。这将唤醒正在等待任务的子线程，不过只有一个子线程将获得新任务的”接管权“，它可以从工作队列中取出任务并执行之，而其他子线程将继续睡眠在工作队列上。</li>
-</ul>
-</li>
-</ul>
-<br>
-
-<p><img src="/2023/03/03/%E7%AC%AC%E4%BA%94%E7%AB%A0%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/image-20230304143320886.png" alt="线程池模型"></p>
-<br>
-
-<p><strong>线程数量</strong></p>
-<p>线程池中的<strong>线程数量最直接的限制因素</strong>是中央处理器(CPU)的处理器(processors&#x2F;cores)的数量N ：如果你的CPU是4-cores的，对于<strong>CPU密集型</strong>的任务(如视频剪辑等消耗CPU计算资源的任务)来说，那线程池中的线程数量最好也设置为4（或者+1防止其他因素造成的线程阻塞）；对于<strong>IO密集型</strong>的任务，一般要多于CPU的核数，因为线程间竞争的不是CPU的计算资源而是IO，IO的处理一般较慢，多于cores数的线程将为CPU争取更多的任务，不至在线程处理IO的过程造成CPU空闲导致资源浪费。</p>
-<p>还可以动态控制线程池中的线程数量。</p>
-<br>
-
-<p><strong>线程池的特点</strong></p>
-<ul>
-<li><strong>空间换时间</strong>，浪费服务器的硬件资源，换取运行效率。</li>
-<li>池是一组资源的集合，这组资源在服务器启动之初就被完全创建好并初始化，这称为<strong>静态资源</strong>。</li>
-<li>当服务器进入正式运行阶段，开始处理客户请求的时候，如果它需要相关的资源，可以直接从池中获取，<strong>无需动态分配</strong>。</li>
-<li>当服务器处理完一个客户连接后，可以把相关的资源放回池中，<strong>无需执行系统调用释放资源</strong>。</li>
-</ul>
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<br>
-
-<h2 id="5-6-其他内容"><a href="#5-6-其他内容" class="headerlink" title="5.6 其他内容"></a>5.6 其他内容</h2><p><strong>EPOLLONESHOT事件</strong></p>
-<ul>
-<li>即使可以使用 ET 模式，一个socket 上的某个事件还是可能被触发多次。这在并发程序中就会引起一个问题。比如一个线程在读取完某个 socket 上的数据后开始处理这些数据，而在数据的处理过程中该socket 上又有新数据可读（EPOLLIN 再次被触发），此时另外一个线程被唤醒来读取这些新的数据。于是就出现了两个线程同时操作一个 socket 的局面。一个socket连接在任一时刻都只被一个线程处理，可以使用 epoll 的 EPOLLONESHOT 事件实现。</li>
-<li>对于注册了 EPOLLONESHOT 事件的文件描述符，操作系统最多触发其上注册的一个可读、可写或者异常事件，且只触发一次，除非我们使用 epoll_ctl 函数重置该文件描述符上注册的 EPOLLONESHOT 事件。这样，当一个线程在处理某个 socket 时，其他线程是不可能有机会操作该 socket 的。但反过来思考，注册了 EPOLLONESHOT 事件的 socket 一旦被某个线程处理完毕， 该线程就应该立即重置这个socket 上的 EPOLLONESHOT 事件，以确保这个 socket 下一次可读时，其 EPOLLIN 事件能被触发，进而让其他工作线程有机会继续处理这个 socket。</li>
-</ul>
-<br>
-
-<br>
-
-<br>
-
-<p><strong>有限状态机</strong></p>
-<ol>
-<li>有限状态机：逻辑单元内部的一种高效编程方法：有限状态机（finite state machine）。有的应用层协议头部包含数据包类型字段，每种类型可以映射为逻辑单元的一种执行状态，服务器可以根据它来编写相应的处理逻辑。如下是一种状态独立的有限状态机：</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">STATE_MACHINE</span>( Package _pack )</span><br><span class="line">&#123;</span><br><span class="line">	PackageType _type = _pack.<span class="built_in">GetType</span>();</span><br><span class="line">	<span class="keyword">switch</span>( _type )</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">case</span> type_A:</span><br><span class="line">			<span class="built_in">process_package_A</span>( _pack );</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		<span class="keyword">case</span> type_B:</span><br><span class="line">			<span class="built_in">process_package_B</span>( _pack );</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;<span class="comment">// 上面是一个简单的有限状态机，只不过该状态机的每个状态都是相互独立的，即状态之间没有相互转移。</span></span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>状态之间的转移是需要状态机内部驱动，如下代码：</li>
-</ol>
-<figure class="highlight cpp"><table><tr><td class="code"><pre><span class="line"><span class="built_in">STATE_MACHINE</span>()</span><br><span class="line">&#123;</span><br><span class="line">	State cur_State = type_A;</span><br><span class="line">	<span class="keyword">while</span>( cur_State != type_C )</span><br><span class="line">	&#123;</span><br><span class="line">		Package _pack = <span class="built_in">getNewPackage</span>();</span><br><span class="line">		<span class="keyword">switch</span>( cur_State )</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">case</span> type_A:</span><br><span class="line">                <span class="built_in">process_package_state_A</span>( _pack );</span><br><span class="line">                cur_State = type_B;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">			<span class="keyword">case</span> type_B:</span><br><span class="line">                <span class="built_in">process_package_state_B</span>( _pack );</span><br><span class="line">                cur_State = type_C;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 该状态机包含三种状态：type_A、type_B 和 type_C，其中 type_A 是状态机的开始状态，type_C 是状态机的结束状态。状态机的当前状态记录在 cur_State 变量中。在一趟循环过程中，状态机先通getNewPackage 方法获得一个新的数据包，然后根据 cur_State 变量的值判断如何处理该数据包。数据包处理完之后，状态机通过给 cur_State 变量传递目标状态值来实现状态转移。那么当状态机进入下一趟循环时，它将执行新的状态对应的逻辑。</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
 ]]></content>
       <categories>
-        <category>C++开发</category>
-        <category>高性能服务器</category>
+        <category>游戏开发</category>
+        <category>服务端</category>
       </categories>
       <tags>
-        <tag>web服务器</tag>
+        <tag>邮件服务</tag>
       </tags>
   </entry>
   <entry>
@@ -6451,496 +6941,6 @@
       </categories>
       <tags>
         <tag>网络编程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MySQL基础学习</title>
-    <url>/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/</url>
-    <content><![CDATA[<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><p><strong>关系型数据库的三大范式</strong></p>
-<ul>
-<li>第一范式：<ul>
-<li>单一字段只能表示一种数据（字段的原子性）</li>
-<li>（否则可分为多个字段）</li>
-</ul>
-</li>
-<li>第二范式：<ul>
-<li>非主键必须依赖整个主键，而非部分主键</li>
-<li>（否则可以分为多个表）</li>
-</ul>
-</li>
-<li>第三范式：<ul>
-<li>非主键必须直接依赖主键，不能间接依赖</li>
-<li>（否则可以分为多个表）</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>事务的四大特性</strong></p>
-<ul>
-<li>原子性：事务中的操作 要么全部成功，要么全部失败回滚</li>
-<li>一致性：一个事务执行前后，数据库的状态保持一致（类比能量守恒）</li>
-<li>隔离性：一个事务只能读到已经提交的修改</li>
-<li>持久性：一个事务一旦提交，对数据库中的数据的改变是永久性的，即使数据库系统遇到故障也不会丢失事务操作所做的修改。</li>
-</ul>
-<p><strong>事务的隔离等级</strong></p>
-<p>前置概念</p>
-<ul>
-<li><strong>脏读</strong>：一个事务处理过程中读取了另一个未提交的事务中的数据<ul>
-<li>当一个事务对数据进行修改但还没有提交时，其他事务可能会读取到这个尚未提交的数据。</li>
-<li>类似的情况在并发编程中被称为<strong>竞态条件</strong>（Race Condition），它指的是多个线程同时访问临界资源，并且对该资源进行修改，从而导致结果的不确定性或错误。</li>
-<li>数据库通常使用锁机制来控制并发访问。</li>
-</ul>
-</li>
-<li><strong>不可重复读</strong><ul>
-<li>一个事务范围内，多次相同的查询却返回了不同的数据值</li>
-<li>原因是在查询间隔内，另一个事务修改了数据并提交了</li>
-</ul>
-</li>
-<li><strong>幻读</strong><ul>
-<li>对于一个事务，在前面进行了查询，之后又有其他事务插入或删除数据，导致前面查询到的数据失去有效性。</li>
-<li>原因：使用了读取一致性级别不同的事务隔离级别</li>
-</ul>
-</li>
-</ul>
-<p>MySQL的四种隔离级别</p>
-<ul>
-<li><strong>串行化</strong> Serializable<ul>
-<li>强制事务顺序，使之不可能相互冲突，解决幻读</li>
-</ul>
-</li>
-<li><strong>可重复读</strong> Repeatable Read<ul>
-<li>默认事务隔离级别，确保同一事务的多个实例在并发读取数据时，会看到同样的数据行，解决了不可重复读的问题。</li>
-</ul>
-</li>
-<li><strong>读已提交</strong> Read Committed<ul>
-<li>一个事务只能看见已经提交的事务所做的改变，避免脏读</li>
-</ul>
-</li>
-<li><strong>读未提交</strong> Read Uncommitted<ul>
-<li>所有的事务都可以看到其他未提交事务的执行结果</li>
-</ul>
-</li>
-</ul>
-<p>生存环境一般使用 <strong>读已提交RC</strong></p>
-<ul>
-<li>为什么使用RC而不是RR<ul>
-<li>RR存在<u>间隙锁</u>，更容易出现死锁</li>
-<li>RR级别下，<u>条件列未命中索引</u>会锁表，而RC级别下只锁行</li>
-<li>可见RC的并发性高于RR</li>
-<li>另外不可重复读问题<u>有时候</u>是可接受的</li>
-</ul>
-</li>
-</ul>
-<h2 id="编码与字符集"><a href="#编码与字符集" class="headerlink" title="编码与字符集"></a>编码与字符集</h2><p><strong>编码和字符集</strong></p>
-<ul>
-<li>ASCII<ul>
-<li>单字符：8bits，1Byte</li>
-<li>只能表示256个字符</li>
-</ul>
-</li>
-<li>各种特殊编码，如中文的 GB2312，希腊语的 greek，俄语的 cp866</li>
-<li>Unicode，统一各种编码为一种<ul>
-<li>单字符：2~4Byte</li>
-<li><img src="/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/image-20240104222222435.png" alt="image-20240104222222435" style="zoom:80%;"></li>
-</ul>
-</li>
-<li>UTF-8<ul>
-<li>优化了Unicode的字符中不必要的字节</li>
-</ul>
-</li>
-<li>总结<ul>
-<li>按照一定规则把符号和二进制码对应起来，这就是<strong>编码</strong>。而把n多这种已经编码的字符聚在一起，就是我们常说的<strong>字符集</strong>。</li>
-<li>比如utf-8字符集就是所有utf-8编码格式的字符的合集。</li>
-</ul>
-</li>
-</ul>
-<h2 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h2><h3 id="索引概述"><a href="#索引概述" class="headerlink" title="索引概述"></a>索引概述</h3><blockquote>
-<p>是什么</p>
-<ul>
-<li>索引用于加快磁盘数据的访问，属于用空间换时间</li>
-<li>索引记录的内容有一组数据的关键字和数据各个部分的存储位置，通过某些数据结构（B树、B+树）组织关键字，在这样数据结构上对关键字进行查询，从而找到关键字对应数据的存储位置，再到磁盘中直接获取。</li>
-<li>数据存储在磁盘中的某个位置，我们要访问某个磁盘中的数据<ul>
-<li>在没有使用索引的情况下，就得把全部相关的数据加载到内存中（如果数据量很大，就需要加载多次，非常耗时），然后再从内存中遍历找到数据。</li>
-<li>使用索引，只需将索引加载到内存，然后在索引中根据关键字找到数据的存储位置，便可直接找到磁盘中数据并进行加载<ul>
-<li>一般来说不会一次性加载所有的索引节点，如果是B树，B+树，每次会根据需要加载一定数量的节点，对磁盘的访问次数最多等于树的高度</li>
-<li>此外，对于高频使用的索引，还会将其缓存到内存中</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>索引键值一般就是该行数据某个列上的具体值</li>
-</ul>
-</blockquote>
-<blockquote>
-<p><strong>GPT</strong></p>
-<p>Q: 对于数据库中的一列，为其建立索引，那么其键值是什么，查找某个数据的过程是怎样的</p>
-<p>A:</p>
-<p>在为数据库中的一列建立索引时，键值是该列中的具体值。具体来说，对于每个索引条目，键值是该列中一行数据的值。</p>
-<p>当进行通过索引进行数据查询时，数据库系统会使用索引树的结构来加速查询过程。以下是查找某个数据的一般过程：</p>
-<ol>
-<li>查询条件：首先，根据查询语句中的条件确定需要查找的数据。</li>
-<li>索引搜索：数据库会根据索引的键值进行搜索。如果该列上有索引，并且该索引适用于查询条件，则数据库系统会根据索引树进行搜索。</li>
-<li>索引树遍历：数据库系统会依次遍历索引树的节点，从根节点开始，在每个节点选择合适的子节点继续查找，直到找到满足查询条件的数据。</li>
-<li>数据访问：一旦找到满足条件的索引节点，数据库系统会使用该节点中的指针来访问相应的数据行。这可能涉及到磁盘读取操作，将数据从磁盘中加载到内存。</li>
-<li>数据返回：找到满足条件的数据行后，数据库系统会将其返回给用户。</li>
-</ol>
-<p>需要注意的是，索引的目的是为了加速数据的查询操作。索引的建立和使用需要在一定程度上增加存储空间和维护开销。因此，对于不频繁搜索的列或一些其他条件，建立索引可能并不总是必要或有效的选择。</p>
-</blockquote>
-<p>作用</p>
-<ul>
-<li>数据是存储在磁盘上的</li>
-<li>查询数据时，如果没有索引，会加载所有的数据到内存，依次进行检索，读取磁盘次数较多。</li>
-<li>有了索引，就不需要加载所有数据，因为B+树的高度一般在2-4层，最多只需要读取2-4次磁盘，查询速度大大提升。</li>
-</ul>
-<p>优点：</p>
-<ul>
-<li><strong>加快数据查找的速度</strong></li>
-<li>为用来排序或者是分组的字段添加索引，可以加快分组和排序的速度</li>
-<li>加快表与表之间的连接</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>建立索引需要<strong>占用物理空间</strong></li>
-<li>会降低表的增删改的效率，因为每次对表记录进行增删改，需要进行<strong>动态维护索引</strong>，导致增删改时间变长</li>
-</ul>
-<p>使用场景</p>
-<ul>
-<li>经常用于查询的字段</li>
-<li>经常用于连接的字段建立索引</li>
-<li>经常需要排序的字段建立索引（建立索引就排好序了）</li>
-</ul>
-<p>不适用的</p>
-<ul>
-<li><code>where</code>条件中用不到的字段不适合建立索引</li>
-<li>表记录较少</li>
-<li>需要经常增删改</li>
-<li><strong>参与列计算</strong>的列不适合建索引</li>
-<li><strong>区分度不高</strong>的字段不适合建立索引，如性别</li>
-</ul>
-<h3 id="索引的数据结构"><a href="#索引的数据结构" class="headerlink" title="索引的数据结构"></a>索引的数据结构</h3><h4 id="线性索引"><a href="#线性索引" class="headerlink" title="线性索引"></a>线性索引</h4><ul>
-<li>用有序数组组织索引</li>
-<li>可以通过二分查找快速找到键值位置</li>
-<li>当数据量太大时，可以分为多层线性索引，在最底层记录每一个数据的存储位置</li>
-<li>缺点<ul>
-<li>对于数组，增删的代价比较大</li>
-</ul>
-</li>
-</ul>
-<h4 id="B树索引"><a href="#B树索引" class="headerlink" title="B树索引"></a>B树索引</h4><p>2-3树即3阶B树</p>
-<img src="/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/image-20240106191056937.png" alt="image-20240106191056937" style="zoom:80%;">
-
-<h4 id="B-树索引"><a href="#B-树索引" class="headerlink" title="B+树索引"></a>B+树索引</h4><ul>
-<li>中间结点中，只保存关键字的值（引导） </li>
-<li>叶子节点中，保存关键字以及相应的数据记录（即数据记录存放在叶子结点）</li>
-</ul>
-<img src="/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/image-20240106192038264.png" alt="image-20240106192038264" style="zoom:80%;">
-
-<ul>
-<li>支持范围查找 ： 同一层的结点还通过链表相连</li>
-</ul>
-<blockquote>
-<p>B树和B+树的插入、删除产生的分裂和合并以及层次变化的过程，可以去看下一华工数据结构慕课。</p>
-</blockquote>
-<ul>
-<li>也有不完全一样的定义方式</li>
-</ul>
-<img src="/2024/01/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E9%9D%A2%E8%AF%95%E9%97%AE%E9%A2%98%E5%AD%A6%E4%B9%A0/image-20240106225126484.png" alt="image-20240106225126484" style="zoom:80%;">
-
-<h4 id="哈希表索引"><a href="#哈希表索引" class="headerlink" title="哈希表索引"></a>哈希表索引</h4><ul>
-<li>哈希索引是基于哈希表实现的，对于每一行数据，存储引擎会对索引列进行哈希计算得到哈希码，并且哈希算法要尽量保证不同的列值计算出的哈希码值是不同的。</li>
-<li>将哈希码的值作为哈希表的key值，将指向数据行的指针作为哈希表的value值。</li>
-<li>这样查找一个数据的时间复杂度就是O(1)，一般多用于精确查找。</li>
-</ul>
-<p>与 B+树 索引的比较</p>
-<ul>
-<li>哈希索引<strong>不支持排序</strong>，因为哈希表是无序的。</li>
-<li>哈希索引<strong>不支持范围查找</strong>。</li>
-<li>哈希索引<strong>不支持模糊查询</strong>及多列索引的最左前缀匹配。</li>
-<li>因为哈希表中会<strong>存在哈希冲突</strong>，所以哈希索引的性能是不稳定的，而B+树索引的性能是相对稳定的，每次查询都是从根节点到叶子节点。</li>
-</ul>
-<h4 id="为什么B-树比B树更适合实现数据库索引？"><a href="#为什么B-树比B树更适合实现数据库索引？" class="headerlink" title="为什么B+树比B树更适合实现数据库索引？"></a>为什么B+树比B树更适合实现数据库索引？</h4><ul>
-<li>由于B+树的数据都存储在叶子结点中，叶子结点均为索引，方便扫库，只需要扫一遍叶子结点即可，但是B树因为其分支结点同样存储着数据，我们要找到具体的数据，需要进行一次中序遍历按序来扫，所以B+树更加适合在区间查询的情况，而在数据库中基于范围的查询是非常频繁的，所以通常B+树用于数据库索引。</li>
-<li>B+树的节点只存储索引key值，具体信息的地址存在于叶子节点的地址中。这就使以页为单位的索引中可以存放更多的节点。减少更多的I&#x2F;O支出。</li>
-<li>B+树的查询效率更加稳定，任何关键字的查找必须走一条从根结点到叶子结点的路。所有关键字查询的路径长度相同，导致每一个数据的查询效率相当。</li>
-</ul>
-<h2 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h2><h3 id="架构篇"><a href="#架构篇" class="headerlink" title="架构篇"></a>架构篇</h3>]]></content>
-      <categories>
-        <category>数据库</category>
-        <category>MySQL</category>
-      </categories>
-      <tags>
-        <tag>MySQL</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>异常的分类和处理</title>
-    <url>/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h2 id="异常的分类"><a href="#异常的分类" class="headerlink" title="异常的分类"></a>异常的分类</h2><br>
-
-<h3 id="异常分类和处理思路"><a href="#异常分类和处理思路" class="headerlink" title="异常分类和处理思路"></a>异常分类和处理思路</h3><ul>
-<li><p><strong>网络异常</strong>：如连接超时、连接中断、DNS解析失败等。</p>
-<ol>
-<li><strong>错误重试</strong>：对于临时性的网络异常，可以尝试重新执行失败的操作，如重新建立连接或重新发送请求。</li>
-<li><strong>超时设置</strong>：为网络操作设置合理的超时时间，当操作耗时超过设定的阈值时，应该放弃当前操作并进行适当的处理。</li>
-<li><strong>断线重连</strong>：针对长连接的情况，当检测到连接断开时，可以尝试自动重新建立连接，以保持与服务端的通信。</li>
-<li><strong>异常通知</strong>：将网络异常信息记录下来，并向相关人员发送通知，以便及时发现和处理潜在的问题。</li>
-<li><strong>降级处理</strong>：对于一些关键操作，可以提供备用方案或者降级处理，以确保系统在部分网络异常的情况下仍能够正常运行。</li>
-<li><strong>连接池管理</strong>：对于频繁建立连接的场景，使用连接池可以减少连接建立的开销，同时在连接出现问题时能够及时进行回收和重建。</li>
-<li><strong>异常捕获和处理</strong>：在代码中合理捕获网络相关异常，并进行适当的处理，包括错误日志记录、资源释放等。</li>
-</ol>
-<br>
-
-<span id="more"></span>
-</li>
-<li><p><strong>数据库异常</strong>：包括连接失败、查询错误、事务处理问题等。</p>
-<ul>
-<li><strong>连接失败</strong>：实施连接池技术，通过合适的配置和管理来减少连接失败的可能性，并在连接失败时进行重试操作。另外，确保数据库连接字符串配置正确，以避免连接失败。</li>
-<li><strong>查询错误</strong>：编写健壮的SQL查询语句，进行输入验证和参数化查询，以防止SQL注入攻击，并通过合适的异常处理机制来捕获并处理查询错误。</li>
-<li><strong>事务处理问题</strong>：使用数据库事务来确保原子性、一致性、隔离性和持久性（ACID特性），并在遇到事务处理问题时实施适当的回滚操作或补偿措施，以维护数据的完整性。</li>
-<li><strong>连接超时和资源释放</strong>：设置合理的数据库连接超时时间，及时释放数据库连接以避免资源泄露。同时，使用try-with-resources或类似的语言特性来确保在使用后关闭数据库连接和释放相关资源。</li>
-<li><strong>监控和报警</strong>：建立数据库性能监控系统，追踪数据库连接池的使用情况、查询性能等指标，并设置报警规则以便及时发现潜在的数据库异常情况。</li>
-<li><strong>日志记录</strong>：在应用程序中添加适当的日志记录，记录数据库操作的详细信息，以便在发生异常时进行故障诊断和排查。</li>
-</ul>
-<br>
-</li>
-<li><p><strong>文件系统异常</strong>：例如文件不存在、权限不足、IO错误等。</p>
-<br>
-</li>
-<li><p><strong>代码逻辑异常</strong>：由于程序设计或实现问题引起的异常，比如空指针引用、数组越界等。</p>
-<ul>
-<li><strong>代码审查</strong>：定期进行代码审查，特别关注潜在的空指针引用、数组越界等问题。通过同行评审或利用静态代码分析工具来发现可能存在的问题。</li>
-<li><strong>输入验证</strong>：对外部输入数据进行严格验证，确保输入符合预期的格式和范围。这可以有效防止数组越界等问题。</li>
-<li><strong>异常处理</strong>：在代码中增加适当的异常处理机制，捕获并处理可能导致空指针引用或数组越界的情况，以避免程序崩溃。</li>
-<li><strong>单元测试</strong>：编写全面的单元测试用例，覆盖各种边界条件和异常情况，以确保代码在面对异常时能够正确处理。</li>
-<li><strong>日志记录</strong>：在程序中添加适当的日志记录，可以帮助开发人员追踪程序执行过程中出现的异常情况，以便快速定位和修复问题。</li>
-</ul>
-<br>
-</li>
-<li><p><strong>第三方服务异常</strong>：调用外部服务时出现的异常，如API调用失败、认证问题等。</p>
-<ul>
-<li><strong>异常捕获和日志记录</strong>：在调用第三方服务的地方，使用合适的异常处理机制来捕获异常，并将异常信息作为日志记录下来，以便后续的分析和研究。</li>
-<li><strong>重试机制</strong>：当第三方服务发生异常时，可以尝试进行重试操作。重试的次数和时间间隔可以根据具体情况进行调整。使用指数退避算法，逐渐增加重试间隔时间，可以避免过度压力和频繁调用外部服务。同时，需要控制重试次数，以免无限制地重试导致系统资源耗尽。</li>
-<li><strong>用户友好的错误提示</strong>：对于用户发起的请求，如果第三方服务发生异常，需要向用户展示有意义的错误提示信息，以便用户理解和解决问题。可以根据异常类型返回相应的错误码和错误信息，或提供相关的解决方法。</li>
-<li><strong>降级处理和备选方案</strong>：当第三方服务无法正常提供服务时，可以考虑降级处理，使用备选方案或本地缓存数据来代替。例如，如果某些服务不可用，可以使用默认值或预先缓存的数据进行响应，以保持系统的可用性。</li>
-<li><strong>监控和报警</strong>：及时监控第三方服务的可用性和性能，通过合适的监控系统来收集指标数据，识别潜在的问题和风险。当发生异常时，触发报警机制，及时通知相关团队进行处理和恢复。</li>
-</ul>
-<br>
-</li>
-<li><p><strong>资源耗尽异常</strong>：内存、CPU、线程池等资源耗尽导致的异常。</p>
-<ul>
-<li><strong>异常处理与回滚</strong>：当发生资源耗尽异常时，可以先捕获异常并进行相应的处理。可能的处理方式包括中止当前操作，回滚事务，释放资源，关闭连接等。这样可以尽量避免异常向上传递，导致更严重的问题。</li>
-<li><strong>重新分配资源</strong>：对于发生资源耗尽的情况，可以考虑重新分配或增加资源。例如，增加服务器的内存，增加线程池的大小，使用更高配置的硬件等。然后重新启动系统，并确保资源得到合理分配，以避免资源耗尽重复发生。</li>
-<li><strong>快速定位问题原因</strong>：对于资源耗尽，需要迅速定位具体的原因。可以通过查看系统日志、监控工具和性能分析工具等来定位导致资源耗尽的具体原因，例如错误的配置、持续高负载、死锁等。</li>
-<li><strong>限制资源使用量</strong>：通过调整相应的配置参数，限制系统的资源使用量。例如，降低线程池的大小，限制请求的并发数，设置合理的内存使用上限等。这样可以在资源耗尽异常发生时，避免进一步的资源浪费。</li>
-</ul>
-<br>
-</li>
-<li><p><strong>安全异常</strong>：包括拒绝访问、未经授权的操作等安全相关异常。</p>
-</li>
-</ul>
-<br>
-
-<h3 id="异常捕获和处理方式"><a href="#异常捕获和处理方式" class="headerlink" title="异常捕获和处理方式"></a>异常捕获和处理方式</h3><p><strong>使用 exception 机制</strong></p>
-<ol>
-<li>Try-Catch语句：使用try块包围可能引发异常的代码，然后使用catch块捕获并处理相应的异常。</li>
-<li>Finally块：可以在try-catch结构中添加finally块，无论是否发生异常，其中的代码都会被执行，通常用于资源清理等操作。</li>
-<li>异常类型匹配：针对不同类型的异常，可以使用多个catch块进行捕获和处理，以执行针对特定异常类型的特定逻辑。</li>
-<li>抛出异常：在遇到无法处理的情况下，可以通过throw语句主动抛出异常，以通知调用者或上层代码出现了问题。</li>
-<li>异常链传递：在捕获异常后，可以选择将当前异常封装在新的异常中并重新抛出，以保留原始异常信息，并让调用者能够更清晰地了解异常发生的上下文。</li>
-<li>自定义异常：针对特定业务场景，可以创建自定义的异常类来标识和处理特定的异常情况，使得异常处理更加具体和精确。</li>
-<li>异常处理策略：针对不同类型的异常，可以采取不同的处理策略，如重试、回滚、记录日志、通知相关人员等。</li>
-</ol>
-<p><strong>不使用 exception 机制</strong></p>
-<ol>
-<li>返回错误码或错误状态：在函数或方法调用发生异常时，返回一个特定的错误码或错误状态，由调用方来检查并处理异常情况。</li>
-<li>回调机制：通过回调函数或回调接口将异常信息传递给调用方，让调用方自行处理异常情况。</li>
-<li>异步通知：使用异步通知机制，当发生异常时向相关组件或模块发送通知，由接收方来处理异常情况。</li>
-<li>使用断言：在开发阶段通过断言来检查程序中的不变量和前置条件，以及对可能出现异常的地方进行预先检查。</li>
-<li>使用条件判断语句：在执行关键操作之前，通过条件判断语句来检查输入参数、环境状态等，以避免可能引发异常的情况发生。</li>
-</ol>
-<br>
-
-<br>
-
-<h2 id="异常的传递（不使用-Try-Catch）"><a href="#异常的传递（不使用-Try-Catch）" class="headerlink" title="异常的传递（不使用 Try Catch）"></a>异常的传递（不使用 Try Catch）</h2><h3 id="网络层操作失败产生的异常"><a href="#网络层操作失败产生的异常" class="headerlink" title="网络层操作失败产生的异常"></a>网络层操作失败产生的异常</h3><p>此处以网络操作 connect 为例</p>
-<h4 id="从网络库的操作开始往上看"><a href="#从网络库的操作开始往上看" class="headerlink" title="从网络库的操作开始往上看"></a>从网络库的操作开始往上看</h4><p>以使用 libuv 网络库中的 uv_tcp_connect 函数为例</p>
-<ul>
-<li>其返回值是一个 int，代表一个 error code，为0则表示成功，否则表示失败</li>
-<li>error code 的值是事先定义好的</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">uv_tcp_connect</span><span class="params">(<span class="type">uv_connect_t</span>* req,</span></span><br><span class="line"><span class="params">                   <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">                   <span class="type">const</span> <span class="keyword">struct</span> sockaddr* addr,</span></span><br><span class="line"><span class="params">                   uv_connect_cb cb)</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> addrlen;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;type != UV_TCP)</span><br><span class="line">    <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (addr-&gt;sa_family == AF_INET)</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (addr-&gt;sa_family == AF_INET6)</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in6);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> uv__tcp_connect(req, handle, addr, addrlen, cb);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<br>
-
-<p>上层的用户函数可能是一个 init() 函数，用来初始化一些网络资源</p>
-<ul>
-<li>用户使用时，根据 uv_tcp_connect 函数的返回值判断执行是否成功即可</li>
-<li>此处使用 goto Exit0 转到单一出口处，进行用户 Init 函数中的错误处理，并通过 return false 返回用户函数的执行结果</li>
-</ul>
-<p><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111140902402.png" alt="image-20240111140902402"></p>
-<p><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111141135793.png" alt="image-20240111141135793"></p>
-<br>
-
-<br>
-
-<p>再往上层看调用了 Init() 函数的地方，这里是在一个断线重连的操作中调用了 Init() ，即函数 TryReconnect()</p>
-<ul>
-<li>通过判断Init()的结果，可以区分重连请求成功还是失败（此处并非真正的重连成功，只是connect请求成功。当连接建立时，会在 uv_tcp_connect 设置的回调函数中对连接结果进行判断和处理）</li>
-<li>此处同样使用goto，对重连请求失败的情况进行处理，并将结果返回给再上一层</li>
-</ul>
-<p><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111141930566.png" alt="image-20240111141930566"></p>
-<br>
-
-<br>
-
-<p>再往上一层看，哪里调用了 TryReconnect()，这里是在一个Update里面定期对掉线队列里的连接进行重连尝试</p>
-<ul>
-<li>但是这里是直接将重连函数结果丢弃了</li>
-<li>结合前面来看，在 TryReconnect 函数里已经把失败情况下的连接重新加到了掉线队列里，所以此处丢弃 TryReconnect 结果是没问题的，但是最好还是判断一下并输出日志，方便查看情况。</li>
-</ul>
-<p><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111142939480.png" alt="image-20240111142939480"></p>
-<br>
-
-<br>
-
-<h4 id="从网络库的操作开始往下看"><a href="#从网络库的操作开始往下看" class="headerlink" title="从网络库的操作开始往下看"></a>从网络库的操作开始往下看</h4><p>直接上代码</p>
-<p>第一层</p>
-<ul>
-<li>主要是进行了一些条件、参数的判断和处理</li>
-<li>然后调用第二层函数</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 顶层第一层</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uv_tcp_connect</span><span class="params">(<span class="type">uv_connect_t</span>* req,</span></span><br><span class="line"><span class="params">                   <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">                   <span class="type">const</span> <span class="keyword">struct</span> sockaddr* addr,</span></span><br><span class="line"><span class="params">                   uv_connect_cb cb)</span> &#123;</span><br><span class="line">  <span class="type">unsigned</span> <span class="type">int</span> addrlen;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;type != UV_TCP)</span><br><span class="line">    <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (addr-&gt;sa_family == AF_INET)</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in);</span><br><span class="line">  <span class="keyword">else</span> <span class="keyword">if</span> (addr-&gt;sa_family == AF_INET6)</span><br><span class="line">    addrlen = <span class="keyword">sizeof</span>(<span class="keyword">struct</span> sockaddr_in6);</span><br><span class="line">  <span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> UV_EINVAL;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> uv__tcp_connect(req, handle, addr, addrlen, cb);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<br>
-
-<p>第二层</p>
-<ul>
-<li>进行错误码的转换</li>
-<li>调用第三层函数，获取其 error code 并按需转换</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 第二层</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">uv__tcp_connect</span><span class="params">(<span class="type">uv_connect_t</span>* req,</span></span><br><span class="line"><span class="params">                    <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">                    <span class="type">const</span> <span class="keyword">struct</span> sockaddr* addr,</span></span><br><span class="line"><span class="params">                    <span class="type">unsigned</span> <span class="type">int</span> addrlen,</span></span><br><span class="line"><span class="params">                    uv_connect_cb cb)</span> &#123;</span><br><span class="line">  <span class="type">int</span> err;</span><br><span class="line"></span><br><span class="line">  err = uv_tcp_try_connect(req, handle, addr, addrlen, cb);</span><br><span class="line">  <span class="keyword">if</span> (err)</span><br><span class="line">    <span class="keyword">return</span> uv_translate_sys_error(err); <span class="comment">// 只是将一些系统错误码换成libuv的错误码</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<br>
-
-<br>
-
-<p>第三层</p>
-<ul>
-<li>真正进行底层的系统调用，包含各个过程的子函数</li>
-<li>一般是直接返回各个过程中异常的错误码</li>
-<li>也有不太一样的，比如 handle-&gt;delayed_error<ul>
-<li>在 uv_tcp_try_bind 里面，WSAEADDRINUSE 错误是不直接返回错误码的，而是暂且认为 uv_tcp_connect 请求成功，并设置tcp句柄的 delayed_error ，最终在处理 pending req 时将错误信息传递到 uv_tcp_connect  请求设置的回调函数中进行处理</li>
-<li><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111150833055.png" alt="uv_try_bind内部"></li>
-<li><img src="/2024/01/11/%E5%BC%82%E5%B8%B8%E7%9A%84%E5%88%86%E7%B1%BB%E5%92%8C%E5%A4%84%E7%90%86/Users\kingsoft\Desktop\blog\mang959595.github.io\source_posts\异常的分类和处理.assets\image-20240111151150825.png" alt="回调函数"></li>
-</ul>
-</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 第三层</span></span><br><span class="line"><span class="type">static</span> <span class="type">int</span> <span class="title function_">uv_tcp_try_connect</span><span class="params">(<span class="type">uv_connect_t</span>* req,</span></span><br><span class="line"><span class="params">                              <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">                              <span class="type">const</span> <span class="keyword">struct</span> sockaddr* addr,</span></span><br><span class="line"><span class="params">                              <span class="type">unsigned</span> <span class="type">int</span> addrlen,</span></span><br><span class="line"><span class="params">                              uv_connect_cb cb)</span> &#123;</span><br><span class="line">  <span class="type">uv_loop_t</span>* loop = handle-&gt;loop;</span><br><span class="line">  TCP_INITIAL_RTO_PARAMETERS retransmit_ioctl;</span><br><span class="line">  <span class="type">const</span> <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr</span>* <span class="title">bind_addr</span>;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_storage</span> <span class="title">converted</span>;</span></span><br><span class="line">  BOOL success;</span><br><span class="line">  DWORD bytes;</span><br><span class="line">  <span class="type">int</span> err;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 函数 1</span></span><br><span class="line">  err = uv__convert_to_localhost_if_unspecified(addr, &amp;converted);</span><br><span class="line">  <span class="keyword">if</span> (err)</span><br><span class="line">    <span class="keyword">return</span> err;</span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;delayed_error != <span class="number">0</span>)</span><br><span class="line">    <span class="keyword">goto</span> out;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!(handle-&gt;flags &amp; UV_HANDLE_BOUND)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (addrlen == <span class="keyword">sizeof</span>(uv_addr_ip4_any_)) &#123;</span><br><span class="line">      bind_addr = (<span class="type">const</span> <span class="keyword">struct</span> sockaddr*) &amp;uv_addr_ip4_any_;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (addrlen == <span class="keyword">sizeof</span>(uv_addr_ip6_any_)) &#123;</span><br><span class="line">      bind_addr = (<span class="type">const</span> <span class="keyword">struct</span> sockaddr*) &amp;uv_addr_ip6_any_;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">abort</span>();</span><br><span class="line">    &#125;</span><br><span class="line">      </span><br><span class="line">    <span class="comment">// 函数 2</span></span><br><span class="line">    err = uv_tcp_try_bind(handle, bind_addr, addrlen, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (err)</span><br><span class="line">      <span class="keyword">return</span> err;</span><br><span class="line">    <span class="keyword">if</span> (handle-&gt;delayed_error != <span class="number">0</span>)</span><br><span class="line">      <span class="keyword">goto</span> out;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 异常情况</span></span><br><span class="line">  <span class="keyword">if</span> (!handle-&gt;tcp.conn.func_connectex) &#123;</span><br><span class="line">    <span class="keyword">if</span> (!uv_get_connectex_function(handle-&gt;socket, &amp;handle-&gt;tcp.conn.func_connectex)) &#123;</span><br><span class="line">      <span class="keyword">return</span> WSAEAFNOSUPPORT;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/* This makes connect() fail instantly if the target port on the localhost</span></span><br><span class="line"><span class="comment">   * is not reachable, instead of waiting for 2s. We do not care if this fails.</span></span><br><span class="line"><span class="comment">   * This only works on Windows version 10.0.16299 and later.</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">if</span> (uv__is_fast_loopback_fail_supported() &amp;&amp; uv__is_loopback(&amp;converted)) &#123;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;retransmit_ioctl, <span class="number">0</span>, <span class="keyword">sizeof</span>(retransmit_ioctl));</span><br><span class="line">    retransmit_ioctl.Rtt = TCP_INITIAL_RTO_NO_SYN_RETRANSMISSIONS;</span><br><span class="line">    retransmit_ioctl.MaxSynRetransmissions = TCP_INITIAL_RTO_NO_SYN_RETRANSMISSIONS;</span><br><span class="line">        <span class="comment">// 配置 TCP 初始重传超时和最大 SYN 重传次数等参数</span></span><br><span class="line">    WSAIoctl(handle-&gt;socket,</span><br><span class="line">             SIO_TCP_INITIAL_RTO,</span><br><span class="line">             &amp;retransmit_ioctl,</span><br><span class="line">             <span class="keyword">sizeof</span>(retransmit_ioctl),</span><br><span class="line">             <span class="literal">NULL</span>,</span><br><span class="line">             <span class="number">0</span>,</span><br><span class="line">             &amp;bytes,</span><br><span class="line">             <span class="literal">NULL</span>,</span><br><span class="line">             <span class="literal">NULL</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">out:</span><br><span class="line"></span><br><span class="line">  UV_REQ_INIT(req, UV_CONNECT);</span><br><span class="line">  req-&gt;handle = (<span class="type">uv_stream_t</span>*) handle;</span><br><span class="line">  req-&gt;cb = cb;</span><br><span class="line">  <span class="built_in">memset</span>(&amp;req-&gt;u.io.overlapped, <span class="number">0</span>, <span class="keyword">sizeof</span>(req-&gt;u.io.overlapped));</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 无法立即处理的错误，不直接返回错误码给上层</span></span><br><span class="line">  <span class="comment">// 这里是把请求塞到tcp句柄的待办队列里，等下一个loop的时候将请求取出来，调用回调进行最终的(错误)处理</span></span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;delayed_error != <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">/* Process the req without IOCP. */</span></span><br><span class="line">    handle-&gt;reqs_pending++;</span><br><span class="line">    REGISTER_HANDLE_REQ(loop, handle, req);</span><br><span class="line">    uv_insert_pending_req(loop, (<span class="type">uv_req_t</span>*)req);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 调用 Windows API，这里应该是通过加载动态库来调用的</span></span><br><span class="line">  success = handle-&gt;tcp.conn.func_connectex(handle-&gt;socket,</span><br><span class="line">                                            (<span class="type">const</span> <span class="keyword">struct</span> sockaddr*) &amp;converted,</span><br><span class="line">                                            addrlen,</span><br><span class="line">                                            <span class="literal">NULL</span>,</span><br><span class="line">                                            <span class="number">0</span>,</span><br><span class="line">                                            &amp;bytes,</span><br><span class="line">                                            &amp;req-&gt;u.io.overlapped);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (UV_SUCCEEDED_WITHOUT_IOCP(success)) &#123;</span><br><span class="line">    <span class="comment">/* Process the req without IOCP. */</span></span><br><span class="line">    handle-&gt;reqs_pending++;</span><br><span class="line">    REGISTER_HANDLE_REQ(loop, handle, req);</span><br><span class="line">    uv_insert_pending_req(loop, (<span class="type">uv_req_t</span>*)req);</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (UV_SUCCEEDED_WITH_IOCP(success)) &#123;</span><br><span class="line">    <span class="comment">/* The req will be processed with IOCP. */</span></span><br><span class="line">    handle-&gt;reqs_pending++;</span><br><span class="line">    REGISTER_HANDLE_REQ(loop, handle, req);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 这里返回API调用出错的 Windows 错误码</span></span><br><span class="line">    <span class="keyword">return</span> WSAGetLastError();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<br>
-
-<br>
-
-<p>感兴趣的可以看一下 libuv 对待办队列中的请求完成结果的处理</p>
-<ul>
-<li>这里会对 delayed_error 状态进行判断，取出err并传给回调函数</li>
-</ul>
-<figure class="highlight c"><table><tr><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">uv_process_tcp_connect_req</span><span class="params">(<span class="type">uv_loop_t</span>* loop, <span class="type">uv_tcp_t</span>* handle,</span></span><br><span class="line"><span class="params">    <span class="type">uv_connect_t</span>* req)</span> &#123;</span><br><span class="line">  <span class="type">int</span> err;</span><br><span class="line"></span><br><span class="line">  assert(handle-&gt;type == UV_TCP);</span><br><span class="line"></span><br><span class="line">  UNREGISTER_HANDLE_REQ(loop, handle, req);</span><br><span class="line"></span><br><span class="line">  err = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">if</span> (handle-&gt;delayed_error) &#123;</span><br><span class="line">    <span class="comment">/* To smooth over the differences between unixes errors that</span></span><br><span class="line"><span class="comment">     * were reported synchronously on the first connect can be delayed</span></span><br><span class="line"><span class="comment">     * until the next tick--which is now.</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    err = handle-&gt;delayed_error;</span><br><span class="line">    handle-&gt;delayed_error = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (REQ_SUCCESS(req)) &#123;</span><br><span class="line">    <span class="keyword">if</span> (handle-&gt;flags &amp; UV_HANDLE_CLOSING) &#123;</span><br><span class="line">      <span class="comment">/* use UV_ECANCELED for consistency with Unix */</span></span><br><span class="line">      err = ERROR_OPERATION_ABORTED;</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (setsockopt(handle-&gt;socket,</span><br><span class="line">                          SOL_SOCKET,</span><br><span class="line">                          SO_UPDATE_CONNECT_CONTEXT,</span><br><span class="line">                          <span class="literal">NULL</span>,</span><br><span class="line">                          <span class="number">0</span>) == <span class="number">0</span>) &#123;</span><br><span class="line">      uv_connection_init((<span class="type">uv_stream_t</span>*)handle);</span><br><span class="line">      handle-&gt;flags |= UV_HANDLE_READABLE | UV_HANDLE_WRITABLE;</span><br><span class="line">      loop-&gt;active_tcp_streams++;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      err = WSAGetLastError();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    err = GET_REQ_SOCK_ERROR(req);</span><br><span class="line">  &#125;</span><br><span class="line">  req-&gt;cb(req, uv_translate_sys_error(err));</span><br><span class="line"></span><br><span class="line">  DECREASE_PENDING_REQ_COUNT(handle);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>编程</category>
-        <category>异常处理</category>
-      </categories>
-      <tags>
-        <tag>异常</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>邮件服务实现思路</title>
-    <url>/2024/01/05/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%AE%9E%E7%8E%B0%E6%80%9D%E8%B7%AF/</url>
-    <content><![CDATA[<h2 id="Mail-Server"><a href="#Mail-Server" class="headerlink" title="Mail Server"></a>Mail Server</h2><ul>
-<li>管理玩家的邮箱数据，包括从数据库（数据库代理服务器）加载、修改并保存到数据库<ul>
-<li>与数据库代理的交互，会有监控机制监控操作是否成功，若不成功则会进行重试</li>
-<li>重试次数会有上限，或者限流，防止压垮数据库</li>
-</ul>
-</li>
-<li>向GS请求验证玩家是否满足接受邮件的条件</li>
-<li>向GS请求验证玩家是否满足领取附件的条件</li>
-<li>向GS通知玩家领取附件</li>
-<li>与客户端直接进行交互（由GS转发）<ul>
-<li>客户端视角：<ul>
-<li>获取所有邮件</li>
-<li>设置已读</li>
-<li>删除邮件</li>
-<li>领取附件</li>
-</ul>
-</li>
-<li>Mail Server 视角：<ul>
-<li>同步邮箱</li>
-<li>同步新邮件</li>
-<li>数据增删查改</li>
-<li>邮件过期通知</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<span id="more"></span>
-
-<h2 id="Game-Server"><a href="#Game-Server" class="headerlink" title="Game Server"></a>Game Server</h2><ul>
-<li>注册到 Mail Server 后，Mail Server 同步过来该服（所在group）的所有邮件</li>
-<li>验证玩家是否符合接收邮件的条件，并将符合的邮件及其对应的玩家告知 Mail Server，Mail Server更新邮件数据</li>
-<li>验证玩家是否符合接受附件的条件，符合则在GS这边更新玩家的附件内容，并告知 Mail Server 附件条件符合的玩家情况，Mail Server 更新玩家邮件附件领取状态</li>
-<li>GS发送广播邮件过程<ul>
-<li>GS 先向 Mail Server 通知要发送广播邮件</li>
-<li>Mail Server 更新 GS 的广播邮件数据，并发给 GS 验证广播邮件的请求</li>
-<li>GS 分帧验证符合接收邮件条件的在线玩家，并将符合情况发给 Mail Server</li>
-<li>Mail Server 更新各个在线玩家的邮件数据，并给对应的在线玩家发送该广播邮件（由GS转发）</li>
-</ul>
-</li>
-<li>GS发送单播邮件过程<ul>
-<li>GS 先向 Mail Server 通知要发送单播邮件给某个玩家</li>
-<li>Mail Server 更新玩家数据，并给对应玩家发送该广播邮件（由GS转发）</li>
-</ul>
-</li>
-</ul>
-<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="GS广播邮件时不在线的玩家，在其上线后如何收到邮件"><a href="#GS广播邮件时不在线的玩家，在其上线后如何收到邮件" class="headerlink" title="GS广播邮件时不在线的玩家，在其上线后如何收到邮件"></a>GS广播邮件时不在线的玩家，在其上线后如何收到邮件</h3><ul>
-<li>首先，Mail Server 记录有每个玩家已接收的最新邮件序号，记录有 GS（所在group）上的所有邮件</li>
-<li>可以推测，每当 Mail Server 向 GS 请求验证完玩家收取邮件的条件后，若玩家能够接收邮件，Mail Server 会更新其收到的最新邮件序号</li>
-<li>于是，不在线的玩家的最新邮件序号可能是过时的，当玩家登陆时，Mail Server 要向GS请求验证该玩家的邮件接收</li>
-<li>GS 的做法是，从玩家的最新邮件序号开始，遍历自己同步到的邮件列表，验证每一个序号大于玩家当前最新邮件序号的邮件，并将符合的邮件的序号加入到回包中，发回给 Mail Server</li>
-<li>Mail Server 根据验证情况，更新玩家的邮件数据和最新邮件序号</li>
-</ul>
-<h3 id="客户端的视角"><a href="#客户端的视角" class="headerlink" title="客户端的视角"></a>客户端的视角</h3><ul>
-<li>客户端登陆后，Mail Server 会收到玩家上线通知，并加载玩家的邮箱数据</li>
-<li>Mail Server 加载完成后，通知客户端加载完成（但不立即同步邮箱数据）</li>
-<li>客户端通过 UI 交互触发同步邮箱数据请求，Mail Server 发送邮箱同步数据</li>
-<li>客户端之后可以通过检查邮箱数据请求，与 Mail Server 校对邮箱数据是否是最新的（通过最新邮件序号）<ul>
-<li>不是最新的的话，Mail Server 需要发送同步数据给客户都</li>
-</ul>
-</li>
-<li>客户端可以进行邮件的读取、删除、领取附件的请求</li>
-<li>客户端在线时，若有新的邮件，Mail Server 会发送单个邮件同步数据过来</li>
-</ul>
-<h3 id="Mail-Server-的性能考虑"><a href="#Mail-Server-的性能考虑" class="headerlink" title="Mail Server 的性能考虑"></a>Mail Server 的性能考虑</h3><ul>
-<li>数据结构：邮件数据以有序的形式组织</li>
-<li>用户量：只有当玩家上线或者需要给玩家发送邮件时，才从数据库中加载玩家的邮箱数据</li>
-<li>过期处理：仅对在线玩家做实时的过期判断</li>
-<li>每帧限制处理数量，防止卡帧丢帧</li>
-</ul>
-]]></content>
-      <categories>
-        <category>游戏开发</category>
-        <category>服务端</category>
-      </categories>
-      <tags>
-        <tag>邮件服务</tag>
       </tags>
   </entry>
 </search>
