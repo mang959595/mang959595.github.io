@@ -6474,6 +6474,8 @@
 </ul>
 </li>
 </ul>
+<span id="more"></span>
+
 <h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p><strong>事务的四大特性</strong></p>
 <ul>
 <li>原子性：事务中的操作 要么全部成功，要么全部失败回滚</li>
@@ -6688,6 +6690,8 @@
 <li><strong>异常捕获和处理</strong>：在代码中合理捕获网络相关异常，并进行适当的处理，包括错误日志记录、资源释放等。</li>
 </ol>
 <br>
+
+<span id="more"></span>
 </li>
 <li><p><strong>数据库异常</strong>：包括连接失败、查询错误、事务处理问题等。</p>
 <ul>
@@ -6887,6 +6891,8 @@
 </ul>
 </li>
 </ul>
+<span id="more"></span>
+
 <h2 id="Game-Server"><a href="#Game-Server" class="headerlink" title="Game Server"></a>Game Server</h2><ul>
 <li>注册到 Mail Server 后，Mail Server 同步过来该服（所在group）的所有邮件</li>
 <li>验证玩家是否符合接收邮件的条件，并将符合的邮件及其对应的玩家告知 Mail Server，Mail Server更新邮件数据</li>
