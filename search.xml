@@ -6943,4 +6943,16 @@
         <tag>网络编程</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Redis基础（一）</title>
+    <url>/2024/01/24/Redis%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/</url>
+    <content><![CDATA[<h1 id="Redis（一）"><a href="#Redis（一）" class="headerlink" title="Redis（一）"></a>Redis（一）</h1>]]></content>
+      <categories>
+        <category>数据库</category>
+        <category>Redis</category>
+      </categories>
+      <tags>
+        <tag>数据库, Redis</tag>
+      </tags>
+  </entry>
 </search>
