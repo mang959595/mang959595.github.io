@@ -84,7 +84,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> Word count:</span>
-            <span class="post-count">7.4k</span>
+            <span class="post-count">7.5k</span>
         </span>
     </span>
 
@@ -93,7 +93,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> Reading time≈</span>
-            <span class="post-count">37 min</span>
+            <span class="post-count">38 min</span>
         </span>
     </span>
 </div>
@@ -139,6 +139,15 @@
 <p>比如说有一个人形的角色：艺术家通常会将头部、四肢、衣服、武器建模为分开的组件，并将这些网格组合而成的结果表现为最终的模型。</p>
 <p>一个网格是我们在OpenGL中绘制物体所需的最小单位（顶点数据、索引和材质属性）。一个模型（通常）会包括多个网格。</p>
 </blockquote>
+<h3 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h3><p>链接这个库的时候，我是把assimp.dll直接放在项目的程序生成所在的目录。</p>
+<p><img src="/2024/04/06/LearnOpenGL%E6%91%98%E8%A6%81%EF%BC%88%E5%9B%9B%EF%BC%89/image-20240406225812845.png" alt="image-20240406225812845"></p>
+<p>而附加依赖项中只放assimp.lib</p>
+<p><img src="/2024/04/06/LearnOpenGL%E6%91%98%E8%A6%81%EF%BC%88%E5%9B%9B%EF%BC%89/image-20240406230206535.png" alt="image-20240406230206535"></p>
+<p>放在自己指定的目录的时候总是用不了</p>
+<ul>
+<li>在VS的附加依赖项中加入assimp.dll时，链接的时候就会报错<code>LINK1107：无法读取assimp.dll的0x300地址处</code></li>
+<li>不加的话，程序启动后又会提示找不到dll。</li>
+</ul>
 <h2 id="二、网格"><a href="#二、网格" class="headerlink" title="二、网格"></a>二、网格</h2><p>通过使用Assimp，我们可以加载不同的模型到程序中，但是载入后它们都被储存为Assimp的数据结构。我们最终仍要将这些数据转换为OpenGL能够理解的格式，这样才能渲染这个物体</p>
 <p>网格(Mesh)代表的是单个的可绘制实体，我们现在先来定义一个我们自己的网格类。</p>
 <h3 id="网格类"><a href="#网格类" class="headerlink" title="网格类"></a>网格类</h3><p>一个网格应该至少需要：</p>
