@@ -141,6 +141,81 @@
     
     
     <article
+  id="post-LearnOpenGL摘要（五）"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/2024/04/10/LearnOpenGL%E6%91%98%E8%A6%81%EF%BC%88%E4%BA%94%EF%BC%89/"
+    >LearnOpenGL摘要（入门五）</a> 
+</h2>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2024/04/10/LearnOpenGL%E6%91%98%E8%A6%81%EF%BC%88%E4%BA%94%EF%BC%89/" class="article-date">
+  <time datetime="2024-04-09T21:42:11.000Z" itemprop="datePublished">2024-04-10</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6/">图形学</a> / <a class="article-category-link" href="/categories/%E5%9B%BE%E5%BD%A2%E5%AD%A6/OpenGL/">OpenGL</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="高级OpenGL（上）深度测试、模板测试、混合、面剔除、帧缓冲"><a href="#高级OpenGL（上）深度测试、模板测试、混合、面剔除、帧缓冲" class="headerlink" title="高级OpenGL（上）深度测试、模板测试、混合、面剔除、帧缓冲"></a>高级OpenGL（上）深度测试、模板测试、混合、面剔除、帧缓冲</h1><h2 id="一、深度测试"><a href="#一、深度测试" class="headerlink" title="一、深度测试"></a>一、深度测试</h2><p>前面我们运用了<code>深度缓冲(Depth Buffer)</code>，来防止被阻挡的面渲染到其它面的前面。</p>
+<ul>
+<li>深度缓冲（或z缓冲(z-buffer)）</li>
+<li>深度值(Depth Value)</li>
+</ul>
+<p>OpenGL会执行深度测试</p>
+<ul>
+<li>如果这个测试通过了的话，深度缓冲将会更新为新的深度值</li>
+<li>如果深度测试失败了，片段将会被丢弃。</li>
+</ul>
+<p>在片段着色器运行之后（以及模板测试(Stencil Testing)运行之后）在屏幕空间中运行的。</p>
+<ul>
+<li>屏幕空间坐标与通过OpenGL的glViewport所定义的视口密切相关</li>
+<li>可以直接使用GLSL内建变量gl_FragCoord从片段着色器中直接访问<ul>
+<li>gl_FragCoord的x和y分量代表了片段的屏幕空间坐标（其中(0, 0)位于左下角）</li>
+<li>gl_FragCoord中也包含了一个z分量，它包含了片段真正的深度值。</li>
+<li>z值就是需要与深度缓冲内容所对比的那个值。</li>
+</ul>
+</li>
+</ul> 
+      <a class="article-more-link" href="/2024/04/10/LearnOpenGL%E6%91%98%E8%A6%81%EF%BC%88%E4%BA%94%EF%BC%89/"
+        >阅读更多...</a
+      >
+       
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/" rel="tag">OpenGL</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+    
+</article>
+
+    
+    <article
   id="post-LearnOpenGL摘要（四）"
   class="article article-type-post"
   itemscope
@@ -731,66 +806,6 @@
     <footer class="article-footer">
        
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%9D%A2%E7%BB%8F/" rel="tag">面经</a></li></ul>
-
-    </footer>
-  </div>
-
-   
-    
-</article>
-
-    
-    <article
-  id="post-2024开年大吉"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/2024/01/01/2024%E5%BC%80%E5%B9%B4%E5%A4%A7%E5%90%89/"
-    >2024开年大吉</a> 
-</h2>
- 
-
-      
-    </header>
-     
-    <div class="article-meta">
-      <a href="/2024/01/01/2024%E5%BC%80%E5%B9%B4%E5%A4%A7%E5%90%89/" class="article-date">
-  <time datetime="2023-12-31T17:26:18.000Z" itemprop="datePublished">2024-01-01</time>
-</a> 
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%8F%8D%E6%80%9D%E5%BD%95/">反思录</a>
-  </div>
-   
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>哈哈，没想到距离上一次反思已经快过去一年了，上次反思还是在 2023.2.12 寒假那会儿。</p>
-<p>这一次，主要是回顾2023年，展望2024年。</p>
-<br>
-
-<p>2023这一年囊括了大三下和大四上这两个学期，按理来说应该是本科找工作的最关键的时期。目前呢，我还是无offer人士，本来现在还0offer的话应该是很焦虑的，但我感觉还好，因为现在还在西山居实习。这会儿实习也来到第三个月了，后面或许有机会拿到项目组的offer。不过拿不到也没事，毕竟这段时候还是有所收获的</p> 
-      <a class="article-more-link" href="/2024/01/01/2024%E5%BC%80%E5%B9%B4%E5%A4%A7%E5%90%89/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%B6%E9%97%B4/" rel="tag">时间</a></li></ul>
 
     </footer>
   </div>
